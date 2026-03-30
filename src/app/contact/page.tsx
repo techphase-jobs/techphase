@@ -15,6 +15,7 @@ import {
   CheckCircle,
   Loader2,
   AlertCircle,
+  AlertTriangle,
 } from 'lucide-react'
 import { CONTACT_INFO } from '@/lib/data'
 import { Badge } from '@/components/ui/badge'
@@ -75,6 +76,7 @@ export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSending, setIsSending] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
+  const [warningMsg, setWarningMsg] = useState('')
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -94,6 +96,7 @@ export default function ContactPage() {
     e.preventDefault()
     setIsSending(true)
     setErrorMsg('')
+    setWarningMsg('')
 
     try {
       const res = await fetch('/api/contact', {
@@ -104,10 +107,13 @@ export default function ContactPage() {
 
       const data = await res.json()
 
-      if (res.ok) {
+      if (res.ok && data.success) {
         setIsSubmitted(true)
+        if (data.emailWarning) {
+          setWarningMsg('Your message was saved, but email notifications could not be sent. Our team will still review it in the admin panel.')
+        }
         setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
-        setTimeout(() => setIsSubmitted(false), 6000)
+        setTimeout(() => { setIsSubmitted(false); setWarningMsg('') }, 8000)
       } else {
         setErrorMsg(data.error || 'Something went wrong. Please try again.')
       }
@@ -259,6 +265,20 @@ export default function ContactPage() {
                       <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
                       <p className="text-green-300 text-sm font-medium">
                         Message sent successfully! We&apos;ll get back to you soon.
+                      </p>
+                    </motion.div>
+                  )}
+
+                  {/* Warning message (email failed but form saved) */}
+                  {warningMsg && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="mb-6 flex items-start gap-3 bg-yellow-500/20 border border-yellow-500/30 rounded-xl px-5 py-4"
+                    >
+                      <AlertTriangle className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
+                      <p className="text-yellow-300 text-sm font-medium">
+                        {warningMsg}
                       </p>
                     </motion.div>
                   )}

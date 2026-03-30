@@ -30,11 +30,24 @@ export async function POST(request: NextRequest) {
     const userAgent = request.headers.get('user-agent') || 'Unknown'
     const browser = parseBrowser(userAgent)
 
-    // Save submission to JSON store
-    createSubmission({ name, email, phone: phone || '', subject, message, ip, userAgent, browser })
+    const contactData = { name, email, phone: phone || '', subject, message }
 
-    // Send emails (non-blocking — don't let email failure block the submission)
-    sendContactEmails({ name, email, phone: phone || '', subject, message }).catch(() => {})
+    // Save submission to JSON store
+    createSubmission({ ...contactData, ip, userAgent, browser })
+
+    // Send emails — await so we can surface errors to the user
+    try {
+      await sendContactEmails(contactData)
+    } catch (emailError: unknown) {
+      console.error('Email sending failed:', emailError)
+      const errMsg = emailError instanceof Error ? emailError.message : 'Email delivery failed'
+      // Return success for the form but include a warning about the email
+      return NextResponse.json({
+        success: true,
+        message: 'Your message has been saved, but there was an issue sending email notifications. Our team will still review your message.',
+        emailWarning: errMsg,
+      })
+    }
 
     return NextResponse.json({
       success: true,
