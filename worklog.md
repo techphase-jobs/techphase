@@ -279,3 +279,26 @@ Stage Summary:
 - Dashboard system info accurately reflects tech stack
 - Submissions page uses proper Lucide Phone icon
 - All changes deployed to GitHub for Vercel
+
+---
+Task ID: 8
+Agent: Main Agent
+Task: Fix acknowledgement email not sending on contact form submissions
+
+Work Log:
+- Diagnosed issue: email sending was fire-and-forget (`.catch(() => {})`) on line 37 of contact/route.ts, silently swallowing ALL email errors
+- Updated `/src/app/api/contact/route.ts`: changed from fire-and-forget to `await` with try/catch. Now returns `emailWarning` in response if emails fail but form still saves.
+- Updated `/src/app/contact/page.tsx`: added `warningMsg` state, `AlertTriangle` icon import, and yellow warning banner UI. If email fails, user sees both success (green) and warning (yellow) messages.
+- Added SMTP env vars to local `.env` for testing (SMTP_EMAIL, SMTP_PASSWORD, SMTP_HOST, SMTP_PORT, ADMIN_EMAIL, ADMIN_PASSWORD, JWT_SECRET).
+- Tested Zoho SMTP connection: ✅ successful
+- Tested admin notification email to info@techphasesolutions.com: ✅ sent
+- Tested acknowledgement email to robertgozar@gmail.com: ✅ sent
+- Tested full /api/contact endpoint: ✅ form saved + both emails sent
+- Added `db/` to `.gitignore` to exclude JSON store files from git.
+- Committed and pushed to GitHub for Vercel deployment (commit 5a69a80).
+
+Stage Summary:
+- Root cause: email errors were silently swallowed by `.catch(() => {})` — user never knew emails were failing
+- Fix: proper async/await with error handling, warning message shown to user
+- Emails are confirmed working with Zoho SMTP (app password QphLU3wk3Nzn)
+- If Vercel still doesn't send emails, user needs to verify SMTP_PASSWORD env var in Vercel dashboard
