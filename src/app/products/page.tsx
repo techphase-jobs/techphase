@@ -1,9 +1,11 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import { PRODUCTS, PARTNERS, STATS } from '@/lib/data'
+import { Package, Loader2 } from 'lucide-react'
 import {
   Trophy,
   Heart,
@@ -35,7 +37,48 @@ const STAT_ICONS = [Trophy, Heart, Briefcase]
    PRODUCTS PAGE
    ========================================================================== */
 
+interface ApiProduct {
+  id: string
+  name: string
+  category: string
+  description: string
+  price: number
+  currency: string
+  image: string
+  inStock: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+// Map product names to their static icons for visual display
+function getProductIcon(productName: string) {
+  const match = PRODUCTS.find(
+    (p) => p.title.toLowerCase() === productName.toLowerCase()
+  )
+  return match?.icon || Package
+}
+
 export default function ProductsPage() {
+  const [apiProducts, setApiProducts] = useState<ApiProduct[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('/api/products')
+      .then((res) => res.json())
+      .then((data) => setApiProducts(data.products || []))
+      .catch(() => setApiProducts([]))
+      .finally(() => setLoading(false))
+  }, [])
+
+  // Use API products if available, fall back to static data
+  const displayProducts = apiProducts.length > 0
+    ? apiProducts.map((p) => ({
+        title: p.name,
+        description: p.description || '',
+        icon: getProductIcon(p.name),
+      }))
+    : PRODUCTS.map((p) => ({ title: p.title, description: p.description, icon: p.icon }))
+
   return (
     <div className="min-h-screen bg-white">
       {/* ── Page Header ─────────────────────────────────────────────────── */}
@@ -102,34 +145,40 @@ export default function ProductsPage() {
           </div>
 
           {/* Products grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-            {PRODUCTS.map((product, idx) => (
-              <motion.div
-                key={product.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.4, delay: Math.min(idx * 0.08, 0.4) }}
-                whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(10, 37, 64, 0.1)' }}
-                className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:border-[#ff8c00]/20 transition-all duration-300 cursor-default"
-              >
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
-                  style={{
-                    background: 'linear-gradient(135deg, #ff8c00, #ffb347)',
-                  }}
+          {loading ? (
+            <div className="flex items-center justify-center py-16">
+              <Loader2 className="size-8 text-[#ff8c00] animate-spin" />
+            </div>
+          ) : (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+              {displayProducts.map((product, idx) => (
+                <motion.div
+                  key={product.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.4, delay: Math.min(idx * 0.08, 0.4) }}
+                  whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(10, 37, 64, 0.1)' }}
+                  className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:border-[#ff8c00]/20 transition-all duration-300 cursor-default"
                 >
-                  <product.icon className="size-6 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-[#0a2540] mb-2">
-                  {product.title}
-                </h3>
-                <p className="text-sm text-[#0a2540]/60 leading-relaxed">
-                  {product.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+                    style={{
+                      background: 'linear-gradient(135deg, #ff8c00, #ffb347)',
+                    }}
+                  >
+                    <product.icon className="size-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-[#0a2540] mb-2">
+                    {product.title}
+                  </h3>
+                  <p className="text-sm text-[#0a2540]/60 leading-relaxed">
+                    {product.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          )}
 
           {/* ── Preferred Partners ──────────────────────────────────────── */}
           <motion.div
@@ -213,7 +262,7 @@ export default function ProductsPage() {
             bulk orders, or product recommendations tailored to your needs.
           </p>
           <Link
-            href="/"
+            href="/contact"
             className="inline-flex items-center gap-2 bg-[#ff8c00] hover:bg-[#ff9f33] text-white font-semibold shadow-lg shadow-[#ff8c00]/25 hover:shadow-[#ff8c00]/40 transition-all duration-200 h-12 px-8 text-base rounded-lg"
           >
             Get in Touch

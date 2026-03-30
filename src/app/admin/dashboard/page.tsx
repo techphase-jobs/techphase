@@ -195,11 +195,11 @@ export default function AdminDashboardPage() {
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-white/50">Platform</span>
-              <span className="text-white/80">Next.js 15</span>
+              <span className="text-white/80">Next.js 16</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-white/50">Database</span>
-              <span className="text-white/80">SQLite (Prisma)</span>
+              <span className="text-white/50">Storage</span>
+              <span className="text-white/80">JSON File Store</span>
             </div>
             <div className="flex justify-between">
               <span className="text-white/50">Status</span>
