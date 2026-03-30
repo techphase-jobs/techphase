@@ -1,0 +1,4 @@
+{
+  "name": "download-service",
+  "scripts": { "dev": "bun --hot index.ts" }
+}

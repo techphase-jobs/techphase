@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id       String @id @default(cuid())
+  email    String @unique
+  password String
+  name     String?
+}
+
+model BlogPost {
+  id           String   @id @default(cuid())
+  title        String
+  slug         String   @unique
+  category     String   @default("IT Solutions")
+  content      String   @default("")
+  author       String   @default("Techphase Team")
+  featuredImage String  @default("")
+  published    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  category    String
+  description String   @default("")
+  price       Float    @default(0)
+  currency    String   @default("GHS")
+  image       String   @default("")
+  inStock     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String   @default("")
+  subject   String
+  message   String
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+}
