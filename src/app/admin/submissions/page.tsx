@@ -254,6 +254,7 @@ export default function AdminSubmissionsPage() {
                   <TableHead className="text-white/60 hidden sm:table-cell">Email</TableHead>
                   <TableHead className="text-white/60 hidden lg:table-cell">Phone</TableHead>
                   <TableHead className="text-white/60">Subject</TableHead>
+                  <TableHead className="text-white/60">Message</TableHead>
                   <TableHead className="text-white/60">Status</TableHead>
                   <TableHead className="text-white/60 text-right">Actions</TableHead>
                 </TableRow>
@@ -274,6 +275,15 @@ export default function AdminSubmissionsPage() {
                       <TableCell className="text-white/50 hidden sm:table-cell whitespace-nowrap">{submission.email}</TableCell>
                       <TableCell className="text-white/50 hidden lg:table-cell whitespace-nowrap">{submission.phone || '—'}</TableCell>
                       <TableCell className="text-white/70 max-w-[150px] truncate">{submission.subject}</TableCell>
+                      <TableCell className="max-w-[200px]">
+                        <button
+                          onClick={(e) => { e.stopPropagation(); openMessageDialog(submission) }}
+                          className="text-[#ff8c00] hover:text-[#ff9f33] text-sm truncate block w-full text-left cursor-pointer transition-colors underline decoration-dotted underline-offset-2"
+                          title="Click to read full message"
+                        >
+                          {submission.message.length > 50 ? submission.message.slice(0, 50) + '...' : submission.message}
+                        </button>
+                      </TableCell>
                       <TableCell>
                         <Badge className={`text-xs ${statusInfo.className}`}>{statusInfo.label}</Badge>
                       </TableCell>
