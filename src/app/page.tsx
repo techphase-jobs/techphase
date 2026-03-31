@@ -167,9 +167,10 @@ function HeroSection() {
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 {HERO_OFFER_ITEMS.map((item) => (
-                  <div
+                  <Link
                     key={item.label}
-                    className="flex items-center gap-3 bg-white/5 rounded-xl p-3 border border-white/5 hover:bg-white/10 transition-colors duration-200"
+                    href={item.href}
+                    className="flex items-center gap-3 bg-white/5 rounded-xl p-3 border border-white/5 hover:bg-white/10 transition-colors duration-200 cursor-pointer"
                   >
                     <div
                       className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
@@ -180,7 +181,7 @@ function HeroSection() {
                       <item.icon className="size-5 text-white" />
                     </div>
                     <span className="text-white/90 text-sm font-medium leading-tight">{item.label}</span>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -220,18 +221,19 @@ function ServicesPreview() {
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.4, delay: Math.min(idx * 0.06, 0.4) }}
               whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(10, 37, 64, 0.12)' }}
-              className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:border-[#ff8c00]/20 transition-all duration-300 cursor-default"
             >
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
-                style={{
-                  background: 'linear-gradient(135deg, #ff8c00, #ffb347)',
-                }}
-              >
-                <service.icon className="size-6 text-white" />
-              </div>
-              <h3 className="text-lg font-semibold text-[#0a2540] mb-2">{service.title}</h3>
-              <p className="text-sm text-[#0a2540]/60 leading-relaxed">{service.description}</p>
+              <Link href="/services" className="block group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:border-[#ff8c00]/20 transition-all duration-300 cursor-pointer">
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+                  style={{
+                    background: 'linear-gradient(135deg, #ff8c00, #ffb347)',
+                  }}
+                >
+                  <service.icon className="size-6 text-white" />
+                </div>
+                <h3 className="text-lg font-semibold text-[#0a2540] mb-2">{service.title}</h3>
+                <p className="text-sm text-[#0a2540]/60 leading-relaxed">{service.description}</p>
+              </Link>
             </motion.div>
           ))}
         </div>

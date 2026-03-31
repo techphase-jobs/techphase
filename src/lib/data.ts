@@ -58,12 +58,12 @@ export const NAV_LINKS = [
    ========================================================================== */
 
 export const HERO_OFFER_ITEMS = [
-  { label: 'Networking Solutions', icon: Network },
-  { label: 'Systems Maintenance', icon: Wrench },
-  { label: 'CCTV Installations', icon: Video },
-  { label: 'Printing Services', icon: Printer },
-  { label: 'Computers & Accessories', icon: Monitor },
-  { label: 'Electric Fence Installation', icon: Shield },
+  { label: 'Networking Solutions', icon: Network, href: '/services' },
+  { label: 'Systems Maintenance', icon: Wrench, href: '/services' },
+  { label: 'CCTV Installations', icon: Video, href: '/services' },
+  { label: 'Printing Services', icon: Printer, href: '/services' },
+  { label: 'Computers & Accessories', icon: Monitor, href: '/products' },
+  { label: 'Electric Fence Installation', icon: Shield, href: '/services' },
 ]
 
 /* ==========================================================================
