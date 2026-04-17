@@ -50,8 +50,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  seedIfEmpty();
-  const settings = getSettings();
+  await seedIfEmpty();
+  const settings = await getSettings();
 
   return (
     <html lang="en" suppressHydrationWarning>

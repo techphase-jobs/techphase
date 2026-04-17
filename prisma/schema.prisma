@@ -30,7 +30,7 @@ model BlogPost {
 model Product {
   id          String   @id @default(cuid())
   name        String
-  category    String
+  category    String   @default("General")
   description String   @default("")
   price       Float    @default(0)
   currency    String   @default("GHS")
@@ -48,5 +48,101 @@ model ContactSubmission {
   subject   String
   message   String
   status    String   @default("new")
+  ip        String   @default("Unknown")
+  userAgent String   @default("")
+  browser   String   @default("Unknown")
   createdAt DateTime @default(now())
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @default("")
+  icon        String   @default("Settings")
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TeamMember {
+  id          String   @id @default(cuid())
+  name        String
+  role        String
+  image       String   @default("")
+  bio         String   @default("")
+  phone       String   @default("")
+  email       String   @default("")
+  socialLinks String   @default("{}")
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Client {
+  id        String   @id @default(cuid())
+  name      String
+  logo      String   @default("")
+  website   String   @default("")
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  quote     String
+  client    String
+  type      String   @default("Client")
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model About {
+  id        String   @id @default("about-main")
+  title     String   @default("Techphase Solutions")
+  subtitle  String   @default("")
+  description String  @default("")
+  mission   String   @default("")
+  vision    String   @default("")
+  values    String   @default("")
+  history   String   @default("")
+  image     String   @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Hero {
+  id                    String   @id @default("hero-main")
+  badge                 String   @default("")
+  title                 String   @default("")
+  titleHighlight        String   @default("")
+  titleSuffix           String   @default("")
+  description           String   @default("")
+  buttonText            String   @default("")
+  buttonLink            String   @default("")
+  secondaryButtonText   String   @default("")
+  secondaryButtonLink   String   @default("")
+  stats                 String   @default("[]")
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model SiteSettings {
+  id              String   @id @default("settings-main")
+  companyName     String   @default("Techphase Solutions")
+  phone           String   @default("")
+  whatsapp        String   @default("")
+  email           String   @default("")
+  address         String   @default("")
+  digitalAddress  String   @default("")
+  region          String   @default("")
+  hours           String   @default("")
+  facebook        String   @default("")
+  twitter         String   @default("")
+  linkedin        String   @default("")
+  instagram       String   @default("")
+  googleMapUrl    String   @default("")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }

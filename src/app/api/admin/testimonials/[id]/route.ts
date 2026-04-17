@@ -12,7 +12,7 @@ export async function GET(
 
   const { id } = await params
 
-  const testimonial = getTestimonial(id)
+  const testimonial = await getTestimonial(id)
   if (!testimonial) return NextResponse.json({ error: 'Testimonial not found' }, { status: 404 })
 
   return NextResponse.json({ testimonial })
@@ -30,7 +30,7 @@ export async function PUT(
 
   try {
     const body = await request.json()
-    const testimonial = updateTestimonial(id, body)
+    const testimonial = await updateTestimonial(id, body)
     if (!testimonial) return NextResponse.json({ error: 'Testimonial not found' }, { status: 404 })
 
     return NextResponse.json({ testimonial, success: true })
@@ -51,7 +51,7 @@ export async function DELETE(
   const { id } = await params
 
   try {
-    const deleted = deleteTestimonial(id)
+    const deleted = await deleteTestimonial(id)
     if (!deleted) return NextResponse.json({ error: 'Testimonial not found' }, { status: 404 })
     return NextResponse.json({ success: true })
   } catch (error) {

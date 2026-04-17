@@ -24,7 +24,7 @@ export async function PUT(
     if (featuredImage !== undefined) updateData.featuredImage = featuredImage
     if (published !== undefined) updateData.published = published
 
-    const post = updateBlogPost(id, updateData)
+    const post = await updateBlogPost(id, updateData)
     if (!post) return NextResponse.json({ error: 'Post not found' }, { status: 404 })
 
     return NextResponse.json({ post, success: true })
@@ -45,7 +45,7 @@ export async function DELETE(
   const { id } = await params
 
   try {
-    const deleted = deleteBlogPost(id)
+    const deleted = await deleteBlogPost(id)
     if (!deleted) return NextResponse.json({ error: 'Post not found' }, { status: 404 })
     return NextResponse.json({ success: true })
   } catch (error) {

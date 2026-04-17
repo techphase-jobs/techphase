@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     const contactData = { name, email, phone: phone || '', subject, message }
 
     // Save submission to JSON store
-    createSubmission({ ...contactData, ip, userAgent, browser })
+    await createSubmission({ ...contactData, ip, userAgent, browser })
 
     // Send emails — await so we can surface errors to the user
     try {

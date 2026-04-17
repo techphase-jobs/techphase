@@ -3,8 +3,8 @@ import { getBlogPosts, getBlogPost, seedIfEmpty } from '@/lib/json-store'
 
 // GET /api/blog — list published posts (public, no auth required)
 export async function GET() {
-  seedIfEmpty()
-  const posts = getBlogPosts({ published: true })
+  await seedIfEmpty()
+  const posts = await getBlogPosts({ published: true })
   return NextResponse.json({
     posts: posts.map((p: any) => ({
       id: p.id,

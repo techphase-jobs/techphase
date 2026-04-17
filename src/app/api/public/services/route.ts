@@ -3,9 +3,9 @@ import { getServices, seedIfEmpty } from '@/lib/json-store'
 
 // GET /api/public/services
 export async function GET() {
-  seedIfEmpty()
+  await seedIfEmpty()
 
-  const services = getServices()
+  const services = await getServices()
 
   return NextResponse.json({ services, total: services.length })
 }

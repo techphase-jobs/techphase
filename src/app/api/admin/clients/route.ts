@@ -7,9 +7,9 @@ export async function GET(request: NextRequest) {
   const auth = await requireAuth(request)
   if (auth.error) return auth.response
 
-  seedIfEmpty()
+  await seedIfEmpty()
 
-  const clients = getClients()
+  const clients = await getClients()
 
   return NextResponse.json({ clients, total: clients.length })
 }
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Client name is required' }, { status: 400 })
     }
 
-    const client = createClient({ name, logo, website, order })
+    const client = await createClient({ name, logo, website, order })
     return NextResponse.json({ client, success: true }, { status: 201 })
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to create client'

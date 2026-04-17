@@ -11,5 +11,18 @@
     "email": "robertgozar@gmail.com",
     "subject": "Test Acknowledgement Email",
     "message": "This is a test to verify that the acknowledgement email is sent correctly to the submitter."
+  },
+  {
+    "id": "mo3fc4wjjjtxce",
+    "status": "new",
+    "createdAt": "2026-04-17T21:32:25.171Z",
+    "ip": "::1",
+    "userAgent": "curl/8.14.1",
+    "browser": "Unknown Browser",
+    "phone": "+233244123456",
+    "name": "Test User",
+    "email": "test@example.com",
+    "subject": "Test Submission",
+    "message": "This is a test message from the admin check."
   }
 ]

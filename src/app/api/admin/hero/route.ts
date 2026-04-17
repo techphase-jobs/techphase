@@ -7,9 +7,9 @@ export async function GET(request: NextRequest) {
   const auth = await requireAuth(request)
   if (auth.error) return auth.response
 
-  seedIfEmpty()
+  await seedIfEmpty()
 
-  const hero = getHero()
+  const hero = await getHero()
 
   return NextResponse.json({ hero })
 }
@@ -21,7 +21,7 @@ export async function PUT(request: NextRequest) {
 
   try {
     const body = await request.json()
-    const hero = updateHero(body)
+    const hero = await updateHero(body)
 
     return NextResponse.json({ hero, success: true })
   } catch (error) {

@@ -1,88 +1,90 @@
-// Simple file-based database for Vercel serverless
-// Stores data in JSON files under /tmp which persists within a deployment
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs'
-import { join } from 'path'
+// Prisma-based data layer — replaces file-based JSON storage
+import { db } from '@/lib/db'
 
-const DATA_DIR = process.env.NODE_ENV === 'production' ? '/tmp/techphase-data' : join(process.cwd(), 'db')
-
-function ensureDir() {
-  if (!existsSync(DATA_DIR)) {
-    mkdirSync(DATA_DIR, { recursive: true })
-  }
-}
-
-function readData(collection: string): any[] {
-  ensureDir()
-  const filePath = join(DATA_DIR, `${collection}.json`)
-  if (!existsSync(filePath)) return []
-  try {
-    return JSON.parse(readFileSync(filePath, 'utf-8'))
-  } catch {
-    return []
-  }
-}
-
-function writeData(collection: string, data: any[]) {
-  ensureDir()
-  const filePath = join(DATA_DIR, `${collection}.json`)
-  writeFileSync(filePath, JSON.stringify(data, null, 2))
-}
+// ==================== HELPERS ====================
 
 function generateId(): string {
   return Date.now().toString(36) + Math.random().toString(36).substring(2, 8)
+}
+
+function generateSlug(title: string): string {
+  return title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim()
+}
+
+function parseJsonField<T = any>(value: string, fallback: T): T {
+  try {
+    return JSON.parse(value) ?? fallback
+  } catch {
+    return fallback
+  }
+}
+
+function stringifyJsonField(value: unknown): string {
+  if (typeof value === 'string') return value
+  return JSON.stringify(value ?? {})
 }
 
 // ==================== SEED DATA ====================
 
 let seeded = false
 
-export function seedIfEmpty() {
+export async function seedIfEmpty() {
   if (seeded) return
   seeded = true
 
   // Seed blog posts
-  const existingPosts = readData('blog_posts')
-  if (existingPosts.length === 0) {
+  const postCount = await db.blogPost.count()
+  if (postCount === 0) {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { BLOG_POSTS } = require('@/lib/data')
-    const blogSeed = (BLOG_POSTS || []).map((post: any, i: number) => ({
-      id: `seed-blog-${i}`,
-      slug: post.slug,
-      title: post.title,
-      category: post.category || 'IT Solutions',
-      content: post.content || '',
-      author: post.author || 'Techphase Team',
-      featuredImage: post.featuredImage || '',
-      published: true,
-      createdAt: post.date ? new Date(post.date).toISOString() : new Date().toISOString(),
-      updatedAt: post.date ? new Date(post.date).toISOString() : new Date().toISOString(),
-    }))
-    writeData('blog_posts', blogSeed)
+    const posts = BLOG_POSTS || []
+    for (let i = 0; i < posts.length; i++) {
+      const post = posts[i]
+      await db.blogPost.create({
+        data: {
+          id: `seed-blog-${i}`,
+          slug: post.slug,
+          title: post.title,
+          category: post.category || 'IT Solutions',
+          content: post.content || '',
+          author: post.author || 'Techphase Team',
+          featuredImage: post.featuredImage || '',
+          published: true,
+          createdAt: post.date ? new Date(post.date) : new Date(),
+          updatedAt: post.date ? new Date(post.date) : new Date(),
+        },
+      })
+    }
   }
 
   // Seed products
-  const existingProducts = readData('products')
-  if (existingProducts.length === 0) {
+  const productCount = await db.product.count()
+  if (productCount === 0) {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { PRODUCTS } = require('@/lib/data')
-    const productSeed = (PRODUCTS || []).map((p: any, i: number) => ({
-      id: `seed-product-${i}`,
-      name: p.title,
-      category: 'General',
-      description: p.description || '',
-      price: 0,
-      currency: 'GHS',
-      image: p.image || '',
-      inStock: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    }))
-    writeData('products', productSeed)
+    const products = PRODUCTS || []
+    for (let i = 0; i < products.length; i++) {
+      const p = products[i]
+      await db.product.create({
+        data: {
+          id: `seed-product-${i}`,
+          name: p.title,
+          category: 'General',
+          description: p.description || '',
+          price: 0,
+          currency: 'GHS',
+          image: p.image || '',
+          inStock: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      })
+    }
   }
 
   // Seed services
-  const existingServices = readData('services')
-  if (existingServices.length === 0) {
+  const serviceCount = await db.service.count()
+  if (serviceCount === 0) {
     const services = [
       { title: 'Web Development', description: 'Professional website design and development for businesses — from landing pages to full web applications tailored to your needs.', icon: 'Globe', order: 1 },
       { title: 'Professional Email', description: 'Professional business email setup, configuration, and management — including domain-based email hosting, migrations, and ongoing support.', icon: 'Mail', order: 2 },
@@ -96,12 +98,25 @@ export function seedIfEmpty() {
       { title: 'Electric Fence Installation', description: 'Professional installation and commissioning of electric fences for enhanced perimeter security.', icon: 'Shield', order: 10 },
       { title: 'Printing Services', description: 'All printing works including banners, stickers, books, forms, calendars, invoices, and more.', icon: 'Printer', order: 11 },
     ]
-    writeData('services', services.map((s, i) => ({ ...s, id: `seed-service-${i}`, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() })))
+    for (let i = 0; i < services.length; i++) {
+      const s = services[i]
+      await db.service.create({
+        data: {
+          id: `seed-service-${i}`,
+          title: s.title,
+          description: s.description,
+          icon: s.icon,
+          order: s.order,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      })
+    }
   }
 
   // Seed team members
-  const existingTeam = readData('team_members')
-  if (existingTeam.length === 0) {
+  const teamCount = await db.teamMember.count()
+  if (teamCount === 0) {
     const team = [
       { name: 'Robert Kwashie Gozar', role: 'Chief Executive Officer', image: '/images/team-ceo.png', order: 1 },
       { name: 'Mawuli Kofi', role: 'Accounts Manager', image: '/images/team-mawuli.png', order: 2 },
@@ -109,12 +124,29 @@ export function seedIfEmpty() {
       { name: 'Hansen Neequaye', role: 'Technical Support', image: '/images/team-hansen.png', order: 4 },
       { name: 'Celestine Bortey', role: 'Technical Support', image: '/images/team-celestine.png', order: 5 },
     ]
-    writeData('team_members', team.map((t, i) => ({ ...t, id: `seed-team-${i}`, bio: '', phone: '', email: '', socialLinks: {}, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() })))
+    for (let i = 0; i < team.length; i++) {
+      const t = team[i]
+      await db.teamMember.create({
+        data: {
+          id: `seed-team-${i}`,
+          name: t.name,
+          role: t.role,
+          image: t.image,
+          bio: '',
+          phone: '',
+          email: '',
+          socialLinks: '{}',
+          order: t.order,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      })
+    }
   }
 
   // Seed clients
-  const existingClients = readData('clients')
-  if (existingClients.length === 0) {
+  const clientCount = await db.client.count()
+  if (clientCount === 0) {
     const clients = [
       { name: 'BOMA Government Hospital', order: 1 },
       { name: 'Tepa Government Hospital', order: 2 },
@@ -128,12 +160,25 @@ export function seedIfEmpty() {
       { name: 'Audancy Limited', order: 10 },
       { name: 'ZIBA ESTR', order: 11 },
     ]
-    writeData('clients', clients.map((c, i) => ({ ...c, id: `seed-client-${i}`, logo: '', website: '', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() })))
+    for (let i = 0; i < clients.length; i++) {
+      const c = clients[i]
+      await db.client.create({
+        data: {
+          id: `seed-client-${i}`,
+          name: c.name,
+          logo: '',
+          website: '',
+          order: c.order,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      })
+    }
   }
 
   // Seed testimonials
-  const existingTestimonials = readData('testimonials')
-  if (existingTestimonials.length === 0) {
+  const testimonialCount = await db.testimonial.count()
+  if (testimonialCount === 0) {
     const testimonials = [
       { quote: 'Techphase Solutions has been our trusted IT partner for years. Their reliability and professionalism in maintaining our hospital IT systems have been exceptional. We highly recommend them to any organization seeking quality IT solutions.', client: 'BOMA Government Hospital', type: 'Healthcare Client', order: 1 },
       { quote: 'The team at Techphase is professional, responsive, and always goes above and beyond. Their networking solutions have significantly improved our operational efficiency. Working with them has been a great experience.', client: 'MINSOL Limited', type: 'Corporate Client', order: 2 },
@@ -142,181 +187,203 @@ export function seedIfEmpty() {
       { quote: 'As a growing enterprise, we needed a partner who could scale our IT infrastructure as we expanded. Techphase Solutions delivered beyond expectations with their cloud services and networking expertise. They understand business needs.', client: 'AMANTRA Ghana Limited', type: 'Enterprise Client', order: 5 },
       { quote: 'From procurement to deployment and ongoing maintenance, Techphase has been exceptional. Their team is knowledgeable, punctual, and always available when we need them. A truly dependable IT partner.', client: 'MROCHEKROM Limited', type: 'Corporate Client', order: 6 },
     ]
-    writeData('testimonials', testimonials.map((t, i) => ({ ...t, id: `seed-testimonial-${i}`, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() })))
+    for (let i = 0; i < testimonials.length; i++) {
+      const t = testimonials[i]
+      await db.testimonial.create({
+        data: {
+          id: `seed-testimonial-${i}`,
+          quote: t.quote,
+          client: t.client,
+          type: t.type,
+          order: t.order,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      })
+    }
   }
 
   // Seed about content
-  const existingAbout = readData('about')
-  if (existingAbout.length === 0) {
-    const about = [{
-      id: 'about-main',
-      title: 'Techphase Solutions',
-      subtitle: 'Your Trusted IT Partner in Ghana',
-      description: 'Techphase Solutions is a Ghanaian IT company dedicated to providing high-quality, reliable, and cost-effective information technology products and services. Established in 2014, we have built a strong reputation for excellence in IT solutions delivery across various sectors including healthcare, government, and private enterprises.',
-      mission: 'To empower businesses across Ghana with innovative, reliable, and cost-effective IT solutions that drive growth, efficiency, and digital transformation.',
-      vision: 'To be the leading IT solutions provider in West Africa, recognized for excellence in service delivery, innovation, and customer satisfaction.',
-      values: 'Professionalism, Integrity, Innovation, Customer Satisfaction, Reliability',
-      history: 'Founded in 2014 by Robert Kwashie Gozar, Techphase Solutions started with a simple mission: to bridge the technology gap for businesses in Ghana. Over the years, we have grown from a small IT shop to a comprehensive solutions provider, serving healthcare facilities, government agencies, corporate organizations, and SMEs across the country. Our team of skilled professionals brings together expertise in networking, system administration, software development, and hardware maintenance to offer comprehensive solutions that meet the evolving needs of modern businesses.',
-      image: '/images/about-team.jpg',
-    }]
-    writeData('about', about)
+  const aboutCount = await db.about.count()
+  if (aboutCount === 0) {
+    await db.about.create({
+      data: {
+        id: 'about-main',
+        title: 'Techphase Solutions',
+        subtitle: 'Your Trusted IT Partner in Ghana',
+        description: 'Techphase Solutions is a Ghanaian IT company dedicated to providing high-quality, reliable, and cost-effective information technology products and services. Established in 2014, we have built a strong reputation for excellence in IT solutions delivery across various sectors including healthcare, government, and private enterprises.',
+        mission: 'To empower businesses across Ghana with innovative, reliable, and cost-effective IT solutions that drive growth, efficiency, and digital transformation.',
+        vision: 'To be the leading IT solutions provider in West Africa, recognized for excellence in service delivery, innovation, and customer satisfaction.',
+        values: 'Professionalism, Integrity, Innovation, Customer Satisfaction, Reliability',
+        history: 'Founded in 2014 by Robert Kwashie Gozar, Techphase Solutions started with a simple mission: to bridge the technology gap for businesses in Ghana. Over the years, we have grown from a small IT shop to a comprehensive solutions provider, serving healthcare facilities, government agencies, corporate organizations, and SMEs across the country. Our team of skilled professionals brings together expertise in networking, system administration, software development, and hardware maintenance to offer comprehensive solutions that meet the evolving needs of modern businesses.',
+        image: '/images/about-team.jpg',
+      },
+    })
   }
 
   // Seed hero content
-  const existingHero = readData('hero')
-  if (existingHero.length === 0) {
-    const hero = [{
-      id: 'hero-main',
-      badge: "Ghana's Trusted IT Partner Since 2014",
-      title: 'Your One-Stop',
-      titleHighlight: 'IT Solutions',
-      titleSuffix: 'Provider in Ghana',
-      description: 'We deliver comprehensive IT solutions — from networking and cloud services to CCTV installations and printing — empowering businesses across Ghana with reliable technology and expert support.',
-      buttonText: 'Get in Touch',
-      buttonLink: '/contact',
-      secondaryButtonText: 'Our Services',
-      secondaryButtonLink: '/services',
-      stats: [
-        { value: '10+', label: 'Years Experience' },
-        { value: '20+', label: 'Happy Clients' },
-        { value: '500+', label: 'Projects Done' },
-      ],
-    }]
-    writeData('hero', hero)
+  const heroCount = await db.hero.count()
+  if (heroCount === 0) {
+    await db.hero.create({
+      data: {
+        id: 'hero-main',
+        badge: "Ghana's Trusted IT Partner Since 2014",
+        title: 'Your One-Stop',
+        titleHighlight: 'IT Solutions',
+        titleSuffix: 'Provider in Ghana',
+        description: 'We deliver comprehensive IT solutions — from networking and cloud services to CCTV installations and printing — empowering businesses across Ghana with reliable technology and expert support.',
+        buttonText: 'Get in Touch',
+        buttonLink: '/contact',
+        secondaryButtonText: 'Our Services',
+        secondaryButtonLink: '/services',
+        stats: JSON.stringify([
+          { value: '10+', label: 'Years Experience' },
+          { value: '20+', label: 'Happy Clients' },
+          { value: '500+', label: 'Projects Done' },
+        ]),
+      },
+    })
   }
 
   // Seed site settings
-  const existingSettings = readData('settings')
-  if (existingSettings.length === 0) {
-    const settings = [{
-      id: 'settings-main',
-      companyName: 'Techphase Solutions',
-      phone: '+233 244 201 295',
-      whatsapp: '233244201295',
-      email: 'info@techphasesolutions.com',
-      address: '49 S.Dzagble Street, Akweteman-Achimota, Accra, Ghana',
-      digitalAddress: 'GA-302-8209',
-      region: 'Okaikoi North, Accra',
-      hours: 'Mon - Fri: 8:00 AM - 5:00 PM | Sat: 9:00 AM - 1:00 PM',
-      facebook: 'https://facebook.com/techphasesolutions',
-      twitter: 'https://twitter.com/techphase_gh',
-      linkedin: 'https://linkedin.com/company/techphase-solutions',
-      instagram: 'https://instagram.com/techphasesolutions',
-      googleMapUrl: '',
-    }]
-    writeData('settings', settings)
+  const settingsCount = await db.siteSettings.count()
+  if (settingsCount === 0) {
+    await db.siteSettings.create({
+      data: {
+        id: 'settings-main',
+        companyName: 'Techphase Solutions',
+        phone: '+233 244 201 295',
+        whatsapp: '233244201295',
+        email: 'info@techphasesolutions.com',
+        address: '49 S.Dzagble Street, Akweteman-Achimota, Accra, Ghana',
+        digitalAddress: 'GA-302-8209',
+        region: 'Okaikoi North, Accra',
+        hours: 'Mon - Fri: 8:00 AM - 5:00 PM | Sat: 9:00 AM - 1:00 PM',
+        facebook: 'https://facebook.com/techphasesolutions',
+        twitter: 'https://twitter.com/techphase_gh',
+        linkedin: 'https://linkedin.com/company/techphase-solutions',
+        instagram: 'https://instagram.com/techphasesolutions',
+        googleMapUrl: '',
+      },
+    })
   }
 }
 
 // ==================== BLOG POSTS ====================
 
-export function getBlogPosts(where?: Record<string, unknown>) {
-  let posts = readData('blog_posts')
-  if (where?.published === true) posts = posts.filter((p: any) => p.published)
-  if (where?.published === false) posts = posts.filter((p: any) => !p.published)
-  return posts.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+export async function getBlogPosts(where?: Record<string, unknown>) {
+  const prismaWhere: any = {}
+  if (where?.published === true) prismaWhere.published = true
+  if (where?.published === false) prismaWhere.published = false
+
+  return db.blogPost.findMany({
+    where: Object.keys(prismaWhere).length > 0 ? prismaWhere : undefined,
+    orderBy: { createdAt: 'desc' },
+  })
 }
 
-export function getBlogPost(id: string) {
-  const posts = readData('blog_posts')
-  return posts.find((p: any) => p.id === id) || null
+export async function getBlogPost(id: string) {
+  return db.blogPost.findUnique({ where: { id } }) ?? null
 }
 
-export function createBlogPost(data: { title: string; category?: string; content?: string; author?: string; featuredImage?: string; published?: boolean }) {
-  const posts = readData('blog_posts')
-  const slug = data.title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim()
-  const post = {
-    id: generateId(),
-    slug,
-    category: data.category || 'IT Solutions',
-    content: data.content || '',
-    author: data.author || 'Techphase Team',
-    featuredImage: data.featuredImage || '',
-    published: data.published || false,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    ...data,
+export async function createBlogPost(data: { title: string; category?: string; content?: string; author?: string; featuredImage?: string; published?: boolean }) {
+  const slug = generateSlug(data.title)
+  return db.blogPost.create({
+    data: {
+      slug,
+      title: data.title,
+      category: data.category || 'IT Solutions',
+      content: data.content || '',
+      author: data.author || 'Techphase Team',
+      featuredImage: data.featuredImage || '',
+      published: data.published || false,
+    },
+  })
+}
+
+export async function updateBlogPost(id: string, data: Record<string, unknown>) {
+  try {
+    return await db.blogPost.update({
+      where: { id },
+      data,
+    })
+  } catch {
+    return null
   }
-  posts.push(post)
-  writeData('blog_posts', posts)
-  return post
 }
 
-export function updateBlogPost(id: string, data: Record<string, unknown>) {
-  const posts = readData('blog_posts')
-  const index = posts.findIndex((p: any) => p.id === id)
-  if (index === -1) return null
-  posts[index] = { ...posts[index], ...data, updatedAt: new Date().toISOString() }
-  writeData('blog_posts', posts)
-  return posts[index]
-}
-
-export function deleteBlogPost(id: string) {
-  const posts = readData('blog_posts')
-  const filtered = posts.filter((p: any) => p.id !== id)
-  if (filtered.length === posts.length) return false
-  writeData('blog_posts', filtered)
-  return true
+export async function deleteBlogPost(id: string) {
+  try {
+    await db.blogPost.delete({ where: { id } })
+    return true
+  } catch {
+    return false
+  }
 }
 
 // ==================== PRODUCTS ====================
 
-export function getProducts(where?: Record<string, unknown>) {
-  let products = readData('products')
-  if (where?.category) products = products.filter((p: any) => p.category === where.category)
-  return products.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+export async function getProducts(where?: Record<string, unknown>) {
+  const prismaWhere: any = {}
+  if (where?.category) prismaWhere.category = where.category as string
+
+  return db.product.findMany({
+    where: Object.keys(prismaWhere).length > 0 ? prismaWhere : undefined,
+    orderBy: { createdAt: 'desc' },
+  })
 }
 
-export function getProduct(id: string) {
-  const products = readData('products')
-  return products.find((p: any) => p.id === id) || null
+export async function getProduct(id: string) {
+  return db.product.findUnique({ where: { id } }) ?? null
 }
 
-export function createProduct(data: { name: string; category?: string; description?: string; price?: number; currency?: string; image?: string; inStock?: boolean }) {
-  const products = readData('products')
-  const product = {
-    id: generateId(),
-    category: data.category || 'General',
-    description: data.description || '',
-    price: data.price || 0,
-    currency: data.currency || 'GHS',
-    image: data.image || '',
-    inStock: data.inStock !== false,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    ...data,
+export async function createProduct(data: { name: string; category?: string; description?: string; price?: number; currency?: string; image?: string; inStock?: boolean }) {
+  return db.product.create({
+    data: {
+      name: data.name,
+      category: data.category || 'General',
+      description: data.description || '',
+      price: data.price || 0,
+      currency: data.currency || 'GHS',
+      image: data.image || '',
+      inStock: data.inStock !== false,
+    },
+  })
+}
+
+export async function updateProduct(id: string, data: Record<string, unknown>) {
+  try {
+    return await db.product.update({
+      where: { id },
+      data,
+    })
+  } catch {
+    return null
   }
-  products.push(product)
-  writeData('products', products)
-  return product
 }
 
-export function updateProduct(id: string, data: Record<string, unknown>) {
-  const products = readData('products')
-  const index = products.findIndex((p: any) => p.id === id)
-  if (index === -1) return null
-  products[index] = { ...products[index], ...data, updatedAt: new Date().toISOString() }
-  writeData('products', products)
-  return products[index]
-}
-
-export function deleteProduct(id: string) {
-  const products = readData('products')
-  const filtered = products.filter((p: any) => p.id !== id)
-  if (filtered.length === products.length) return false
-  writeData('products', filtered)
-  return true
+export async function deleteProduct(id: string) {
+  try {
+    await db.product.delete({ where: { id } })
+    return true
+  } catch {
+    return false
+  }
 }
 
 // ==================== CONTACT SUBMISSIONS ====================
 
-export function getSubmissions(where?: Record<string, unknown>) {
-  let submissions = readData('submissions')
-  if (where?.status) submissions = submissions.filter((s: any) => s.status === where.status)
-  return submissions.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+export async function getSubmissions(where?: Record<string, unknown>) {
+  const prismaWhere: any = {}
+  if (where?.status) prismaWhere.status = where.status as string
+
+  return db.contactSubmission.findMany({
+    where: Object.keys(prismaWhere).length > 0 ? prismaWhere : undefined,
+    orderBy: { createdAt: 'desc' },
+  })
 }
 
-export function createSubmission(data: {
+export async function createSubmission(data: {
   name: string
   email: string
   phone?: string
@@ -326,273 +393,321 @@ export function createSubmission(data: {
   userAgent?: string
   browser?: string
 }) {
-  const submissions = readData('submissions')
-  const submission = {
-    id: generateId(),
-    status: 'new',
-    createdAt: new Date().toISOString(),
-    ip: data.ip || 'Unknown',
-    userAgent: data.userAgent || '',
-    browser: data.browser || 'Unknown',
-    phone: data.phone || '',
-    ...data,
+  return db.contactSubmission.create({
+    data: {
+      name: data.name,
+      email: data.email,
+      phone: data.phone || '',
+      subject: data.subject,
+      message: data.message,
+      status: 'new',
+      ip: data.ip || 'Unknown',
+      userAgent: data.userAgent || '',
+      browser: data.browser || 'Unknown',
+    },
+  })
+}
+
+export async function updateSubmission(id: string, data: { status: string }) {
+  try {
+    return await db.contactSubmission.update({
+      where: { id },
+      data,
+    })
+  } catch {
+    return null
   }
-  submissions.push(submission)
-  writeData('submissions', submissions)
-  return submission
 }
 
-export function updateSubmission(id: string, data: { status: string }) {
-  const submissions = readData('submissions')
-  const index = submissions.findIndex((s: any) => s.id === id)
-  if (index === -1) return null
-  submissions[index] = { ...submissions[index], ...data }
-  writeData('submissions', submissions)
-  return submissions[index]
-}
-
-export function deleteSubmission(id: string) {
-  const submissions = readData('submissions')
-  const filtered = submissions.filter((s: any) => s.id !== id)
-  if (filtered.length === submissions.length) return false
-  writeData('submissions', filtered)
-  return true
+export async function deleteSubmission(id: string) {
+  try {
+    await db.contactSubmission.delete({ where: { id } })
+    return true
+  } catch {
+    return false
+  }
 }
 
 // ==================== SERVICES ====================
 
-export function getServices(where?: Record<string, unknown>) {
-  let services = readData('services')
-  return services.sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
+export async function getServices(where?: Record<string, unknown>) {
+  return db.service.findMany({
+    orderBy: { order: 'asc' },
+  })
 }
 
-export function getService(id: string) {
-  const services = readData('services')
-  return services.find((s: any) => s.id === id) || null
+export async function getService(id: string) {
+  return db.service.findUnique({ where: { id } }) ?? null
 }
 
-export function createService(data: { title: string; description: string; icon?: string; order?: number }) {
-  const services = readData('services')
-  const service = {
-    id: generateId(),
-    icon: data.icon || 'Settings',
-    order: data.order || services.length + 1,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    ...data,
+export async function createService(data: { title: string; description: string; icon?: string; order?: number }) {
+  const count = await db.service.count()
+  return db.service.create({
+    data: {
+      title: data.title,
+      description: data.description,
+      icon: data.icon || 'Settings',
+      order: data.order || count + 1,
+    },
+  })
+}
+
+export async function updateService(id: string, data: Record<string, unknown>) {
+  try {
+    return await db.service.update({
+      where: { id },
+      data,
+    })
+  } catch {
+    return null
   }
-  services.push(service)
-  writeData('services', services)
-  return service
 }
 
-export function updateService(id: string, data: Record<string, unknown>) {
-  const services = readData('services')
-  const index = services.findIndex((s: any) => s.id === id)
-  if (index === -1) return null
-  services[index] = { ...services[index], ...data, updatedAt: new Date().toISOString() }
-  writeData('services', services)
-  return services[index]
-}
-
-export function deleteService(id: string) {
-  const services = readData('services')
-  const filtered = services.filter((s: any) => s.id !== id)
-  if (filtered.length === services.length) return false
-  writeData('services', filtered)
-  return true
+export async function deleteService(id: string) {
+  try {
+    await db.service.delete({ where: { id } })
+    return true
+  } catch {
+    return false
+  }
 }
 
 // ==================== TEAM MEMBERS ====================
 
-export function getTeamMembers() {
-  return readData('team_members').sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
+export async function getTeamMembers() {
+  const members = await db.teamMember.findMany({
+    orderBy: { order: 'asc' },
+  })
+  return members.map(m => ({
+    ...m,
+    socialLinks: parseJsonField(m.socialLinks, {}),
+  }))
 }
 
-export function getTeamMember(id: string) {
-  const members = readData('team_members')
-  return members.find((m: any) => m.id === id) || null
-}
-
-export function createTeamMember(data: { name: string; role: string; image?: string; bio?: string; phone?: string; email?: string; socialLinks?: Record<string, string>; order?: number }) {
-  const members = readData('team_members')
-  const member = {
-    id: generateId(),
-    image: data.image || '',
-    bio: data.bio || '',
-    phone: data.phone || '',
-    email: data.email || '',
-    socialLinks: data.socialLinks || {},
-    order: data.order || members.length + 1,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    ...data,
+export async function getTeamMember(id: string) {
+  const member = await db.teamMember.findUnique({ where: { id } })
+  if (!member) return null
+  return {
+    ...member,
+    socialLinks: parseJsonField(member.socialLinks, {}),
   }
-  members.push(member)
-  writeData('team_members', members)
-  return member
 }
 
-export function updateTeamMember(id: string, data: Record<string, unknown>) {
-  const members = readData('team_members')
-  const index = members.findIndex((m: any) => m.id === id)
-  if (index === -1) return null
-  members[index] = { ...members[index], ...data, updatedAt: new Date().toISOString() }
-  writeData('team_members', members)
-  return members[index]
+export async function createTeamMember(data: { name: string; role: string; image?: string; bio?: string; phone?: string; email?: string; socialLinks?: Record<string, string>; order?: number }) {
+  const count = await db.teamMember.count()
+  const member = await db.teamMember.create({
+    data: {
+      name: data.name,
+      role: data.role,
+      image: data.image || '',
+      bio: data.bio || '',
+      phone: data.phone || '',
+      email: data.email || '',
+      socialLinks: stringifyJsonField(data.socialLinks),
+      order: data.order || count + 1,
+    },
+  })
+  return {
+    ...member,
+    socialLinks: parseJsonField(member.socialLinks, {}),
+  }
 }
 
-export function deleteTeamMember(id: string) {
-  const members = readData('team_members')
-  const filtered = members.filter((m: any) => m.id !== id)
-  if (filtered.length === members.length) return false
-  writeData('team_members', filtered)
-  return true
+export async function updateTeamMember(id: string, data: Record<string, unknown>) {
+  try {
+    const updateData: Record<string, unknown> = { ...data }
+    if (data.socialLinks !== undefined) {
+      updateData.socialLinks = stringifyJsonField(data.socialLinks)
+    }
+    const member = await db.teamMember.update({
+      where: { id },
+      data: updateData,
+    })
+    return {
+      ...member,
+      socialLinks: parseJsonField(member.socialLinks, {}),
+    }
+  } catch {
+    return null
+  }
+}
+
+export async function deleteTeamMember(id: string) {
+  try {
+    await db.teamMember.delete({ where: { id } })
+    return true
+  } catch {
+    return false
+  }
 }
 
 // ==================== CLIENTS ====================
 
-export function getClients() {
-  return readData('clients').sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
+export async function getClients() {
+  return db.client.findMany({
+    orderBy: { order: 'asc' },
+  })
 }
 
-export function getClient(id: string) {
-  const clients = readData('clients')
-  return clients.find((c: any) => c.id === id) || null
+export async function getClient(id: string) {
+  return db.client.findUnique({ where: { id } }) ?? null
 }
 
-export function createClient(data: { name: string; logo?: string; website?: string; order?: number }) {
-  const clients = readData('clients')
-  const client = {
-    id: generateId(),
-    logo: data.logo || '',
-    website: data.website || '',
-    order: data.order || clients.length + 1,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    ...data,
+export async function createClient(data: { name: string; logo?: string; website?: string; order?: number }) {
+  const count = await db.client.count()
+  return db.client.create({
+    data: {
+      name: data.name,
+      logo: data.logo || '',
+      website: data.website || '',
+      order: data.order || count + 1,
+    },
+  })
+}
+
+export async function updateClient(id: string, data: Record<string, unknown>) {
+  try {
+    return await db.client.update({
+      where: { id },
+      data,
+    })
+  } catch {
+    return null
   }
-  clients.push(client)
-  writeData('clients', clients)
-  return client
 }
 
-export function updateClient(id: string, data: Record<string, unknown>) {
-  const clients = readData('clients')
-  const index = clients.findIndex((c: any) => c.id === id)
-  if (index === -1) return null
-  clients[index] = { ...clients[index], ...data, updatedAt: new Date().toISOString() }
-  writeData('clients', clients)
-  return clients[index]
-}
-
-export function deleteClient(id: string) {
-  const clients = readData('clients')
-  const filtered = clients.filter((c: any) => c.id !== id)
-  if (filtered.length === clients.length) return false
-  writeData('clients', filtered)
-  return true
+export async function deleteClient(id: string) {
+  try {
+    await db.client.delete({ where: { id } })
+    return true
+  } catch {
+    return false
+  }
 }
 
 // ==================== TESTIMONIALS ====================
 
-export function getTestimonials() {
-  return readData('testimonials').sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
+export async function getTestimonials() {
+  return db.testimonial.findMany({
+    orderBy: { order: 'asc' },
+  })
 }
 
-export function getTestimonial(id: string) {
-  const items = readData('testimonials')
-  return items.find((t: any) => t.id === id) || null
+export async function getTestimonial(id: string) {
+  return db.testimonial.findUnique({ where: { id } }) ?? null
 }
 
-export function createTestimonial(data: { quote: string; client: string; type?: string; order?: number }) {
-  const items = readData('testimonials')
-  const item = {
-    id: generateId(),
-    type: data.type || 'Client',
-    order: data.order || items.length + 1,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    ...data,
+export async function createTestimonial(data: { quote: string; client: string; type?: string; order?: number }) {
+  const count = await db.testimonial.count()
+  return db.testimonial.create({
+    data: {
+      quote: data.quote,
+      client: data.client,
+      type: data.type || 'Client',
+      order: data.order || count + 1,
+    },
+  })
+}
+
+export async function updateTestimonial(id: string, data: Record<string, unknown>) {
+  try {
+    return await db.testimonial.update({
+      where: { id },
+      data,
+    })
+  } catch {
+    return null
   }
-  items.push(item)
-  writeData('testimonials', items)
-  return item
 }
 
-export function updateTestimonial(id: string, data: Record<string, unknown>) {
-  const items = readData('testimonials')
-  const index = items.findIndex((t: any) => t.id === id)
-  if (index === -1) return null
-  items[index] = { ...items[index], ...data, updatedAt: new Date().toISOString() }
-  writeData('testimonials', items)
-  return items[index]
-}
-
-export function deleteTestimonial(id: string) {
-  const items = readData('testimonials')
-  const filtered = items.filter((t: any) => t.id !== id)
-  if (filtered.length === items.length) return false
-  writeData('testimonials', filtered)
-  return true
+export async function deleteTestimonial(id: string) {
+  try {
+    await db.testimonial.delete({ where: { id } })
+    return true
+  } catch {
+    return false
+  }
 }
 
 // ==================== ABOUT (SINGLE DOCUMENT) ====================
 
-export function getAbout() {
-  const items = readData('about')
-  return items[0] || null
+export async function getAbout() {
+  return db.about.findFirst() ?? null
 }
 
-export function updateAbout(data: Record<string, unknown>) {
-  let items = readData('about')
-  if (items.length === 0) {
-    const newItem = { id: 'about-main', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), ...data }
-    items = [newItem]
-    writeData('about', items)
-    return newItem
+export async function updateAbout(data: Record<string, unknown>) {
+  const existing = await db.about.findFirst()
+  if (!existing) {
+    return db.about.create({
+      data: {
+        id: 'about-main',
+        ...data,
+      },
+    })
   }
-  items[0] = { ...items[0], ...data, updatedAt: new Date().toISOString() }
-  writeData('about', items)
-  return items[0]
+  return db.about.update({
+    where: { id: existing.id },
+    data,
+  })
 }
 
 // ==================== HERO (SINGLE DOCUMENT) ====================
 
-export function getHero() {
-  const items = readData('hero')
-  return items[0] || null
+export async function getHero() {
+  const hero = await db.hero.findFirst()
+  if (!hero) return null
+  return {
+    ...hero,
+    stats: parseJsonField(hero.stats, []),
+  }
 }
 
-export function updateHero(data: Record<string, unknown>) {
-  let items = readData('hero')
-  if (items.length === 0) {
-    const newItem = { id: 'hero-main', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), ...data }
-    items = [newItem]
-    writeData('hero', items)
-    return newItem
+export async function updateHero(data: Record<string, unknown>) {
+  const existing = await db.hero.findFirst()
+  const updateData: Record<string, unknown> = { ...data }
+  if (data.stats !== undefined) {
+    updateData.stats = stringifyJsonField(data.stats)
   }
-  items[0] = { ...items[0], ...data, updatedAt: new Date().toISOString() }
-  writeData('hero', items)
-  return items[0]
+  if (!existing) {
+    const hero = await db.hero.create({
+      data: {
+        id: 'hero-main',
+        ...updateData,
+      },
+    })
+    return {
+      ...hero,
+      stats: parseJsonField(hero.stats, []),
+    }
+  }
+  const hero = await db.hero.update({
+    where: { id: existing.id },
+    data: updateData,
+  })
+  return {
+    ...hero,
+    stats: parseJsonField(hero.stats, []),
+  }
 }
 
 // ==================== SITE SETTINGS (SINGLE DOCUMENT) ====================
 
-export function getSettings() {
-  const items = readData('settings')
-  return items[0] || null
+export async function getSettings() {
+  return db.siteSettings.findFirst() ?? null
 }
 
-export function updateSettings(data: Record<string, unknown>) {
-  let items = readData('settings')
-  if (items.length === 0) {
-    const newItem = { id: 'settings-main', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), ...data }
-    items = [newItem]
-    writeData('settings', items)
-    return newItem
+export async function updateSettings(data: Record<string, unknown>) {
+  const existing = await db.siteSettings.findFirst()
+  if (!existing) {
+    return db.siteSettings.create({
+      data: {
+        id: 'settings-main',
+        ...data,
+      },
+    })
   }
-  items[0] = { ...items[0], ...data, updatedAt: new Date().toISOString() }
-  writeData('settings', items)
-  return items[0]
+  return db.siteSettings.update({
+    where: { id: existing.id },
+    data,
+  })
 }

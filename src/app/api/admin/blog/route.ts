@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   const auth = await requireAuth(request)
   if (auth.error) return auth.response
 
-  seedIfEmpty()
+  await seedIfEmpty()
 
   const { searchParams } = new URL(request.url)
   const published = searchParams.get('published')
@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
   if (published === 'true') where.published = true
   if (published === 'false') where.published = false
 
-  const posts = getBlogPosts(where)
+  const posts = await getBlogPosts(where)
 
   return NextResponse.json({ posts, total: posts.length })
 }
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Title is required' }, { status: 400 })
     }
 
-    const post = createBlogPost({ title, category, content, author, featuredImage, published })
+    const post = await createBlogPost({ title, category, content, author, featuredImage, published })
     return NextResponse.json({ post, success: true }, { status: 201 })
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to create blog post'

@@ -12,7 +12,7 @@ export async function GET(
 
   const { id } = await params
 
-  const client = getClient(id)
+  const client = await getClient(id)
   if (!client) return NextResponse.json({ error: 'Client not found' }, { status: 404 })
 
   return NextResponse.json({ client })
@@ -30,7 +30,7 @@ export async function PUT(
 
   try {
     const body = await request.json()
-    const client = updateClient(id, body)
+    const client = await updateClient(id, body)
     if (!client) return NextResponse.json({ error: 'Client not found' }, { status: 404 })
 
     return NextResponse.json({ client, success: true })
@@ -51,7 +51,7 @@ export async function DELETE(
   const { id } = await params
 
   try {
-    const deleted = deleteClient(id)
+    const deleted = await deleteClient(id)
     if (!deleted) return NextResponse.json({ error: 'Client not found' }, { status: 404 })
     return NextResponse.json({ success: true })
   } catch (error) {

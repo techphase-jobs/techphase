@@ -6,11 +6,11 @@ export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
-  seedIfEmpty()
+  await seedIfEmpty()
   const { slug } = await params
 
   // Find by slug in published posts
-  const allPublished = getBlogPosts({ published: true })
+  const allPublished = await getBlogPosts({ published: true })
   const post = allPublished.find((p: any) => p.slug === slug)
 
   if (!post) {

@@ -7,9 +7,9 @@ export async function GET(request: NextRequest) {
   const auth = await requireAuth(request)
   if (auth.error) return auth.response
 
-  seedIfEmpty()
+  await seedIfEmpty()
 
-  const members = getTeamMembers()
+  const members = await getTeamMembers()
 
   return NextResponse.json({ members, total: members.length })
 }
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Name and role are required' }, { status: 400 })
     }
 
-    const member = createTeamMember({ name, role, image, bio, phone, email, socialLinks, order })
+    const member = await createTeamMember({ name, role, image, bio, phone, email, socialLinks, order })
     return NextResponse.json({ member, success: true }, { status: 201 })
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to create team member'

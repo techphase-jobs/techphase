@@ -3,9 +3,9 @@ import { getSettings, seedIfEmpty } from '@/lib/json-store'
 
 // GET /api/public/settings
 export async function GET() {
-  seedIfEmpty()
+  await seedIfEmpty()
 
-  const settings = getSettings()
+  const settings = await getSettings()
 
   return NextResponse.json({ settings })
 }

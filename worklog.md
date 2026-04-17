@@ -431,3 +431,56 @@ Stage Summary:
 - All 4 stat cards on dashboard are now clickable links
 - Products section added to admin sidebar navigation (11 items total)
 - Services page confirmed working (returns 11 services from API)
+
+---
+Task ID: migrate-to-prisma
+Agent: Main Agent
+Task: Rewrite json-store.ts to use Prisma instead of file-based JSON storage
+
+Work Log:
+- Read and analyzed current `/src/lib/json-store.ts` — identified all 38 exported functions and their signatures
+- Read Prisma schema at `prisma/schema.prisma` — confirmed all 12 models exist in the database
+- Confirmed Prisma client setup at `/src/lib/db.ts` using `import { db } from '@/lib/db'`
+- Rewrote `/src/lib/json-store.ts` entirely:
+  - Replaced `readFileSync/writeFileSync` file I/O with Prisma `db.model.findMany/create/update/delete` operations
+  - All functions converted to `async` (required for Prisma's promise-based API)
+  - `seedIfEmpty()` uses `db.model.count()` + `db.model.create()` for each model (same seed data as before)
+  - Helper functions: `generateId()`, `generateSlug()`, `parseJsonField()`, `stringifyJsonField()`
+  - `socialLinks` (TeamMember) and `stats` (Hero) fields: JSON.stringify on write, JSON.parse on read
+  - All where-parameter filtering translated to Prisma `.where()` clauses
+  - All sorting uses Prisma `.orderBy()` matching original `.sort()` logic
+  - `update*/delete*` functions use try/catch to return null/false on record-not-found (matching original behavior)
+  - `updateAbout/updateHero/updateSettings` use findFirst + create/update pattern for single-document models
+  - `seeded` variable preserved to prevent double-seeding within a process
+  - Same section comments preserved (BLOG POSTS, PRODUCTS, CONTACT SUBMISSIONS, SERVICES, TEAM MEMBERS, CLIENTS, TESTIMONIALS, ABOUT, HERO, SITE SETTINGS)
+- Ran `bun run lint` — zero ESLint errors
+- Verified dev server compiles and serves successfully
+
+Stage Summary:
+- `/src/lib/json-store.ts` fully migrated from file-based JSON to Prisma ORM
+- All 38 exported functions preserved with same names and parameter types (now async)
+- Seed data identical to original — seeds into Prisma/SQLite instead of JSON files
+- JSON string fields (socialLinks, stats) handled with parse/stringify helpers
+- Zero lint errors
+- **IMPORTANT**: All callers (API routes, server components, server actions) will need `await` added to json-store function calls in a follow-up task
+
+---
+Task ID: fix-async-callers
+Agent: Main Agent
+Task: Add await to all json-store function calls after Prisma migration
+
+Work Log:
+- Read all 30+ files that import from @/lib/json-store
+- Added `await` to every json-store function call in all files:
+  - 7 server components: page.tsx (home), services/page.tsx, about/page.tsx, team/page.tsx, clients/page.tsx, contact/page.tsx, layout.tsx
+  - 11 public/admin API routes: contact, blog, blog/[slug], products, public/services, public/team, public/clients, public/testimonials, public/about, public/hero, public/settings
+  - 17 admin API routes: admin/blog, admin/blog/[id], admin/products, admin/products/[id], admin/submissions, admin/submissions/[id], admin/services, admin/services/[id], admin/team, admin/team/[id], admin/clients, admin/clients/[id], admin/testimonials, admin/testimonials/[id], admin/about, admin/hero, admin/settings
+- Functions updated: seedIfEmpty, getHero, getServices, getTestimonials, getBlogPosts, getBlogPost, getProducts, getTeamMembers, getClients, getSettings, getAbout, createSubmission, createBlogPost, updateBlogPost, deleteBlogPost, createProduct, updateProduct, deleteProduct, getSubmissions, updateSubmission, deleteSubmission, createService, getService, updateService, deleteService, createTeamMember, getTeamMember, updateTeamMember, deleteTeamMember, createClient, getClient, updateClient, deleteClient, createTestimonial, getTestimonial, updateTestimonial, deleteTestimonial, updateAbout, updateHero, updateSettings
+- Ran `bun run lint` — zero ESLint errors
+- No other changes made to any files
+
+Stage Summary:
+- All 35 files updated with proper `await` on json-store async function calls
+- All json-store functions are now properly awaited after Prisma migration
+- Zero lint errors — no syntax errors introduced
+- Dev server compiles cleanly

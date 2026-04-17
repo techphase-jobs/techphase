@@ -7,9 +7,9 @@ export async function GET(request: NextRequest) {
   const auth = await requireAuth(request)
   if (auth.error) return auth.response
 
-  seedIfEmpty()
+  await seedIfEmpty()
 
-  const services = getServices()
+  const services = await getServices()
 
   return NextResponse.json({ services, total: services.length })
 }
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Service title is required' }, { status: 400 })
     }
 
-    const service = createService({ title, description, icon, order })
+    const service = await createService({ title, description, icon, order })
     return NextResponse.json({ service, success: true }, { status: 201 })
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to create service'

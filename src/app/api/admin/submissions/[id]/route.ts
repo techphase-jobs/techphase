@@ -20,7 +20,7 @@ export async function PUT(
       return NextResponse.json({ error: 'Invalid status' }, { status: 400 })
     }
 
-    const submission = updateSubmission(id, { status })
+    const submission = await updateSubmission(id, { status })
     if (!submission) return NextResponse.json({ error: 'Submission not found' }, { status: 404 })
 
     return NextResponse.json({ submission, success: true })
@@ -41,7 +41,7 @@ export async function DELETE(
   const { id } = await params
 
   try {
-    const deleted = deleteSubmission(id)
+    const deleted = await deleteSubmission(id)
     if (!deleted) return NextResponse.json({ error: 'Not found' }, { status: 404 })
     return NextResponse.json({ success: true })
   } catch (error) {

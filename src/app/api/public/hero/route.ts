@@ -3,9 +3,9 @@ import { getHero, seedIfEmpty } from '@/lib/json-store'
 
 // GET /api/public/hero
 export async function GET() {
-  seedIfEmpty()
+  await seedIfEmpty()
 
-  const hero = getHero()
+  const hero = await getHero()
 
   return NextResponse.json({ hero })
 }

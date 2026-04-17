@@ -12,7 +12,7 @@ export async function GET(
 
   const { id } = await params
 
-  const service = getService(id)
+  const service = await getService(id)
   if (!service) return NextResponse.json({ error: 'Service not found' }, { status: 404 })
 
   return NextResponse.json({ service })
@@ -30,7 +30,7 @@ export async function PUT(
 
   try {
     const body = await request.json()
-    const service = updateService(id, body)
+    const service = await updateService(id, body)
     if (!service) return NextResponse.json({ error: 'Service not found' }, { status: 404 })
 
     return NextResponse.json({ service, success: true })
@@ -51,7 +51,7 @@ export async function DELETE(
   const { id } = await params
 
   try {
-    const deleted = deleteService(id)
+    const deleted = await deleteService(id)
     if (!deleted) return NextResponse.json({ error: 'Service not found' }, { status: 404 })
     return NextResponse.json({ success: true })
   } catch (error) {

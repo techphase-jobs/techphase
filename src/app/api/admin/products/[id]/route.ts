@@ -14,7 +14,7 @@ export async function PUT(
 
   try {
     const body = await request.json()
-    const product = updateProduct(id, body)
+    const product = await updateProduct(id, body)
     if (!product) return NextResponse.json({ error: 'Product not found' }, { status: 404 })
 
     return NextResponse.json({ product, success: true })
@@ -35,7 +35,7 @@ export async function DELETE(
   const { id } = await params
 
   try {
-    const deleted = deleteProduct(id)
+    const deleted = await deleteProduct(id)
     if (!deleted) return NextResponse.json({ error: 'Product not found' }, { status: 404 })
     return NextResponse.json({ success: true })
   } catch (error) {

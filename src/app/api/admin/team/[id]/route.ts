@@ -12,7 +12,7 @@ export async function GET(
 
   const { id } = await params
 
-  const member = getTeamMember(id)
+  const member = await getTeamMember(id)
   if (!member) return NextResponse.json({ error: 'Team member not found' }, { status: 404 })
 
   return NextResponse.json({ member })
@@ -30,7 +30,7 @@ export async function PUT(
 
   try {
     const body = await request.json()
-    const member = updateTeamMember(id, body)
+    const member = await updateTeamMember(id, body)
     if (!member) return NextResponse.json({ error: 'Team member not found' }, { status: 404 })
 
     return NextResponse.json({ member, success: true })
@@ -51,7 +51,7 @@ export async function DELETE(
   const { id } = await params
 
   try {
-    const deleted = deleteTeamMember(id)
+    const deleted = await deleteTeamMember(id)
     if (!deleted) return NextResponse.json({ error: 'Team member not found' }, { status: 404 })
     return NextResponse.json({ success: true })
   } catch (error) {

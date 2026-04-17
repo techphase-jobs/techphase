@@ -3,9 +3,9 @@ import { getTeamMembers, seedIfEmpty } from '@/lib/json-store'
 
 // GET /api/public/team
 export async function GET() {
-  seedIfEmpty()
+  await seedIfEmpty()
 
-  const members = getTeamMembers()
+  const members = await getTeamMembers()
 
   return NextResponse.json({ members, total: members.length })
 }

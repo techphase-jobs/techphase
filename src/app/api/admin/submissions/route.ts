@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
   const where: Record<string, unknown> = {}
   if (status) where.status = status
 
-  const submissions = getSubmissions(where)
+  const submissions = await getSubmissions(where)
 
   return NextResponse.json({ submissions, total: submissions.length })
 }

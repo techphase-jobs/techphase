@@ -7,9 +7,9 @@ export async function GET(request: NextRequest) {
   const auth = await requireAuth(request)
   if (auth.error) return auth.response
 
-  seedIfEmpty()
+  await seedIfEmpty()
 
-  const testimonials = getTestimonials()
+  const testimonials = await getTestimonials()
 
   return NextResponse.json({ testimonials, total: testimonials.length })
 }
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Quote and client name are required' }, { status: 400 })
     }
 
-    const testimonial = createTestimonial({ quote, client, type, order })
+    const testimonial = await createTestimonial({ quote, client, type, order })
     return NextResponse.json({ testimonial, success: true }, { status: 201 })
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to create testimonial'

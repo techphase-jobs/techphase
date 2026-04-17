@@ -3,9 +3,9 @@ import { getClients, seedIfEmpty } from '@/lib/json-store'
 
 // GET /api/public/clients
 export async function GET() {
-  seedIfEmpty()
+  await seedIfEmpty()
 
-  const clients = getClients()
+  const clients = await getClients()
 
   return NextResponse.json({ clients, total: clients.length })
 }

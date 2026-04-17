@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   const auth = await requireAuth(request)
   if (auth.error) return auth.response
 
-  seedIfEmpty()
+  await seedIfEmpty()
 
   const { searchParams } = new URL(request.url)
   const category = searchParams.get('category')
@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
   const where: Record<string, unknown> = {}
   if (category) where.category = category
 
-  const products = getProducts(where)
+  const products = await getProducts(where)
 
   return NextResponse.json({ products, total: products.length })
 }
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Product name is required' }, { status: 400 })
     }
 
-    const product = createProduct({ name, category, description, price, currency, image, inStock })
+    const product = await createProduct({ name, category, description, price, currency, image, inStock })
     return NextResponse.json({ product, success: true }, { status: 201 })
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to create product'

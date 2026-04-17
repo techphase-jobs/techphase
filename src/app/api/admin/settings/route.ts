@@ -7,9 +7,9 @@ export async function GET(request: NextRequest) {
   const auth = await requireAuth(request)
   if (auth.error) return auth.response
 
-  seedIfEmpty()
+  await seedIfEmpty()
 
-  const settings = getSettings()
+  const settings = await getSettings()
 
   return NextResponse.json({ settings })
 }
@@ -21,7 +21,7 @@ export async function PUT(request: NextRequest) {
 
   try {
     const body = await request.json()
-    const settings = updateSettings(body)
+    const settings = await updateSettings(body)
 
     return NextResponse.json({ settings, success: true })
   } catch (error) {
