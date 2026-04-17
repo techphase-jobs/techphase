@@ -7,9 +7,10 @@ import ScrollToTop from '@/components/layout/scroll-to-top'
 
 interface ClientLayoutProps {
   children: React.ReactNode
+  settings?: Record<string, unknown> | null
 }
 
-export default function ClientLayout({ children }: ClientLayoutProps) {
+export default function ClientLayout({ children, settings }: ClientLayoutProps) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -37,7 +38,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     <div className="min-h-screen flex flex-col">
       <Navigation />
       <main className="flex-1">{children}</main>
-      <Footer />
+      <Footer settings={settings as any} />
       <ScrollToTop />
     </div>
   )

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "@/components/layout/client-layout";
+import { getSettings, seedIfEmpty } from "@/lib/json-store";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,17 +45,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  seedIfEmpty();
+  const settings = getSettings();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
-        <ClientLayout>{children}</ClientLayout>
+        <ClientLayout settings={settings}>{children}</ClientLayout>
       </body>
     </html>
   );

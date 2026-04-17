@@ -384,3 +384,28 @@ Stage Summary:
 - Loading states added (skeleton placeholders or null rendering while fetching)
 - Fallback values provided for graceful degradation on API errors
 - Zero new lint errors introduced (only pre-existing json-store.ts errors remain)
+
+---
+Task ID: fix-blank-pages
+Agent: Fix Blank Pages Agent
+Task: Fix blank pages by moving data fetch from client to server
+
+Work Log:
+- Split team page into server+client components (page.tsx + team-client.tsx)
+- Split clients page into server+client components (page.tsx + clients-client.tsx)
+- Split about page into server+client components (page.tsx + about-client.tsx)
+- Split contact page into server+client components (page.tsx + contact-client.tsx) — form handling remains client-side
+- Split home page into server+client components (page.tsx + home-client.tsx)
+- Updated footer.tsx to accept optional settings prop instead of fetching on mount — removed `if (!settings) return null`, footer now always renders with fallback values
+- Updated client-layout.tsx to accept optional settings prop and pass to Footer
+- Updated layout.tsx to be async server component that fetches settings via getSettings() and passes to ClientLayout
+
+Stage Summary:
+- All 6 pages + footer updated to use server-side data fetching
+- Pages now render content during SSR instead of showing blank skeletons
+- Visual design preserved exactly
+- Server components import from @/lib/json-store (not API routes)
+- All server components call seedIfEmpty() before fetching
+- All animation code (framer-motion) stays in client components
+- Form handling (POST) remains client-side
+- Zero lint errors verified
