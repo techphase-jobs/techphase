@@ -3,6 +3,7 @@
 import { useState, useEffect, createContext, useContext } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -167,13 +168,22 @@ export default function AdminLayout({
     <div className="flex flex-col h-full">
       {/* Logo */}
       <div className="p-6 border-b border-white/10">
-        <Link href="/admin/dashboard" className="block">
-          <h1 className="text-lg font-bold">
-            <span className="text-white">Techphase</span>{' '}
-            <span className="text-[#ff8c00]">Solutions</span>
-          </h1>
-          <p className="text-white/40 text-xs mt-0.5">Admin Panel</p>
-        </Link>
+        <Link href="/admin/dashboard" className="flex items-center gap-2">
+              <Image
+                src="/logo.png"
+                alt="Techphase"
+                width={28}
+                height={28}
+                className="h-7 w-auto"
+              />
+              <div>
+                <h1 className="text-lg font-bold leading-tight">
+                  <span className="text-white">Techphase</span>{' '}
+                  <span className="text-[#ff8c00]">Solutions</span>
+                </h1>
+                <p className="text-white/40 text-xs">Admin Panel</p>
+              </div>
+            </Link>
       </div>
 
       {/* Navigation */}

@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Menu, X, MessageCircle } from 'lucide-react'
 import { NAV_LINKS } from '@/lib/data'
@@ -42,13 +43,22 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Brand Name */}
-          <Link href="/" className="flex items-center gap-1 shrink-0">
-            <span className="text-lg lg:text-xl font-bold text-white">
-              Techphase
-            </span>
-            <span className="text-lg lg:text-xl font-bold text-[#ff8c00]">
-              Solutions
-            </span>
+          <Link href="/" className="flex items-center gap-2 shrink-0">
+            <Image
+              src="/logo.png"
+              alt="Techphase Solutions Logo"
+              width={36}
+              height={36}
+              className="h-8 w-auto lg:h-9"
+            />
+            <div className="flex flex-col leading-none">
+              <span className="text-base lg:text-lg font-bold text-white">
+                Techphase
+              </span>
+              <span className="text-base lg:text-lg font-bold text-[#ff8c00]">
+                Solutions
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation + CTA grouped together */}

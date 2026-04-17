@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
@@ -56,13 +57,34 @@ export default function AdminLoginPage() {
         />
       </div>
 
+      {/* Large watermark logo */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <Image
+          src="/logo.png"
+          alt=""
+          width={600}
+          height={450}
+          className="w-[500px] md:w-[600px] h-auto opacity-[0.06]"
+          aria-hidden="true"
+        />
+      </div>
+
       {/* Gradient orbs */}
       <div className="absolute top-1/4 -left-32 w-64 h-64 rounded-full bg-[#ff8c00]/10 blur-3xl" />
       <div className="absolute bottom-1/4 -right-32 w-64 h-64 rounded-full bg-[#ff8c00]/10 blur-3xl" />
 
       <div className="relative w-full max-w-md mx-4">
-        {/* Logo */}
+        {/* Logo + Title */}
         <div className="text-center mb-8">
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <Image
+              src="/logo.png"
+              alt="Techphase Solutions Logo"
+              width={52}
+              height={52}
+              className="h-12 w-auto"
+            />
+          </div>
           <h1 className="text-3xl font-bold">
             <span className="text-white">Techphase</span>{' '}
             <span className="text-[#ff8c00]">Solutions</span>

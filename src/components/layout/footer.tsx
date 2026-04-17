@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import {
   Facebook,
   Twitter,
@@ -53,7 +54,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
           {/* Column 1: Company Info */}
           <div>
-            <Link href="/" className="inline-flex items-center gap-1 mb-4">
+            <Link href="/" className="inline-flex items-center gap-2 mb-4">
+              <Image
+                src="/logo.png"
+                alt="Techphase Solutions Logo"
+                width={36}
+                height={36}
+                className="h-8 w-auto"
+              />
               <span className="text-xl font-bold text-white">
                 Techphase
               </span>
