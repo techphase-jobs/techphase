@@ -1,0 +1,13 @@
+[
+  {
+    "id": "about-main",
+    "title": "Techphase Solutions",
+    "subtitle": "Your Trusted IT Partner in Ghana",
+    "description": "Techphase Solutions is a Ghanaian IT company dedicated to providing high-quality, reliable, and cost-effective information technology products and services. Established in 2014, we have built a strong reputation for excellence in IT solutions delivery across various sectors including healthcare, government, and private enterprises.",
+    "mission": "To empower businesses across Ghana with innovative, reliable, and cost-effective IT solutions that drive growth, efficiency, and digital transformation.",
+    "vision": "To be the leading IT solutions provider in West Africa, recognized for excellence in service delivery, innovation, and customer satisfaction.",
+    "values": "Professionalism, Integrity, Innovation, Customer Satisfaction, Reliability",
+    "history": "Founded in 2014 by Robert Kwashie Gozar, Techphase Solutions started with a simple mission: to bridge the technology gap for businesses in Ghana. Over the years, we have grown from a small IT shop to a comprehensive solutions provider, serving healthcare facilities, government agencies, corporate organizations, and SMEs across the country. Our team of skilled professionals brings together expertise in networking, system administration, software development, and hardware maintenance to offer comprehensive solutions that meet the evolving needs of modern businesses.",
+    "image": "/images/about-team.jpg"
+  }
+]

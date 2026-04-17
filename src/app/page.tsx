@@ -18,13 +18,71 @@ import {
   ChevronLeft,
   Sparkles,
   Zap,
+  Network,
+  Wrench,
+  Video,
+  Printer,
+  Monitor,
+  Shield,
+  Settings,
+  Globe,
+  Mail,
+  Cloud,
+  Wifi,
+  Hammer,
+  Package,
+  Code,
+  Box,
+  Cable,
+  Camera,
 } from 'lucide-react'
-import {
-  HERO_OFFER_ITEMS,
-  STATS,
-  SERVICES,
-  TESTIMONIALS,
-} from '@/lib/data'
+import { type LucideIcon } from 'lucide-react'
+
+/* ==========================================================================
+   ICON MAP
+   ========================================================================== */
+
+const iconMap: Record<string, LucideIcon> = {
+  Globe, Mail, Cloud, Settings, Network, Wifi, Wrench, Video, Hammer, Shield, Printer, Monitor, Package, Code, Box, Cable, Camera,
+}
+
+function getIcon(name: string): LucideIcon {
+  return iconMap[name] || Settings
+}
+
+/* ==========================================================================
+   API TYPES
+   ========================================================================== */
+
+interface HeroData {
+  id?: string
+  badge?: string
+  title?: string
+  titleHighlight?: string
+  titleSuffix?: string
+  description?: string
+  buttonText?: string
+  buttonLink?: string
+  secondaryButtonText?: string
+  secondaryButtonLink?: string
+  stats?: { value: string; label: string }[]
+}
+
+interface ServiceItem {
+  id: string
+  title: string
+  description: string
+  icon: string
+  order: number
+}
+
+interface TestimonialItem {
+  id: string
+  quote: string
+  client: string
+  type: string
+  order: number
+}
 
 /* ==========================================================================
    SECTION BADGE COMPONENT
@@ -70,11 +128,38 @@ function HeroSection() {
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
 
-  const heroStats = [
-    { value: STATS[0].value, label: STATS[0].label, icon: Trophy },
-    { value: STATS[1].value, label: STATS[1].label, icon: Heart },
-    { value: STATS[2].value, label: STATS[2].label, icon: Briefcase },
-  ]
+  const [hero, setHero] = useState<HeroData | null>(null)
+  const [services, setServices] = useState<ServiceItem[]>([])
+
+  useEffect(() => {
+    Promise.all([
+      fetch('/api/public/hero').then((r) => r.json()),
+      fetch('/api/public/services').then((r) => r.json()),
+    ])
+      .then(([heroData, servicesData]) => {
+        if (heroData.hero) setHero(heroData.hero)
+        if (servicesData.services) setServices(servicesData.services)
+      })
+      .catch(() => {})
+  }, [])
+
+  const heroStats = hero?.stats?.length
+    ? [
+        { value: hero.stats[0]?.value, label: hero.stats[0]?.label, icon: Trophy },
+        { value: hero.stats[1]?.value, label: hero.stats[1]?.label, icon: Heart },
+        { value: hero.stats[2]?.value, label: hero.stats[2]?.label, icon: Briefcase },
+      ]
+    : [
+        { value: '10+', label: 'Years Experience', icon: Trophy },
+        { value: '20+', label: 'Happy Clients', icon: Heart },
+        { value: '500+', label: 'Projects Done', icon: Briefcase },
+      ]
+
+  const offerItems = services.slice(0, 6).map((s) => ({
+    label: s.title,
+    icon: getIcon(s.icon),
+    href: '/services',
+  }))
 
   return (
     <section
@@ -106,20 +191,19 @@ function HeroSection() {
           <div className="space-y-6 lg:space-y-8">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10">
               <span className="w-2 h-2 rounded-full bg-[#ff8c00] animate-pulse-dot" />
-              <span className="text-white/90 text-sm font-medium">Ghana&apos;s Trusted IT Partner Since 2014</span>
+              <span className="text-white/90 text-sm font-medium">{hero?.badge || "Ghana's Trusted IT Partner Since 2014"}</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
-              Your One-Stop{' '}
+              {hero?.title || 'Your One-Stop'}{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff8c00] to-[#ffb347]">
-                IT Solutions
+                {hero?.titleHighlight || 'IT Solutions'}
               </span>{' '}
-              Provider in Ghana
+              {hero?.titleSuffix || 'Provider in Ghana'}
             </h1>
 
             <p className="text-white/70 text-base lg:text-lg max-w-xl leading-relaxed">
-              We deliver comprehensive IT solutions — from networking and cloud services to CCTV installations
-              and printing — empowering businesses across Ghana with reliable technology and expert support.
+              {hero?.description || 'We deliver comprehensive IT solutions — from networking and cloud services to CCTV installations and printing — empowering businesses across Ghana with reliable technology and expert support.'}
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -128,8 +212,8 @@ function HeroSection() {
                 size="lg"
                 className="bg-[#ff8c00] hover:bg-[#ff9f33] text-white font-semibold shadow-lg shadow-[#ff8c00]/25 hover:shadow-[#ff8c00]/40 transition-all duration-200 h-12 px-8 text-base"
               >
-                <Link href="/contact">
-                  Get in Touch
+                <Link href={hero?.buttonLink || '/contact'}>
+                  {hero?.buttonText || 'Get in Touch'}
                   <ChevronRight className="size-4" />
                 </Link>
               </Button>
@@ -139,7 +223,7 @@ function HeroSection() {
                 variant="outline"
                 className="border-white/20 text-white hover:bg-white/10 hover:text-white h-12 px-8 text-base transition-all duration-200"
               >
-                <Link href="/services">Our Services</Link>
+                <Link href={hero?.secondaryButtonLink || '/services'}>{hero?.secondaryButtonText || 'Our Services'}</Link>
               </Button>
             </div>
 
@@ -166,7 +250,7 @@ function HeroSection() {
                 What We Offer
               </h3>
               <div className="grid grid-cols-2 gap-4">
-                {HERO_OFFER_ITEMS.map((item) => (
+                {offerItems.length > 0 ? offerItems.map((item) => (
                   <Link
                     key={item.label}
                     href={item.href}
@@ -182,7 +266,14 @@ function HeroSection() {
                     </div>
                     <span className="text-white/90 text-sm font-medium leading-tight">{item.label}</span>
                   </Link>
-                ))}
+                )) : (
+                  Array.from({ length: 6 }).map((_, i) => (
+                    <div key={i} className="bg-white/5 rounded-xl p-3 border border-white/5">
+                      <div className="w-10 h-10 rounded-lg bg-white/10 mb-2 animate-pulse" />
+                      <div className="h-3 bg-white/10 rounded animate-pulse" />
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           </div>
@@ -199,7 +290,18 @@ function HeroSection() {
    ========================================================================== */
 
 function ServicesPreview() {
-  const previewServices = SERVICES.slice(0, 6)
+  const [services, setServices] = useState<ServiceItem[]>([])
+
+  useEffect(() => {
+    fetch('/api/public/services')
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.services) setServices(data.services)
+      })
+      .catch(() => {})
+  }, [])
+
+  const previewServices = services.slice(0, 6)
 
   return (
     <section className="py-16 lg:py-24" style={{ backgroundColor: '#f8fafc' }}>
@@ -213,29 +315,41 @@ function ServicesPreview() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {previewServices.map((service, idx) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.4, delay: Math.min(idx * 0.06, 0.4) }}
-              whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(10, 37, 64, 0.12)' }}
-            >
-              <Link href="/services" className="block group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:border-[#ff8c00]/20 transition-all duration-300 cursor-pointer">
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
-                  style={{
-                    background: 'linear-gradient(135deg, #ff8c00, #ffb347)',
-                  }}
-                >
-                  <service.icon className="size-6 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-[#0a2540] mb-2">{service.title}</h3>
-                <p className="text-sm text-[#0a2540]/60 leading-relaxed">{service.description}</p>
-              </Link>
-            </motion.div>
-          ))}
+          {previewServices.length > 0 ? previewServices.map((service, idx) => {
+            const Icon = getIcon(service.icon)
+            return (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.4, delay: Math.min(idx * 0.06, 0.4) }}
+                whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(10, 37, 64, 0.12)' }}
+              >
+                <Link href="/services" className="block group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:border-[#ff8c00]/20 transition-all duration-300 cursor-pointer">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+                    style={{
+                      background: 'linear-gradient(135deg, #ff8c00, #ffb347)',
+                    }}
+                  >
+                    <Icon className="size-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-[#0a2540] mb-2">{service.title}</h3>
+                  <p className="text-sm text-[#0a2540]/60 leading-relaxed">{service.description}</p>
+                </Link>
+              </motion.div>
+            )
+          }) : (
+            Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                <div className="w-12 h-12 rounded-xl bg-gray-100 mb-4 animate-pulse" />
+                <div className="h-5 bg-gray-100 rounded mb-2 animate-pulse w-3/4" />
+                <div className="h-4 bg-gray-100 rounded animate-pulse w-full" />
+                <div className="h-4 bg-gray-100 rounded animate-pulse w-2/3 mt-2" />
+              </div>
+            ))
+          )}
         </div>
 
         <div className="text-center mt-10">
@@ -312,7 +426,11 @@ function AboutPreview() {
             </p>
 
             <div className="grid grid-cols-3 gap-4 pt-2">
-              {STATS.map((stat) => (
+              {[
+                { value: '10+', label: 'Years Experience' },
+                { value: '20+', label: 'Happy Clients' },
+                { value: '500+', label: 'Projects Done' },
+              ].map((stat) => (
                 <div
                   key={stat.label}
                   className="text-center rounded-xl p-4 border border-gray-100 shadow-sm"
@@ -351,11 +469,22 @@ function TestimonialsPreview() {
   const ITEMS_PER_PAGE = 3
   const [currentPage, setCurrentPage] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
+  const [direction, setDirection] = useState(1)
+  const [testimonials, setTestimonials] = useState<TestimonialItem[]>([])
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  const totalPages = Math.ceil(TESTIMONIALS.length / ITEMS_PER_PAGE)
+  useEffect(() => {
+    fetch('/api/public/testimonials')
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.testimonials) setTestimonials(data.testimonials)
+      })
+      .catch(() => {})
+  }, [])
+
+  const totalPages = Math.max(1, Math.ceil(testimonials.length / ITEMS_PER_PAGE))
   const startIndex = currentPage * ITEMS_PER_PAGE
-  const visibleTestimonials = TESTIMONIALS.slice(startIndex, startIndex + ITEMS_PER_PAGE)
+  const visibleTestimonials = testimonials.slice(startIndex, startIndex + ITEMS_PER_PAGE)
 
   const goTo = useCallback(
     (page: number) => setCurrentPage((p) => ((page % totalPages) + totalPages) % totalPages),
@@ -365,12 +494,12 @@ function TestimonialsPreview() {
   const goNext = useCallback(() => goTo(currentPage + 1), [currentPage, goTo])
 
   useEffect(() => {
-    if (isPaused) return
+    if (isPaused || testimonials.length === 0) return
     intervalRef.current = setInterval(goNext, 10000)
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current)
     }
-  }, [goNext, isPaused])
+  }, [goNext, isPaused, testimonials.length])
 
   const slideVariants = {
     enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 80 : -80 }),
@@ -378,12 +507,12 @@ function TestimonialsPreview() {
     exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -80 : 80 }),
   }
 
-  const [direction, setDirection] = useState(1)
-
   const paginate = (newDir: number, page: number) => {
     setDirection(newDir)
     goTo(page)
   }
+
+  if (testimonials.length === 0) return null
 
   return (
     <section className="py-16 lg:py-24" style={{ backgroundColor: '#f8fafc' }}>
@@ -412,7 +541,7 @@ function TestimonialsPreview() {
               >
                 {visibleTestimonials.map((item) => (
                   <div
-                    key={item.client}
+                    key={item.id}
                     className="bg-white rounded-2xl p-6 lg:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300"
                   >
                     <Quote className="size-8 text-[#ff8c00]/30 mb-4" />

@@ -1,0 +1,28 @@
+[
+  {
+    "id": "hero-main",
+    "badge": "Ghana's Trusted IT Partner Since 2014",
+    "title": "Your One-Stop",
+    "titleHighlight": "IT Solutions",
+    "titleSuffix": "Provider in Ghana",
+    "description": "We deliver comprehensive IT solutions — from networking and cloud services to CCTV installations and printing — empowering businesses across Ghana with reliable technology and expert support.",
+    "buttonText": "Get in Touch",
+    "buttonLink": "/contact",
+    "secondaryButtonText": "Our Services",
+    "secondaryButtonLink": "/services",
+    "stats": [
+      {
+        "value": "10+",
+        "label": "Years Experience"
+      },
+      {
+        "value": "20+",
+        "label": "Happy Clients"
+      },
+      {
+        "value": "500+",
+        "label": "Projects Done"
+      }
+    ]
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "seed-product-0",
+    "name": "Computers, Laptops and Accessories",
+    "category": "General",
+    "description": "Desktops, laptops, and essential accessories for home and office use.",
+    "price": 0,
+    "currency": "GHS",
+    "image": "",
+    "inStock": true,
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "id": "seed-product-1",
+    "name": "Computer Peripherals",
+    "category": "General",
+    "description": "Keyboards, mice, monitors, speakers, and other essential peripherals.",
+    "price": 0,
+    "currency": "GHS",
+    "image": "",
+    "inStock": true,
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "id": "seed-product-2",
+    "name": "Software Solutions",
+    "category": "General",
+    "description": "Licensed software, antivirus, operating systems, and productivity suites.",
+    "price": 0,
+    "currency": "GHS",
+    "image": "",
+    "inStock": true,
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "id": "seed-product-3",
+    "name": "Office Consumables",
+    "category": "General",
+    "description": "Printer cartridges, paper, stationery, and other office supplies.",
+    "price": 0,
+    "currency": "GHS",
+    "image": "",
+    "inStock": true,
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "id": "seed-product-4",
+    "name": "Networking Equipment & Cables",
+    "category": "General",
+    "description": "Routers, switches, access points, and structured cabling materials.",
+    "price": 0,
+    "currency": "GHS",
+    "image": "",
+    "inStock": true,
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "id": "seed-product-5",
+    "name": "CCTV & Security Systems",
+    "category": "General",
+    "description": "Security cameras, DVR/NVR systems, and surveillance accessories.",
+    "price": 0,
+    "currency": "GHS",
+    "image": "",
+    "inStock": true,
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  }
+]

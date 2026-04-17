@@ -1,0 +1,56 @@
+[
+  {
+    "quote": "Techphase Solutions has been our trusted IT partner for years. Their reliability and professionalism in maintaining our hospital IT systems have been exceptional. We highly recommend them to any organization seeking quality IT solutions.",
+    "client": "BOMA Government Hospital",
+    "type": "Healthcare Client",
+    "order": 1,
+    "id": "seed-testimonial-0",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "quote": "The team at Techphase is professional, responsive, and always goes above and beyond. Their networking solutions have significantly improved our operational efficiency. Working with them has been a great experience.",
+    "client": "MINSOL Limited",
+    "type": "Corporate Client",
+    "order": 2,
+    "id": "seed-testimonial-1",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "quote": "We've worked with Techphase for IT equipment and maintenance services for several years now. Their commitment to quality and customer satisfaction is unmatched. They are our go-to IT solutions provider.",
+    "client": "WACO Ghana Limited",
+    "type": "Long-term Client",
+    "order": 3,
+    "id": "seed-testimonial-2",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "quote": "Techphase installed our entire CCTV security system across three branch locations. The installation was seamless, the quality of equipment is outstanding, and their after-sales support has been truly reliable. Highly recommended!",
+    "client": "Tepa Government Hospital",
+    "type": "Healthcare Client",
+    "order": 4,
+    "id": "seed-testimonial-3",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "quote": "As a growing enterprise, we needed a partner who could scale our IT infrastructure as we expanded. Techphase Solutions delivered beyond expectations with their cloud services and networking expertise. They understand business needs.",
+    "client": "AMANTRA Ghana Limited",
+    "type": "Enterprise Client",
+    "order": 5,
+    "id": "seed-testimonial-4",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "quote": "From procurement to deployment and ongoing maintenance, Techphase has been exceptional. Their team is knowledgeable, punctual, and always available when we need them. A truly dependable IT partner.",
+    "client": "MROCHEKROM Limited",
+    "type": "Corporate Client",
+    "order": 6,
+    "id": "seed-testimonial-5",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  }
+]

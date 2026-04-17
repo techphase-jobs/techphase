@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import {
   Facebook,
@@ -12,9 +13,39 @@ import {
   Clock,
   Heart,
 } from 'lucide-react'
-import { NAV_LINKS, CONTACT_INFO } from '@/lib/data'
+import { NAV_LINKS } from '@/lib/data'
+
+interface Settings {
+  id?: string
+  companyName?: string
+  phone?: string
+  whatsapp?: string
+  email?: string
+  address?: string
+  digitalAddress?: string
+  region?: string
+  hours?: string
+  facebook?: string
+  twitter?: string
+  linkedin?: string
+  instagram?: string
+  googleMapUrl?: string
+}
 
 export default function Footer() {
+  const [settings, setSettings] = useState<Settings | null>(null)
+
+  useEffect(() => {
+    fetch('/api/public/settings')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.settings) setSettings(data.settings)
+      })
+      .catch(() => {})
+  }, [])
+
+  if (!settings) return null
+
   return (
     <footer className="bg-[#0a2540] text-white">
       {/* Main Footer Content */}
@@ -38,10 +69,10 @@ export default function Footer() {
             {/* Social Icons */}
             <div className="flex items-center gap-3 flex-wrap">
               {[
-                { icon: Facebook, href: 'https://facebook.com/techphasesolutions', label: 'Facebook' },
-                { icon: Twitter, href: 'https://twitter.com/techphasesolutions', label: 'Twitter' },
-                { icon: Linkedin, href: 'https://linkedin.com/company/techphasesolutions', label: 'LinkedIn' },
-                { icon: Instagram, href: 'https://instagram.com/techphasesolutions', label: 'Instagram' },
+                { icon: Facebook, href: settings.facebook || 'https://facebook.com/techphasesolutions', label: 'Facebook' },
+                { icon: Twitter, href: settings.twitter || 'https://twitter.com/techphasesolutions', label: 'Twitter' },
+                { icon: Linkedin, href: settings.linkedin || 'https://linkedin.com/company/techphasesolutions', label: 'LinkedIn' },
+                { icon: Instagram, href: settings.instagram || 'https://instagram.com/techphasesolutions', label: 'Instagram' },
               ].map((social) => (
                 <a
                   key={social.label}
@@ -56,7 +87,7 @@ export default function Footer() {
               ))}
               {/* WhatsApp */}
               <a
-                href="https://wa.me/233244201295?text=Hello%20Techphase%20Solutions%2C%20I%20would%20like%20to%20enquire%20about%20your%20IT%20services."
+                href={`https://wa.me/${settings.whatsapp || '233244201295'}?text=Hello%20Techphase%20Solutions%2C%20I%20would%20like%20to%20enquire%20about%20your%20IT%20services.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Chat on WhatsApp"
@@ -106,29 +137,29 @@ export default function Footer() {
                 <MapPin className="size-5 text-[#ff8c00] shrink-0 mt-0.5" />
                 <div>
                   <span className="text-white/60 text-sm leading-relaxed block">
-                    {CONTACT_INFO.location}
+                    {settings.address || '49 S.Dzagble Street, Akweteman-Achimota, Accra, Ghana'}
                   </span>
                   <span className="text-[#ff8c00] text-xs font-semibold mt-0.5 block">
-                    Digital Address: {CONTACT_INFO.digitalAddress}
+                    Digital Address: {settings.digitalAddress || 'GA-302-8209'}
                   </span>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="size-5 text-[#ff8c00] shrink-0 mt-0.5" />
-                <a href="tel:+233244201295" className="text-white/60 hover:text-[#ff8c00] text-sm transition-colors duration-200">
-                  {CONTACT_INFO.phone}
+                <a href={`tel:${settings.phone?.replace(/\s/g, '') || '+233244201295'}`} className="text-white/60 hover:text-[#ff8c00] text-sm transition-colors duration-200">
+                  {settings.phone || '+233 244 201 295'}
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="size-5 text-[#ff8c00] shrink-0 mt-0.5" />
-                <a href="mailto:info@techphasesolutions.com" className="text-white/60 hover:text-[#ff8c00] text-sm transition-colors duration-200">
-                  {CONTACT_INFO.email}
+                <a href={`mailto:${settings.email || 'info@techphasesolutions.com'}`} className="text-white/60 hover:text-[#ff8c00] text-sm transition-colors duration-200">
+                  {settings.email || 'info@techphasesolutions.com'}
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Clock className="size-5 text-[#ff8c00] shrink-0 mt-0.5" />
                 <span className="text-white/60 text-sm">
-                  {CONTACT_INFO.hours}
+                  {settings.hours || 'Mon - Fri: 8:00 AM - 5:00 PM | Sat: 9:00 AM - 1:00 PM'}
                 </span>
               </li>
             </ul>

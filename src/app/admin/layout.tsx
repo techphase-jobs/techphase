@@ -11,6 +11,12 @@ import {
   FileText,
   Package,
   MessageSquare,
+  Settings,
+  Users,
+  Briefcase,
+  Star,
+  Info,
+  Sparkles,
   LogOut,
   Menu,
   X,
@@ -34,19 +40,49 @@ const navItems = [
     icon: LayoutDashboard,
   },
   {
+    label: 'Services',
+    href: '/admin/services',
+    icon: Briefcase,
+  },
+  {
+    label: 'Team',
+    href: '/admin/team',
+    icon: Users,
+  },
+  {
+    label: 'Clients',
+    href: '/admin/clients',
+    icon: Package,
+  },
+  {
+    label: 'Testimonials',
+    href: '/admin/testimonials',
+    icon: Star,
+  },
+  {
     label: 'Blog',
     href: '/admin/blog',
     icon: FileText,
   },
   {
-    label: 'Products',
-    href: '/admin/products',
-    icon: Package,
-  },
-  {
     label: 'Submissions',
     href: '/admin/submissions',
     icon: MessageSquare,
+  },
+  {
+    label: 'About Page',
+    href: '/admin/about',
+    icon: Info,
+  },
+  {
+    label: 'Hero Section',
+    href: '/admin/hero',
+    icon: Sparkles,
+  },
+  {
+    label: 'Settings',
+    href: '/admin/settings',
+    icon: Settings,
   },
 ]
 

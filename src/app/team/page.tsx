@@ -1,13 +1,25 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
-import { TEAM } from '@/lib/data'
 import {
   Linkedin,
   Twitter,
 } from 'lucide-react'
+
+interface TeamMember {
+  id: string
+  name: string
+  role: string
+  bio: string
+  image: string
+  phone: string
+  email: string
+  socialLinks: Record<string, string>
+  order: number
+}
 
 /* ==========================================================================
    SECTION BADGE COMPONENT
@@ -29,6 +41,17 @@ function SectionBadge({ children }: { children: React.ReactNode }) {
    ========================================================================== */
 
 export default function TeamPage() {
+  const [team, setTeam] = useState<TeamMember[]>([])
+
+  useEffect(() => {
+    fetch('/api/public/team')
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.members) setTeam(data.members)
+      })
+      .catch(() => {})
+  }, [])
+
   return (
     <div className="min-h-screen bg-white">
       {/* ── Page Header ─────────────────────────────────────────────────── */}
@@ -97,7 +120,7 @@ export default function TeamPage() {
 
           {/* Team cards grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {TEAM.map((member, idx) => {
+            {team.length > 0 ? team.map((member, idx) => {
               const initials = member.name
                 .split(' ')
                 .map((n) => n[0])
@@ -106,7 +129,7 @@ export default function TeamPage() {
 
               return (
                 <motion.div
-                  key={member.name}
+                  key={member.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-50px' }}
@@ -156,7 +179,15 @@ export default function TeamPage() {
                   </div>
                 </motion.div>
               )
-            })}
+            }) : (
+              Array.from({ length: 5 }).map((_, i) => (
+                <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm text-center">
+                  <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gray-100 animate-pulse" />
+                  <div className="h-4 bg-gray-100 rounded mb-2 animate-pulse w-3/4 mx-auto" />
+                  <div className="h-3 bg-gray-100 rounded animate-pulse w-1/2 mx-auto" />
+                </div>
+              ))
+            )}
           </div>
         </div>
       </section>

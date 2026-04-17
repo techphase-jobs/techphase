@@ -2,11 +2,13 @@
 bun install v1.3.10 (30e609e0)
 No packages! Deleted empty lockfile
 
-[2.00ms] done
+[1.00ms] done
 [download-service] Running bun run dev...
 $ bun --hot index.ts
-Download server running on port 3035
- |   if (args.length > 0)
+46 |     }
+47 |   }
+48 |   let er;
+49 |   if (args.length > 0)
 50 |     er = args[0];
 51 |     throw er;
                  ^

@@ -1,0 +1,101 @@
+[
+  {
+    "name": "BOMA Government Hospital",
+    "order": 1,
+    "id": "seed-client-0",
+    "logo": "",
+    "website": "",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "name": "Tepa Government Hospital",
+    "order": 2,
+    "id": "seed-client-1",
+    "logo": "",
+    "website": "",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "name": "MINSOL Limited",
+    "order": 3,
+    "id": "seed-client-2",
+    "logo": "",
+    "website": "",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "name": "WACO Ghana Limited",
+    "order": 4,
+    "id": "seed-client-3",
+    "logo": "",
+    "website": "",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "name": "AMANTRA Ghana Limited",
+    "order": 5,
+    "id": "seed-client-4",
+    "logo": "",
+    "website": "",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "name": "MROCHEKROM Limited",
+    "order": 6,
+    "id": "seed-client-5",
+    "logo": "",
+    "website": "",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "name": "ALLADI Limited",
+    "order": 7,
+    "id": "seed-client-6",
+    "logo": "",
+    "website": "",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "name": "InkIt Ghana",
+    "order": 8,
+    "id": "seed-client-7",
+    "logo": "",
+    "website": "",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "name": "ITING Computers",
+    "order": 9,
+    "id": "seed-client-8",
+    "logo": "",
+    "website": "",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "name": "Audancy Limited",
+    "order": 10,
+    "id": "seed-client-9",
+    "logo": "",
+    "website": "",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "name": "ZIBA ESTR",
+    "order": 11,
+    "id": "seed-client-10",
+    "logo": "",
+    "website": "",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  }
+]

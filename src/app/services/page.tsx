@@ -1,10 +1,31 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import { SERVICES } from '@/lib/data'
+import {
+  Globe, Mail, Cloud, Settings, Network, Wifi, Wrench, Video, Hammer, Shield, Printer, Monitor,
+  Package, Code, Box, Cable, Camera,
+} from 'lucide-react'
+import { type LucideIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+
+const iconMap: Record<string, LucideIcon> = {
+  Globe, Mail, Cloud, Settings, Network, Wifi, Wrench, Video, Hammer, Shield, Printer, Monitor, Package, Code, Box, Cable, Camera,
+}
+
+function getIcon(name: string): LucideIcon {
+  return iconMap[name] || Settings
+}
+
+interface ServiceItem {
+  id: string
+  title: string
+  description: string
+  icon: string
+  order: number
+}
 
 const cardFadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -20,6 +41,17 @@ const cardFadeUp = {
 }
 
 export default function ServicesPage() {
+  const [services, setServices] = useState<ServiceItem[]>([])
+
+  useEffect(() => {
+    fetch('/api/public/services')
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.services) setServices(data.services)
+      })
+      .catch(() => {})
+  }, [])
+
   return (
     <div className="min-h-screen bg-[#f8fafc]">
       {/* ============ PAGE HEADER ============ */}
@@ -72,11 +104,11 @@ export default function ServicesPage() {
           viewport={{ once: true, amount: 0.05 }}
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {SERVICES.map((service, idx) => {
-            const Icon = service.icon
+          {services.length > 0 ? services.map((service, idx) => {
+            const Icon = getIcon(service.icon)
             return (
               <motion.div
-                key={service.title}
+                key={service.id}
                 custom={idx}
                 variants={cardFadeUp}
                 whileHover={{
@@ -102,7 +134,16 @@ export default function ServicesPage() {
                 </p>
               </motion.div>
             )
-          })}
+          }) : (
+            Array.from({ length: 11 }).map((_, i) => (
+              <div key={i} className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                <div className="mb-5 h-12 w-12 rounded-xl bg-gray-100 animate-pulse" />
+                <div className="h-5 bg-gray-100 rounded mb-2 animate-pulse w-3/4" />
+                <div className="h-4 bg-gray-100 rounded animate-pulse w-full" />
+                <div className="h-4 bg-gray-100 rounded animate-pulse w-5/6 mt-2" />
+              </div>
+            ))
+          )}
         </motion.div>
       </section>
 

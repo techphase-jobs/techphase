@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Quote, Users, ChevronLeft, ChevronRight, CheckCircle } from 'lucide-react'
-import { TESTIMONIALS, CLIENTS } from '@/lib/data'
 import { Badge } from '@/components/ui/badge'
 
 /* ==========================================================================
@@ -26,12 +25,32 @@ const slideVariants = {
 }
 
 /* ==========================================================================
+   API TYPES
+   ========================================================================== */
+
+interface TestimonialItem {
+  id: string
+  quote: string
+  client: string
+  type: string
+  order: number
+}
+
+interface ClientItem {
+  id: string
+  name: string
+  logo: string
+  website: string
+  order: number
+}
+
+/* ==========================================================================
    TESTIMONIALS CAROUSEL
    ========================================================================== */
 
-function TestimonialsCarousel() {
+function TestimonialsCarousel({ testimonials }: { testimonials: TestimonialItem[] }) {
   const itemsPerPage = 3
-  const totalPages = Math.ceil(TESTIMONIALS.length / itemsPerPage)
+  const totalPages = Math.max(1, Math.ceil(testimonials.length / itemsPerPage))
 
   const [currentPage, setCurrentPage] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
@@ -62,7 +81,7 @@ function TestimonialsCarousel() {
     return () => clearInterval(timer)
   }, [isPaused, nextPage])
 
-  const currentTestimonials = TESTIMONIALS.slice(
+  const currentTestimonials = testimonials.slice(
     currentPage * itemsPerPage,
     currentPage * itemsPerPage + itemsPerPage
   )
@@ -87,7 +106,7 @@ function TestimonialsCarousel() {
           >
             {currentTestimonials.map((testimonial, idx) => (
               <motion.div
-                key={`${currentPage}-${idx}`}
+                key={`${currentPage}-${testimonial.id}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1, duration: 0.4 }}
@@ -160,6 +179,21 @@ function TestimonialsCarousel() {
    ========================================================================== */
 
 export default function ClientsPage() {
+  const [testimonials, setTestimonials] = useState<TestimonialItem[]>([])
+  const [clients, setClients] = useState<ClientItem[]>([])
+
+  useEffect(() => {
+    Promise.all([
+      fetch('/api/public/testimonials').then((r) => r.json()),
+      fetch('/api/public/clients').then((r) => r.json()),
+    ])
+      .then(([testimonialsData, clientsData]) => {
+        if (testimonialsData.testimonials) setTestimonials(testimonialsData.testimonials)
+        if (clientsData.clients) setClients(clientsData.clients)
+      })
+      .catch(() => {})
+  }, [])
+
   return (
     <div className="min-h-screen bg-[#f8fafc]">
       {/* ===== Page Header ===== */}
@@ -196,37 +230,39 @@ export default function ClientsPage() {
       </section>
 
       {/* ===== Testimonials Section ===== */}
-      <section className="py-20 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-14"
-          >
-            <Badge className="bg-[#ff8c00]/10 text-[#ff8c00] border-[#ff8c00]/20 px-4 py-1.5 text-sm mb-4">
-              Client Feedback
-            </Badge>
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#0a2540] mb-4">
-              What Our Clients Say
-            </h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">
-              Hear directly from the organisations we&apos;ve had the privilege of serving.
-            </p>
-          </motion.div>
+      {testimonials.length > 0 && (
+        <section className="py-20 lg:py-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-14"
+            >
+              <Badge className="bg-[#ff8c00]/10 text-[#ff8c00] border-[#ff8c00]/20 px-4 py-1.5 text-sm mb-4">
+                Client Feedback
+              </Badge>
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#0a2540] mb-4">
+                What Our Clients Say
+              </h2>
+              <p className="text-gray-500 max-w-2xl mx-auto">
+                Hear directly from the organisations we&apos;ve had the privilege of serving.
+              </p>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-6xl mx-auto px-8"
-          >
-            <TestimonialsCarousel />
-          </motion.div>
-        </div>
-      </section>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="max-w-6xl mx-auto px-8"
+            >
+              <TestimonialsCarousel testimonials={testimonials} />
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* ===== Client Names Grid ===== */}
       <section className="py-20 lg:py-24 bg-white">
@@ -251,9 +287,9 @@ export default function ClientsPage() {
           </motion.div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-            {CLIENTS.map((client, index) => (
+            {clients.length > 0 ? clients.map((client, index) => (
               <motion.div
-                key={client}
+                key={client.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
@@ -265,10 +301,17 @@ export default function ClientsPage() {
                   <CheckCircle className="w-5 h-5 text-[#0a2540]" />
                 </div>
                 <span className="font-medium text-[#0a2540] text-sm lg:text-base truncate">
-                  {client}
+                  {client.name}
                 </span>
               </motion.div>
-            ))}
+            )) : (
+              Array.from({ length: 11 }).map((_, i) => (
+                <div key={i} className="bg-gray-50 rounded-xl p-4 lg:p-5 flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-gray-200 animate-pulse flex-shrink-0" />
+                  <div className="h-4 bg-gray-200 rounded animate-pulse flex-1" />
+                </div>
+              ))
+            )}
           </div>
         </div>
       </section>

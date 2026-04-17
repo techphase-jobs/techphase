@@ -1,0 +1,67 @@
+[
+  {
+    "name": "Robert Kwashie Gozar",
+    "role": "Chief Executive Officer",
+    "image": "/images/team-ceo.png",
+    "order": 1,
+    "id": "seed-team-0",
+    "bio": "",
+    "phone": "",
+    "email": "",
+    "socialLinks": {},
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "name": "Mawuli Kofi",
+    "role": "Accounts Manager",
+    "image": "/images/team-mawuli.png",
+    "order": 2,
+    "id": "seed-team-1",
+    "bio": "",
+    "phone": "",
+    "email": "",
+    "socialLinks": {},
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "name": "Felix Kofi Gozar",
+    "role": "Technical Support Manager",
+    "image": "/images/team-felix.png",
+    "order": 3,
+    "id": "seed-team-2",
+    "bio": "",
+    "phone": "",
+    "email": "",
+    "socialLinks": {},
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "name": "Hansen Neequaye",
+    "role": "Technical Support",
+    "image": "/images/team-hansen.png",
+    "order": 4,
+    "id": "seed-team-3",
+    "bio": "",
+    "phone": "",
+    "email": "",
+    "socialLinks": {},
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "name": "Celestine Bortey",
+    "role": "Technical Support",
+    "image": "/images/team-celestine.png",
+    "order": 5,
+    "id": "seed-team-4",
+    "bio": "",
+    "phone": "",
+    "email": "",
+    "socialLinks": {},
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  }
+]

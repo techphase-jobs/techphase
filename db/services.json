@@ -1,0 +1,101 @@
+[
+  {
+    "title": "Web Development",
+    "description": "Professional website design and development for businesses — from landing pages to full web applications tailored to your needs.",
+    "icon": "Globe",
+    "order": 1,
+    "id": "seed-service-0",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "title": "Professional Email",
+    "description": "Professional business email setup, configuration, and management — including domain-based email hosting, migrations, and ongoing support.",
+    "icon": "Mail",
+    "order": 2,
+    "id": "seed-service-1",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "title": "Cloud Services",
+    "description": "Cloud infrastructure setup, migration, and management to keep your business data secure, accessible, and always available.",
+    "icon": "Cloud",
+    "order": 3,
+    "id": "seed-service-2",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "title": "System Administration",
+    "description": "Expert management and administration of servers, networks, and IT infrastructure to ensure optimal uptime and performance.",
+    "icon": "Settings",
+    "order": 4,
+    "id": "seed-service-3",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "title": "Wide Area Networking",
+    "description": "Professional installation and maintenance of Wide Area Networks for businesses of all sizes across Ghana.",
+    "icon": "Network",
+    "order": 5,
+    "id": "seed-service-4",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "title": "Local Area Networking",
+    "description": "We plan, design, and maintain Local Area Networks to improve your business efficiency and connectivity.",
+    "icon": "Wifi",
+    "order": 6,
+    "id": "seed-service-5",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "title": "Systems Maintenance",
+    "description": "Regular preventive and corrective maintenance to keep your IT systems running at peak performance always.",
+    "icon": "Wrench",
+    "order": 7,
+    "id": "seed-service-6",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "title": "CCTV Installations",
+    "description": "Professional CCTV installation and maintenance for enhanced security of your premises and assets.",
+    "icon": "Video",
+    "order": 8,
+    "id": "seed-service-7",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "title": "Repairs & Servicing",
+    "description": "Expert repairs and servicing of computers, Fax Machines, Printers, UPS, plotters and electronic equipment.",
+    "icon": "Hammer",
+    "order": 9,
+    "id": "seed-service-8",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "title": "Electric Fence Installation",
+    "description": "Professional installation and commissioning of electric fences for enhanced perimeter security.",
+    "icon": "Shield",
+    "order": 10,
+    "id": "seed-service-9",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  },
+  {
+    "title": "Printing Services",
+    "description": "All printing works including banners, stickers, books, forms, calendars, invoices, and more.",
+    "icon": "Printer",
+    "order": 11,
+    "id": "seed-service-10",
+    "createdAt": "2026-04-17T19:54:38.096Z",
+    "updatedAt": "2026-04-17T19:54:38.096Z"
+  }
+]

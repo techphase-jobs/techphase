@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
+import { useState, useEffect, type FormEvent } from 'react'
 import { motion } from 'framer-motion'
 import {
   MapPin,
@@ -17,54 +17,31 @@ import {
   AlertCircle,
   AlertTriangle,
 } from 'lucide-react'
-import { CONTACT_INFO } from '@/lib/data'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 
 /* ==========================================================================
-   CONTACT INFO ITEMS
+   API TYPE
    ========================================================================== */
 
-const infoItems = [
-  {
-    icon: MapPin,
-    label: 'Location',
-    value: CONTACT_INFO.location,
-    href: 'https://maps.google.com/?q=49+S.Dzagble+Street+Akweteman+Accra+Ghana',
-  },
-  {
-    icon: Phone,
-    label: 'Phone',
-    value: CONTACT_INFO.phone,
-    href: 'tel:+233244201295',
-  },
-  {
-    icon: Mail,
-    label: 'Email',
-    value: CONTACT_INFO.email,
-    href: 'mailto:info@techphasesolutions.com',
-  },
-  {
-    icon: Clock,
-    label: 'Working Hours',
-    value: CONTACT_INFO.hours,
-  },
-]
-
-/* ==========================================================================
-   SOCIAL LINKS
-   ========================================================================== */
-
-const socialLinks = [
-  { icon: Facebook, href: 'https://facebook.com/techphasesolutions', label: 'Facebook' },
-  { icon: Twitter, href: 'https://twitter.com/techphasesolutions', label: 'Twitter' },
-  { icon: Linkedin, href: 'https://linkedin.com/company/techphasesolutions', label: 'LinkedIn' },
-  { icon: Instagram, href: 'https://instagram.com/techphasesolutions', label: 'Instagram' },
-]
-
-const WHATSAPP_LINK = 'https://wa.me/233244201295?text=Hello%20Techphase%20Solutions%2C%20I%20would%20like%20to%20enquire%20about%20your%20IT%20services.'
+interface Settings {
+  id?: string
+  companyName?: string
+  phone?: string
+  whatsapp?: string
+  email?: string
+  address?: string
+  digitalAddress?: string
+  region?: string
+  hours?: string
+  facebook?: string
+  twitter?: string
+  linkedin?: string
+  instagram?: string
+  googleMapUrl?: string
+}
 
 /* ==========================================================================
    GOOGLE MAP CONFIG
@@ -78,6 +55,7 @@ const mapSrc =
    ========================================================================== */
 
 export default function ContactPage() {
+  const [settings, setSettings] = useState<Settings | null>(null)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSending, setIsSending] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
@@ -89,6 +67,15 @@ export default function ContactPage() {
     subject: '',
     message: '',
   })
+
+  useEffect(() => {
+    fetch('/api/public/settings')
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.settings) setSettings(data.settings)
+      })
+      .catch(() => {})
+  }, [])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -128,6 +115,43 @@ export default function ContactPage() {
       setIsSending(false)
     }
   }
+
+  const s = settings
+
+  const infoItems = [
+    {
+      icon: MapPin,
+      label: 'Location',
+      value: s?.address || '49 S.Dzagble Street, Akweteman-Achimota, Accra, Ghana',
+      href: 'https://maps.google.com/?q=49+S.Dzagble+Street+Akweteman+Accra+Ghana',
+    },
+    {
+      icon: Phone,
+      label: 'Phone',
+      value: s?.phone || '+233 244 201 295',
+      href: `tel:${s?.phone?.replace(/\s/g, '') || '+233244201295'}`,
+    },
+    {
+      icon: Mail,
+      label: 'Email',
+      value: s?.email || 'info@techphasesolutions.com',
+      href: `mailto:${s?.email || 'info@techphasesolutions.com'}`,
+    },
+    {
+      icon: Clock,
+      label: 'Working Hours',
+      value: s?.hours || 'Mon - Fri: 8:00 AM - 5:00 PM | Sat: 9:00 AM - 1:00 PM',
+    },
+  ]
+
+  const socialLinks = [
+    { icon: Facebook, href: s?.facebook || 'https://facebook.com/techphasesolutions', label: 'Facebook' },
+    { icon: Twitter, href: s?.twitter || 'https://twitter.com/techphasesolutions', label: 'Twitter' },
+    { icon: Linkedin, href: s?.linkedin || 'https://linkedin.com/company/techphasesolutions', label: 'LinkedIn' },
+    { icon: Instagram, href: s?.instagram || 'https://instagram.com/techphasesolutions', label: 'Instagram' },
+  ]
+
+  const WHATSAPP_LINK = `https://wa.me/${s?.whatsapp || '233244201295'}?text=Hello%20Techphase%20Solutions%2C%20I%20would%20like%20to%20enquire%20about%20your%20IT%20services.`
 
   const inputClasses =
     'w-full bg-white/10 border border-white/10 text-white placeholder:text-white/30 rounded-lg px-4 py-3 text-sm outline-none transition-all duration-200 focus:border-[#ff8c00]/50 focus:ring-1 focus:ring-[#ff8c00]/50'
@@ -499,7 +523,7 @@ export default function ContactPage() {
             className="rounded-2xl overflow-hidden shadow-2xl shadow-black/30 border border-white/10"
           >
             <iframe
-              src={mapSrc}
+              src={s?.googleMapUrl || mapSrc}
               width="100%"
               height="400"
               style={{ border: 0 }}

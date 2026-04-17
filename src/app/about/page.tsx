@@ -1,9 +1,9 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Target, Eye, ArrowRight, CheckCircle } from 'lucide-react'
-import { STATS } from '@/lib/data'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 
@@ -21,7 +21,36 @@ const staggerContainer = {
   visible: { transition: { staggerChildren: 0.1 } },
 }
 
+interface AboutData {
+  id?: string
+  title?: string
+  subtitle?: string
+  description?: string
+  mission?: string
+  vision?: string
+  values?: string
+  history?: string
+  image?: string
+}
+
 export default function AboutPage() {
+  const [about, setAbout] = useState<AboutData | null>(null)
+
+  useEffect(() => {
+    fetch('/api/public/about')
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.about) setAbout(data.about)
+      })
+      .catch(() => {})
+  }, [])
+
+  const stats = [
+    { value: '10+', label: 'Years Experience' },
+    { value: '20+', label: 'Happy Clients' },
+    { value: '500+', label: 'Projects Done' },
+  ]
+
   return (
     <div className="min-h-screen bg-[#f8fafc]">
       {/* ============ PAGE HEADER ============ */}
@@ -90,12 +119,7 @@ export default function AboutPage() {
               custom={1}
               className="mb-5 text-base leading-relaxed text-[#0a2540]/70"
             >
-              Founded in 2014, Techphase Solutions has grown from a small IT
-              startup into one of Ghana&apos;s most trusted technology partners.
-              Headquartered in Accra, we serve a diverse portfolio of clients
-              ranging from government hospitals and corporate enterprises to
-              growing SMEs — providing end-to-end IT solutions that empower
-              businesses to operate efficiently and securely.
+              {about?.description || 'Founded in 2014, Techphase Solutions has grown from a small IT startup into one of Ghana\'s most trusted technology partners. Headquartered in Accra, we serve a diverse portfolio of clients ranging from government hospitals and corporate enterprises to growing SMEs — providing end-to-end IT solutions that empower businesses to operate efficiently and securely.'}
             </motion.p>
 
             <motion.p
@@ -103,12 +127,7 @@ export default function AboutPage() {
               custom={2}
               className="mb-8 text-base leading-relaxed text-[#0a2540]/70"
             >
-              Our team of experienced professionals brings deep expertise in
-              networking, cloud infrastructure, cybersecurity, hardware
-              procurement, and systems maintenance. We take pride in building
-              long-lasting relationships with our clients by delivering
-              consistent quality, transparent communication, and unwavering
-              commitment to excellence in every project we undertake.
+              {about?.history || 'Our team of experienced professionals brings deep expertise in networking, cloud infrastructure, cybersecurity, hardware procurement, and systems maintenance. We take pride in building long-lasting relationships with our clients by delivering consistent quality, transparent communication, and unwavering commitment to excellence in every project we undertake.'}
             </motion.p>
 
             {/* Key highlights */}
@@ -158,11 +177,7 @@ export default function AboutPage() {
                     Our Mission
                   </h3>
                   <p className="text-sm leading-relaxed text-[#0a2540]/70">
-                    To deliver exceptional value to our clients by providing
-                    innovative, reliable, and cost-effective IT solutions that
-                    empower businesses to achieve their goals. We are committed
-                    to building lasting partnerships founded on trust, quality
-                    service, and measurable results.
+                    {about?.mission || 'To deliver exceptional value to our clients by providing innovative, reliable, and cost-effective IT solutions that empower businesses to achieve their goals. We are committed to building lasting partnerships founded on trust, quality service, and measurable results.'}
                   </p>
                 </CardContent>
               </Card>
@@ -179,11 +194,7 @@ export default function AboutPage() {
                     Our Vision
                   </h3>
                   <p className="text-sm leading-relaxed text-[#0a2540]/70">
-                    To become the leading IT solutions provider in West Africa,
-                    recognized for our technical expertise, customer-centric
-                    approach, and unwavering commitment to helping businesses
-                    thrive in the digital age. We aspire to set the standard for
-                    IT excellence across the region.
+                    {about?.vision || 'To become the leading IT solutions provider in West Africa, recognized for our technical expertise, customer-centric approach, and unwavering commitment to helping businesses thrive in the digital age. We aspire to set the standard for IT excellence across the region.'}
                   </p>
                 </CardContent>
               </Card>
@@ -212,7 +223,7 @@ export default function AboutPage() {
             className="grid grid-cols-1 gap-6 sm:grid-cols-3"
             variants={staggerContainer}
           >
-            {STATS.map((stat, idx) => (
+            {stats.map((stat, idx) => (
               <motion.div
                 key={stat.label}
                 variants={fadeUp}
