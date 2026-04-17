@@ -1,0 +1,15 @@
+[
+  {
+    "id": "mndpxy3ksgzi9c",
+    "status": "new",
+    "createdAt": "2026-03-30T21:47:18.368Z",
+    "ip": "::1",
+    "userAgent": "node",
+    "browser": "Unknown Browser",
+    "phone": "+233 244 201 295",
+    "name": "Test User",
+    "email": "robertgozar@gmail.com",
+    "subject": "Test Acknowledgement Email",
+    "message": "This is a test to verify that the acknowledgement email is sent correctly to the submitter."
+  }
+]

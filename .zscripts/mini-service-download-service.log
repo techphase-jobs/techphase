@@ -1,0 +1,14 @@
+[download-service] Installing dependencies...
+bun install v1.3.10 (30e609e0)
+No packages! Deleted empty lockfile
+
+[2.00ms] done
+[download-service] Running bun run dev...
+$ bun --hot index.ts
+Download server running on port 3035
+ |   if (args.length > 0)
+50 |     er = args[0];
+51 |     throw er;
+                 ^
+error: Failed to start server. Is port 3035 in use?
+      at emitError (node:events:51:13)
