@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { useAdmin } from '../layout'
 import { Skeleton } from '@/components/ui/skeleton'
 import {
@@ -79,6 +80,7 @@ export default function AdminDashboardPage() {
       color: 'from-blue-500/20 to-blue-600/10',
       iconColor: 'text-blue-400',
       borderColor: 'border-blue-500/20',
+      href: '/admin/blog',
     },
     {
       label: 'Published Posts',
@@ -87,6 +89,7 @@ export default function AdminDashboardPage() {
       color: 'from-green-500/20 to-green-600/10',
       iconColor: 'text-green-400',
       borderColor: 'border-green-500/20',
+      href: '/admin/blog',
     },
     {
       label: 'Total Products',
@@ -95,6 +98,7 @@ export default function AdminDashboardPage() {
       color: 'from-purple-500/20 to-purple-600/10',
       iconColor: 'text-purple-400',
       borderColor: 'border-purple-500/20',
+      href: '/admin/products',
     },
     {
       label: 'New Submissions',
@@ -103,6 +107,7 @@ export default function AdminDashboardPage() {
       color: 'from-orange-500/20 to-orange-600/10',
       iconColor: 'text-[#ff8c00]',
       borderColor: 'border-[#ff8c00]/20',
+      href: '/admin/submissions',
     },
   ]
 
@@ -138,9 +143,10 @@ export default function AdminDashboardPage() {
               </div>
             ))
           : statCards.map((card) => (
-              <div
+              <Link
                 key={card.label}
-                className={`rounded-xl border ${card.borderColor} bg-white/5 p-6 transition-all hover:bg-white/[0.07]`}
+                href={card.href}
+                className={`block rounded-xl border ${card.borderColor} bg-white/5 p-6 transition-all hover:bg-white/[0.07] hover:scale-[1.02] cursor-pointer`}
               >
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-white/60 text-sm font-medium">
@@ -157,7 +163,7 @@ export default function AdminDashboardPage() {
                   <TrendingUp className="h-3.5 w-3.5 text-green-400" />
                   <p className="text-xs text-white/40">Total count</p>
                 </div>
-              </div>
+              </Link>
             ))}
       </div>
 
@@ -166,27 +172,27 @@ export default function AdminDashboardPage() {
         <div className="rounded-xl border border-white/10 bg-white/5 p-6">
           <h3 className="text-white font-semibold mb-3">Quick Actions</h3>
           <div className="grid grid-cols-2 gap-3">
-            <a
+            <Link
               href="/admin/blog/new"
               className="flex items-center gap-2 p-3 rounded-lg bg-white/5 hover:bg-[#ff8c00]/10 text-white/70 hover:text-[#ff8c00] transition-colors text-sm"
             >
               <FileText className="h-4 w-4" />
               New Blog Post
-            </a>
-            <a
+            </Link>
+            <Link
               href="/admin/products/new"
               className="flex items-center gap-2 p-3 rounded-lg bg-white/5 hover:bg-[#ff8c00]/10 text-white/70 hover:text-[#ff8c00] transition-colors text-sm"
             >
               <Package className="h-4 w-4" />
               Add Product
-            </a>
-            <a
+            </Link>
+            <Link
               href="/admin/submissions"
               className="flex items-center gap-2 p-3 rounded-lg bg-white/5 hover:bg-[#ff8c00]/10 text-white/70 hover:text-[#ff8c00] transition-colors text-sm"
             >
               <MessageSquare className="h-4 w-4" />
               View Messages
-            </a>
+            </Link>
           </div>
         </div>
 

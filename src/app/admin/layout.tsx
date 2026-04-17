@@ -22,6 +22,7 @@ import {
   Menu,
   X,
   Loader2,
+  ShoppingCart,
 } from 'lucide-react'
 
 interface AdminContextType {
@@ -64,6 +65,11 @@ const navItems = [
     label: 'Blog',
     href: '/admin/blog',
     icon: FileText,
+  },
+  {
+    label: 'Products',
+    href: '/admin/products',
+    icon: ShoppingCart,
   },
   {
     label: 'Submissions',

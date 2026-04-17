@@ -409,3 +409,25 @@ Stage Summary:
 - All animation code (framer-motion) stays in client components
 - Form handling (POST) remains client-side
 - Zero lint errors verified
+
+---
+Task ID: make-dashboard-clickable
+Agent: Main Agent
+Task: Make admin dashboard circled items clickable and add Products to sidebar
+
+Work Log:
+- Updated admin dashboard stat cards from `<div>` to `<Link>` components so they navigate to respective admin pages when clicked:
+  - Total Blog Posts → /admin/blog
+  - Published Posts → /admin/blog
+  - Total Products → /admin/products
+  - New Submissions → /admin/submissions
+- Added `hover:scale-[1.02]` effect for visual feedback on click
+- Quick Actions buttons were already linked (New Blog Post → /admin/blog/new, Add Product → /admin/products/new, View Messages → /admin/submissions)
+- Added missing "Products" nav item to admin sidebar (between Blog and Submissions) with ShoppingCart icon
+- Verified all routes compile and return 200 status
+- Zero lint errors verified
+
+Stage Summary:
+- All 4 stat cards on dashboard are now clickable links
+- Products section added to admin sidebar navigation (11 items total)
+- Services page confirmed working (returns 11 services from API)
