@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechPhase Solutions | Premier IT Solutions Provider in Ghana</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="TechPhase Solutions is Ghana's trusted IT partner offering computers, networking, CCTV, systems maintenance, repairs and office supplies in Accra since 2014.">
+    <meta name="keywords" content="IT solutions Ghana, computer repair Accra, networking Ghana, CCTV installation, office consumables, TechPhase Solutions, Achimota IT">
+    <meta name="author" content="TechPhase Solutions">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a2540">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="TechPhase Solutions | Premier IT Solutions Provider in Ghana">
+    <meta property="og:description" content="Quality computers, networking solutions, CCTV, and exceptional maintenance services across Ghana since 2014.">
+    <meta property="og:url" content="https://techphasesolutions.com">
+    <meta property="og:locale" content="en_GH">
+    <meta property="og:site_name" content="TechPhase Solutions">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="TechPhase Solutions | Premier IT Solutions Provider in Ghana">
+    <meta name="twitter:description" content="Quality computers, networking, CCTV, and maintenance services across Ghana since 2014.">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://techphasesolutions.com/">
+
+    <!-- Favicon (inline SVG — no extra request) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a2540'/%3E%3Cpath d='M14 20h36v8H37v24h-10V28H14z' fill='%23ff8c00'/%3E%3C/svg%3E">
+
+    <!-- Structured Data: LocalBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "TechPhase Solutions",
+      "description": "Ghana's trusted IT partner offering computers, networking, CCTV, systems maintenance, repairs and office supplies since 2014.",
+      "url": "https://techphasesolutions.com",
+      "telephone": "+233244201295",
+      "email": "info@techphasesolutions.com",
+      "foundingDate": "2014",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "49 S.Dzagble Street, Akweteman-Achimota",
+        "addressLocality": "Accra",
+        "addressCountry": "GH"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": 5.6228, "longitude": -0.2241 },
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "17:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00" }
+      ],
+      "sameAs": [
+        "https://facebook.com/techphasesolutions",
+        "https://twitter.com/techphase_gh",
+        "https://linkedin.com/company/techphase-solutions",
+        "https://instagram.com/techphasesolutions"
+      ]
+    }
+    </script>
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Fonts: Syne (display) + DM Sans (body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+
+    <style>
+        /* ===============================================
+           CSS VARIABLES & BASE RESET
+        =============================================== */
+        :root {
+            --primary:       #0a2540;
+            --primary-light: #0e3460;
+            --secondary:     #1e6fdc;
+            --accent:        #ff8c00;
+            --accent-light:  #ffb347;
+            --white:         #ffffff;
+            --gray-50:       #f8fafc;
+            --gray-100:      #f1f5f9;
+            --gray-200:      #e2e8f0;
+            --gray-600:      #475569;
+            --gray-700:      #334155;
+            --gray-900:      #0f172a;
+            --text:          #1e293b;
+            --radius:        12px;
+            --radius-lg:     20px;
+            --shadow-sm:     0 2px 8px rgba(10,37,64,.08);
+            --shadow-md:     0 8px 32px rgba(10,37,64,.12);
+            --shadow-lg:     0 20px 60px rgba(10,37,64,.18);
+            --transition:    all 0.35s cubic-bezier(.4,0,.2,1);
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: var(--white);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+        h1,h2,h3,h4 { font-family: 'Syne', sans-serif; line-height: 1.2; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; }
+
+        /* ===============================================
+           PAGE SYSTEM
+        =============================================== */
+        .page { display: none; opacity: 0; transition: opacity 0.45s ease; }
+        .page.active  { display: block; }
+        .page.visible { opacity: 1; }
+
+        /* ===============================================
+           NAVBAR
+        =============================================== */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(10,37,64,.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,255,255,.08);
+            transition: var(--transition);
+        }
+        .navbar-inner {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 16px 40px; max-width: 1280px; margin: 0 auto;
+        }
+        .logo {
+            font-family: 'Syne', sans-serif; font-size: 1.55rem; font-weight: 800;
+            color: var(--white); cursor: pointer; letter-spacing: -.5px;
+        }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; list-style: none; gap: 4px; align-items: center; }
+        .nav-links li a {
+            color: rgba(255,255,255,.82); font-size: .9rem; font-weight: 500;
+            padding: 8px 13px; border-radius: 8px; cursor: pointer;
+            transition: var(--transition); display: block;
+        }
+        .nav-links li a:hover { color: var(--white); background: rgba(255,255,255,.1); }
+        .nav-links li a.active { color: var(--accent); background: rgba(255,140,0,.12); }
+        .nav-cta {
+            background: var(--accent) !important; color: var(--white) !important;
+            padding: 9px 18px !important; border-radius: 8px !important; font-weight: 600 !important;
+        }
+        .nav-cta:hover { background: var(--accent-light) !important; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,140,0,.35); }
+
+        /* Hamburger */
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            cursor: pointer; padding: 8px; border: none; background: transparent;
+        }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* Mobile Nav */
+        .mobile-nav {
+            display: none; max-height: 0; overflow: hidden;
+            transition: max-height .4s ease; background: rgba(10,37,64,.97);
+            backdrop-filter: blur(16px);
+        }
+        .mobile-nav.open { max-height: 600px; }
+        .mobile-nav a {
+            display: block; color: rgba(255,255,255,.82); padding: 14px 40px;
+            font-size: .98rem; font-weight: 500; cursor: pointer;
+            border-bottom: 1px solid rgba(255,255,255,.06); transition: var(--transition);
+        }
+        .mobile-nav a:hover, .mobile-nav a.active { color: var(--accent); padding-left: 52px; }
+
+        /* ===============================================
+           HERO
+        =============================================== */
+        .hero {
+            min-height: 100vh; padding-top: 78px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 45%, #14527a 100%);
+            display: flex; align-items: center; position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 72% 50%, rgba(30,111,220,.28) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 55% at 8% 80%,  rgba(255,140,0,.13) 0%, transparent 65%);
+        }
+        .hero-grid {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); animation: floatOrb 9s ease-in-out infinite; }
+        .hero-orb-1 { width: 420px; height: 420px; background: rgba(30,111,220,.22); top: -120px; right: -60px; }
+        .hero-orb-2 { width: 320px; height: 320px; background: rgba(255,140,0,.16); bottom: -60px; left: 8%; animation-delay: -3.5s; }
+        .hero-orb-3 { width: 220px; height: 220px; background: rgba(30,111,220,.14); top: 35%; left: 42%; animation-delay: -6s; }
+        @keyframes floatOrb {
+            0%,100% { transform: translate(0,0) scale(1); }
+            33%      { transform: translate(22px,-22px) scale(1.06); }
+            66%      { transform: translate(-16px,16px) scale(.97); }
+        }
+
+        .hero-content {
+            position: relative; z-index: 2; max-width: 1280px;
+            margin: 0 auto; padding: 80px 40px;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 70px; align-items: center;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,140,0,.14); border: 1px solid rgba(255,140,0,.3);
+            color: var(--accent-light); padding: 6px 14px;
+            border-radius: 100px; font-size: .81rem; font-weight: 600;
+            margin-bottom: 22px; letter-spacing: .4px;
+        }
+        .hero-badge::before {
+            content: ''; width: 8px; height: 8px; background: var(--accent);
+            border-radius: 50%; animation: pulseDot 2s infinite;
+        }
+        @keyframes pulseDot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.35)} }
+
+        .hero-text h1 { font-size: clamp(2.1rem,3.6vw,3.3rem); color: var(--white); margin-bottom: 18px; letter-spacing: -1px; }
+        .hero-text h1 span { color: var(--accent); }
+        .hero-text > p { color: rgba(255,255,255,.73); font-size: 1.08rem; margin-bottom: 34px; max-width: 490px; }
+        .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+        .btn-primary {
+            background: var(--accent); color: var(--white); padding: 14px 26px;
+            border-radius: var(--radius); font-weight: 600; font-size: .93rem;
+            cursor: pointer; border: 2px solid var(--accent);
+            display: inline-flex; align-items: center; gap: 8px; transition: var(--transition);
+        }
+        .btn-primary:hover { background: var(--accent-light); border-color: var(--accent-light); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,140,0,.4); }
+        .btn-outline {
+            background: transparent; color: var(--white); padding: 14px 26px;
+            border-radius: var(--radius); font-weight: 600; font-size: .93rem;
+            cursor: pointer; border: 2px solid rgba(255,255,255,.38);
+            display: inline-flex; align-items: center; gap: 8px; transition: var(--transition);
+        }
+        .btn-outline:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.7); transform: translateY(-2px); }
+
+        .hero-stats { display: flex; gap: 34px; margin-top: 46px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,.12); }
+        .hero-stat-num { font-family: 'Syne', sans-serif; font-size: 1.75rem; font-weight: 800; color: var(--white); line-height: 1.1; }
+        .hero-stat-num span { color: var(--accent); }
+        .hero-stat-label { font-size: .78rem; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .8px; margin-top: 3px; }
+
+        /* Hero floating card */
+        .hero-visual { display: flex; justify-content: center; align-items: center; }
+        .hero-card {
+            background: rgba(255,255,255,.065); backdrop-filter: blur(22px);
+            border: 1px solid rgba(255,255,255,.13); border-radius: var(--radius-lg);
+            padding: 32px 28px; width: 100%; max-width: 400px;
+            animation: heroFloat 7s ease-in-out infinite;
+        }
+        @keyframes heroFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+        .hero-card-title {
+            font-family: 'Syne', sans-serif; font-size: .78rem; color: rgba(255,255,255,.55);
+            text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 18px;
+        }
+        .hsl-item {
+            display: flex; align-items: center; gap: 12px;
+            color: rgba(255,255,255,.85); font-size: .92rem;
+            padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+        .hsl-item:last-child { border-bottom: none; }
+        .hsl-icon {
+            width: 34px; height: 34px; background: rgba(255,140,0,.16);
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            color: var(--accent); font-size: .82rem; flex-shrink: 0;
+        }
+
+        /* ===============================================
+           LAYOUT UTILITIES
+        =============================================== */
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+        section { padding: 88px 0; }
+        .section-header { text-align: center; margin-bottom: 62px; }
+        .section-tag {
+            display: inline-block; background: rgba(30,111,220,.09);
+            color: var(--secondary); padding: 4px 14px; border-radius: 100px;
+            font-size: .78rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; margin-bottom: 12px;
+        }
+        .section-title { font-size: clamp(1.75rem, 2.8vw, 2.5rem); color: var(--primary); margin-bottom: 14px; letter-spacing: -.4px; }
+        .section-divider { width: 46px; height: 4px; background: linear-gradient(90deg, var(--accent), var(--accent-light)); border-radius: 2px; margin: 0 auto 18px; }
+        .section-subtitle { color: var(--gray-600); font-size: 1.02rem; max-width: 580px; margin: 0 auto; }
+
+
+
+        /* ===============================================
+           ABOUT PAGE
+        =============================================== */
+        .about-page { background: var(--gray-50); padding-top: 120px; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+        .about-img-wrap { position: relative; }
+        .about-img-wrap img { width: 100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+        .about-badge {
+            position: absolute; bottom: -20px; right: -16px;
+            background: var(--accent); color: var(--white);
+            padding: 20px 22px; border-radius: var(--radius);
+            font-family: 'Syne', sans-serif; box-shadow: var(--shadow-md);
+        }
+        .about-badge strong { display: block; font-size: 2rem; line-height: 1; }
+        .about-badge span { font-size: .82rem; opacity: .9; }
+        .about-text h2 { font-size: clamp(1.7rem,2.4vw,2.3rem); color: var(--primary); margin-bottom: 18px; letter-spacing: -.4px; }
+        .about-text p { color: var(--gray-600); margin-bottom: 16px; font-size: .98rem; }
+        .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
+        .mv-card {
+            padding: 22px; border-radius: var(--radius);
+            border: 1px solid var(--gray-200); background: var(--white);
+        }
+        .mv-card:first-child { border-left: 4px solid var(--secondary); }
+        .mv-card:last-child  { border-left: 4px solid var(--accent); }
+        .mv-card h4 { font-family: 'Syne',sans-serif; font-size: .95rem; color: var(--primary); margin-bottom: 8px; }
+        .mv-card p  { color: var(--gray-600); font-size: .88rem; margin: 0; }
+
+        /* ===============================================
+           SERVICES PAGE
+        =============================================== */
+        .services-page { padding-top: 120px; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px,1fr)); gap: 26px; }
+        .service-card {
+            background: var(--white); border-radius: var(--radius-lg);
+            padding: 34px 28px; border: 1px solid var(--gray-200);
+            transition: var(--transition); position: relative; overflow: hidden;
+        }
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            transform: scaleX(0); transition: transform .35s ease; transform-origin: left;
+        }
+        .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .service-card:hover::before { transform: scaleX(1); }
+        .svc-icon {
+            width: 58px; height: 58px; border-radius: 14px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary-light));
+            display: flex; align-items: center; justify-content: center;
+            color: var(--white); font-size: 1.35rem; margin-bottom: 20px;
+        }
+        .service-card h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 10px; }
+        .service-card p  { color: var(--gray-600); font-size: .91rem; }
+
+        /* ===============================================
+           PRODUCTS PAGE
+        =============================================== */
+        .products-page { background: var(--gray-50); padding-top: 120px; }
+        .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; }
+        .product-list { list-style: none; }
+        .product-list li {
+            display: flex; align-items: center; gap: 14px;
+            padding: 15px 0; border-bottom: 1px solid var(--gray-100);
+            font-size: .98rem; color: var(--gray-700);
+        }
+        .product-list li:last-child { border-bottom: none; }
+        .check-icon {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            display: flex; align-items: center; justify-content: center;
+            color: var(--white); font-size: .68rem; flex-shrink: 0;
+        }
+        .partners-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 22px; }
+        .partner-chip {
+            background: var(--white); border: 1px solid var(--gray-200);
+            border-radius: var(--radius); padding: 14px 10px;
+            text-align: center; font-family: 'Syne',sans-serif;
+            font-weight: 700; color: var(--primary); font-size: .95rem;
+            transition: var(--transition);
+        }
+        .partner-chip:hover { border-color: var(--secondary); background: rgba(30,111,220,.04); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+
+        /* Stats Strip */
+        .stats-strip { background: var(--primary); padding: 72px 0; }
+        .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 40px; text-align: center; }
+        .stat-icon {
+            width: 54px; height: 54px; background: rgba(255,140,0,.14); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--accent); font-size: 1.3rem; margin: 0 auto 14px;
+        }
+        .stat-number { font-family: 'Syne',sans-serif; font-size: 2.7rem; font-weight: 800; color: var(--white); line-height: 1; margin-bottom: 8px; }
+        .stat-number span { color: var(--accent); }
+        .stat-label { color: rgba(255,255,255,.55); font-size: .87rem; }
+
+        /* ===============================================
+           TEAM PAGE
+        =============================================== */
+        .team-page { padding-top: 120px; }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: 26px; }
+        .team-card {
+            background: var(--white); border-radius: var(--radius-lg);
+            padding: 30px 22px; text-align: center;
+            border: 1px solid var(--gray-200); transition: var(--transition);
+        }
+        .team-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .team-avatar {
+            width: 78px; height: 78px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            display: flex; align-items: center; justify-content: center;
+            color: var(--white); font-size: 1.75rem; margin: 0 auto 16px;
+            position: relative;
+        }
+        .team-avatar::after {
+            content: ''; position: absolute; inset: -3px; border-radius: 50%;
+            border: 2px solid var(--accent); opacity: 0; transition: var(--transition);
+        }
+        .team-card:hover .team-avatar::after { opacity: 1; }
+        .team-card h3 { font-size: 1.02rem; color: var(--primary); margin-bottom: 5px; }
+        .team-card .role { font-size: .82rem; color: var(--secondary); font-weight: 600; margin-bottom: 16px; }
+        .team-social { display: flex; justify-content: center; gap: 8px; }
+        .team-social a {
+            width: 30px; height: 30px; background: var(--gray-100); border-radius: 7px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--gray-600); font-size: .76rem; transition: var(--transition);
+        }
+        .team-social a:hover { background: var(--secondary); color: var(--white); transform: translateY(-2px); }
+
+        /* Testimonials */
+        .testimonials { background: var(--gray-50); }
+        .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(275px,1fr)); gap: 26px; }
+        .testi-card {
+            background: var(--white); border-radius: var(--radius-lg);
+            padding: 30px; border: 1px solid var(--gray-200); transition: var(--transition);
+        }
+        .testi-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+        .stars { color: var(--accent); font-size: .82rem; margin-bottom: 14px; letter-spacing: 2px; }
+        .testi-quote { font-size: 2.4rem; color: var(--accent); line-height: 1; font-family: Georgia,serif; margin-bottom: 12px; }
+        .testi-text { color: var(--gray-600); font-size: .93rem; margin-bottom: 18px; line-height: 1.7; }
+        .testi-author { display: flex; align-items: center; gap: 11px; }
+        .testi-av {
+            width: 42px; height: 42px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            display: flex; align-items: center; justify-content: center; color: var(--white); font-size: .88rem;
+        }
+        .testi-name { font-weight: 600; font-size: .88rem; color: var(--primary); }
+        .testi-role { font-size: .78rem; color: var(--gray-600); }
+
+        /* ===============================================
+           CLIENTS PAGE
+        =============================================== */
+        .clients-page { padding-top: 120px; }
+        .clients-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px,1fr)); gap: 18px; }
+        .client-card {
+            background: var(--white); border: 1px solid var(--gray-200);
+            border-radius: var(--radius); padding: 24px 18px;
+            text-align: center; transition: var(--transition); position: relative; overflow: hidden;
+        }
+        .client-card::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            opacity: 0; transition: var(--transition);
+        }
+        .client-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: transparent; }
+        .client-card:hover::before { opacity: 1; }
+        .client-card:hover .cl-icon { background: rgba(255,255,255,.18); color: var(--white); }
+        .client-card:hover p { color: var(--white); }
+        .cl-icon {
+            width: 42px; height: 42px; background: var(--gray-100); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 10px; font-size: 1.05rem; color: var(--secondary);
+            position: relative; z-index: 1; transition: var(--transition);
+        }
+        .client-card p { font-weight: 600; font-size: .84rem; color: var(--primary); position: relative; z-index: 1; transition: var(--transition); }
+
+        /* ===============================================
+           CONTACT PAGE
+        =============================================== */
+        .contact-page { padding-top: 78px; }
+        .contact-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 88px 0; position: relative; overflow: hidden;
+        }
+        .contact-hero::before {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+            background-size: 42px 42px;
+        }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1.45fr; gap: 58px; align-items: start; position: relative; z-index: 1; }
+        .contact-info h2 { font-size: 1.9rem; color: var(--white); margin-bottom: 10px; }
+        .contact-info > p { color: rgba(255,255,255,.62); margin-bottom: 32px; font-size: .93rem; }
+        .ci-item { display: flex; gap: 14px; margin-bottom: 22px; align-items: flex-start; }
+        .ci-icon {
+            width: 42px; height: 42px; background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.12); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--accent); font-size: .95rem; flex-shrink: 0;
+        }
+        .ci-item h4 { color: var(--white); font-size: .87rem; margin-bottom: 3px; font-family: 'Syne',sans-serif; }
+        .ci-item p, .ci-item a { color: rgba(255,255,255,.62); font-size: .87rem; }
+        .ci-item a:hover { color: var(--accent); }
+        .social-row { display: flex; gap: 9px; margin-top: 28px; }
+        .soc-btn {
+            width: 38px; height: 38px; background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.12); border-radius: 9px;
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,.68); font-size: .88rem; text-decoration: none; transition: var(--transition);
+        }
+        .soc-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--white); transform: translateY(-2px); }
+
+        /* Form */
+        .form-wrap { background: var(--white); border-radius: var(--radius-lg); padding: 40px; box-shadow: var(--shadow-lg); }
+        .form-wrap h3 { font-size: 1.45rem; color: var(--primary); margin-bottom: 26px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: .83rem; font-weight: 600; color: var(--primary); margin-bottom: 7px; }
+        .form-group label span { color: #ef4444; }
+        .form-control {
+            width: 100%; padding: 12px 15px; border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius); font-family: 'DM Sans',sans-serif;
+            font-size: .93rem; color: var(--text); background: var(--white);
+            transition: var(--transition); outline: none;
+        }
+        .form-control:focus { border-color: var(--secondary); box-shadow: 0 0 0 3px rgba(30,111,220,.1); }
+        .form-control.error { border-color: #ef4444; }
+        textarea.form-control { resize: vertical; min-height: 116px; }
+        .form-err { font-size: .76rem; color: #ef4444; margin-top: 4px; display: none; }
+        .form-err.show { display: block; }
+        .btn-submit {
+            width: 100%; padding: 15px; border: none; border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--secondary), var(--primary-light));
+            color: var(--white); font-family: 'DM Sans',sans-serif;
+            font-size: .98rem; font-weight: 600; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: var(--transition);
+        }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(30,111,220,.4); }
+        .btn-submit:disabled { opacity: .7; cursor: not-allowed; transform: none; }
+        .form-alert {
+            padding: 13px 16px; border-radius: var(--radius);
+            margin-bottom: 18px; font-size: .88rem;
+            align-items: center; gap: 10px; display: none;
+        }
+        .form-alert.success-msg { background: #d1fae5; border: 1px solid #6ee7b7; color: #065f46; }
+        .form-alert.error-msg   { background: #fee2e2; border: 1px solid #fca5a5; color: #991b1b; }
+
+        /* ===============================================
+           FOOTER
+        =============================================== */
+        footer { background: var(--gray-900); color: var(--white); padding: 64px 0 28px; }
+        .footer-top {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px; margin-bottom: 48px; padding-bottom: 48px;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+        .footer-brand .logo { display: block; margin-bottom: 13px; font-size: 1.4rem; }
+        .footer-brand p { color: rgba(255,255,255,.48); font-size: .87rem; line-height: 1.75; margin-bottom: 18px; }
+        .footer-col h5 {
+            font-family: 'Syne',sans-serif; font-size: .78rem;
+            color: rgba(255,255,255,.46); text-transform: uppercase;
+            letter-spacing: 1.1px; margin-bottom: 14px;
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 9px; }
+        .footer-col ul li a {
+            color: rgba(255,255,255,.62); font-size: .87rem;
+            cursor: pointer; transition: var(--transition);
+        }
+        .footer-col ul li a:hover { color: var(--accent); padding-left: 4px; }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .footer-bottom p { color: rgba(255,255,255,.38); font-size: .82rem; }
+
+        /* ===============================================
+           FLOATING ELEMENTS
+        =============================================== */
+        .wa-btn {
+            position: fixed; bottom: 86px; right: 22px;
+            width: 50px; height: 50px; background: #25D366; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--white); font-size: 1.45rem;
+            box-shadow: 0 4px 18px rgba(37,211,102,.42); z-index: 900;
+            text-decoration: none; transition: var(--transition);
+            animation: waPop 3.5s ease-in-out infinite;
+        }
+        .wa-btn:hover { transform: scale(1.12); box-shadow: 0 8px 26px rgba(37,211,102,.5); }
+        @keyframes waPop { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
+        .wa-tip {
+            position: absolute; right: 58px;
+            background: #128C7E; color: var(--white);
+            padding: 5px 11px; border-radius: 7px;
+            font-size: .76rem; white-space: nowrap;
+            opacity: 0; pointer-events: none;
+            transition: var(--transition); font-family: 'DM Sans',sans-serif;
+        }
+        .wa-btn:hover .wa-tip { opacity: 1; }
+
+        .back-top {
+            position: fixed; bottom: 22px; right: 22px;
+            width: 42px; height: 42px; background: var(--primary);
+            border: 1px solid rgba(255,255,255,.14); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--white); cursor: pointer; z-index: 900;
+            opacity: 0; pointer-events: none;
+            transform: translateY(10px); transition: var(--transition);
+            font-size: .82rem;
+        }
+        .back-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        .back-top:hover { background: var(--accent); border-color: var(--accent); }
+
+        /* ===============================================
+           SCROLL REVEAL
+        =============================================== */
+        .reveal       { opacity: 0; transform: translateY(32px); transition: opacity .65s ease, transform .65s ease; }
+        .reveal-left  { opacity: 0; transform: translateX(-42px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal-right { opacity: 0; transform: translateX(42px);  transition: opacity .7s ease, transform .7s ease; }
+        .reveal.in, .reveal-left.in, .reveal-right.in { opacity: 1; transform: translate(0); }
+
+        .d1 { transition-delay: .1s !important; }
+        .d2 { transition-delay: .2s !important; }
+        .d3 { transition-delay: .3s !important; }
+        .d4 { transition-delay: .4s !important; }
+        .d5 { transition-delay: .5s !important; }
+        .d6 { transition-delay: .6s !important; }
+
+        /* ===============================================
+           RESPONSIVE
+        =============================================== */
+        @media (max-width: 1024px) {
+            .hero-content { grid-template-columns: 1fr; gap: 30px; padding: 110px 24px 70px; }
+            .hero-visual { display: none; }
+            .hero { min-height: auto; }
+            .about-grid, .products-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-top { grid-template-columns: 1fr 1fr; }
+            .navbar-inner { padding: 14px 24px; }
+            .container { padding: 0 24px; }
+            section { padding: 68px 0; }
+            .about-badge { right: 8px; bottom: -10px; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .mobile-nav { display: block; }
+            .hero-stats { gap: 18px; }
+            .stats-grid, .mv-grid { grid-template-columns: 1fr; gap: 22px; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer-top { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .form-wrap { padding: 26px 18px; }
+        }
+        @media (max-width: 480px) {
+            .hero-text h1 { font-size: 1.85rem; }
+            .hero-btns { flex-direction: column; }
+            .btn-primary, .btn-outline { justify-content: center; }
+            .section-title { font-size: 1.65rem; }
+        }
+
+        /* ===============================================
+           MAP SECTION
+        =============================================== */
+        .map-section {
+            background: var(--gray-50);
+            padding: 64px 0 72px;
+        }
+        .map-section .section-header { margin-bottom: 36px; }
+        .map-container {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+            position: relative;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 440px;
+            display: block;
+            border: none;
+        }
+        .map-pin-label {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-size: .84rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow-md);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        .map-pin-label i { color: var(--accent); }
+        /* ===============================================
+           ENHANCEMENTS — a11y, motion craft, new UI
+        =============================================== */
+        :root {
+            --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+            --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        /* Skip link (keyboard users) */
+        .skip-link {
+            position: absolute; top: -48px; left: 16px; z-index: 3000;
+            background: var(--accent); color: var(--white);
+            padding: 10px 18px; border-radius: 0 0 10px 10px;
+            font-weight: 600; font-size: .88rem; transition: top .18s var(--ease-out);
+        }
+        .skip-link:focus { top: 0; }
+
+        /* Visible keyboard focus everywhere */
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* Scroll progress bar */
+        .scroll-progress {
+            position: fixed; top: 0; left: 0; height: 3px; width: 100%;
+            transform-origin: 0 50%; transform: scaleX(0);
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            z-index: 2500; pointer-events: none;
+        }
+
+        /* Tactile press feedback */
+        .btn-primary:active, .btn-outline:active, .btn-submit:active,
+        .nav-cta:active, .soc-btn:active, .back-top:active { transform: scale(0.97); }
+
+        /* Navbar condensed state on scroll */
+        .navbar.scrolled { box-shadow: 0 6px 24px rgba(10,37,64,.14); }
+        .navbar.scrolled .navbar-inner { padding-top: 10px; padding-bottom: 10px; }
+
+        /* Partner logo marquee */
+        .marquee { overflow: hidden; position: relative; margin-top: 10px;
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+                    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+        .marquee-track { display: flex; gap: 12px; width: max-content; animation: marquee 22s linear infinite; }
+        .marquee:hover .marquee-track { animation-play-state: paused; }
+        @keyframes marquee { to { transform: translateX(-50%); } }
+
+        /* FAQ accordion */
+        .faq-wrap { max-width: 760px; margin: 0 auto; }
+        .faq-item { border: 1px solid var(--gray-200); border-radius: var(--radius); background: var(--white); margin-bottom: 12px; overflow: hidden; }
+        .faq-q {
+            width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+            padding: 18px 22px; background: none; border: 0; cursor: pointer; text-align: left;
+            font-family: inherit; font-size: 1rem; font-weight: 600; color: var(--primary);
+        }
+        .faq-q i { color: var(--accent); transition: transform .25s var(--ease-out); flex-shrink: 0; }
+        .faq-item.open .faq-q i { transform: rotate(180deg); }
+        .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s var(--ease-out); }
+        .faq-item.open .faq-a { grid-template-rows: 1fr; }
+        .faq-a > div { overflow: hidden; }
+        .faq-a p { padding: 0 22px 18px; color: var(--gray-600); font-size: .95rem; line-height: 1.65; margin: 0; }
+
+        /* Copy-to-clipboard toast */
+        .toast {
+            position: fixed; bottom: 96px; left: 50%;
+            transform: translateX(-50%) translateY(16px); opacity: 0;
+            background: var(--gray-900); color: var(--white);
+            padding: 11px 20px; border-radius: 100px; font-size: .87rem; font-weight: 500;
+            box-shadow: var(--shadow-md); z-index: 3000; pointer-events: none;
+            transition: transform .25s var(--ease-out), opacity .25s var(--ease-out);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .ci-copy {
+            background: none; border: 0; cursor: pointer; color: rgba(255,255,255,.45);
+            font-size: .8rem; margin-left: 8px; padding: 4px; transition: color .2s ease;
+        }
+        .ci-copy:hover { color: var(--accent-light); }
+
+        /* Message character counter */
+        .char-count { font-size: .74rem; color: var(--gray-600); text-align: right; margin-top: 5px; opacity: .8; }
+
+        /* Reduced motion: keep fades, remove movement */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.15s !important;
+            }
+            .marquee-track { animation: none; flex-wrap: wrap; }
+            .hero-orb-1, .hero-orb-2, .hero-orb-3 { animation: none !important; }
+        }
+
+        /* Gate hover lifts behind real pointers (touch fires hover on tap) */
+        @media (hover: none) {
+            .btn-primary:hover, .btn-outline:hover { transform: none; }
+        }
+    </style>
+</head>
+<body>
+<a href="#" class="skip-link" onclick="document.querySelector('.page.active')?.focus()">Skip to main content</a>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+<header class="navbar" id="navbar">
+    <div class="navbar-inner">
+        <a class="logo" href="#home" onclick="showPage('home');return false">TechPhase<span>Solutions</span></a>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" onclick="showPage('home');return false"     data-page="home"     class="active">Home</a></li>
+            <li><a href="#about" onclick="showPage('about');return false"    data-page="about">About Us</a></li>
+            <li><a href="#services" onclick="showPage('services');return false" data-page="services">Services</a></li>
+            <li><a href="#products" onclick="showPage('products');return false" data-page="products">Products</a></li>
+            <li><a href="#team" onclick="showPage('team');return false"     data-page="team">Our Team</a></li>
+            <li><a href="#clients" onclick="showPage('clients');return false"  data-page="clients">Clients</a></li>
+            <li><a href="#contact" onclick="showPage('contact');return false"  data-page="contact" class="nav-cta">Contact Us</a></li>
+        </ul>
+
+        <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#home" onclick="showPage('home');return false"     data-page="home">Home</a>
+        <a href="#about" onclick="showPage('about');return false"    data-page="about">About Us</a>
+        <a href="#services" onclick="showPage('services');return false" data-page="services">Services</a>
+        <a href="#products" onclick="showPage('products');return false" data-page="products">Products</a>
+        <a href="#team" onclick="showPage('team');return false"     data-page="team">Our Team</a>
+        <a href="#clients" onclick="showPage('clients');return false"  data-page="clients">Clients</a>
+        <a href="#contact" onclick="showPage('contact');return false"  data-page="contact">Contact Us</a>
+    </nav>
+</header>
+
+<!-- ============================================================
+     HOME PAGE
+============================================================ -->
+<div id="home" class="page active">
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-orb hero-orb-3"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge"><svg width="18" height="12" viewBox="0 0 18 12" aria-hidden="true" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4" fill="#ce1126"/><rect y="4" width="18" height="4" fill="#fcd116"/><rect y="8" width="18" height="4" fill="#006b3f"/><path d="M9 4.2l.55 1.7h1.78l-1.44 1.05.55 1.7L9 7.6l-1.44 1.05.55-1.7L6.67 5.9h1.78z" fill="#0a0a0a"/></svg> Ghana's Trusted IT Partner Since 2014</div>
+                <h1>Your One-Stop <span>IT Solutions</span> Provider in Ghana</h1>
+                <p>TechPhase Solutions delivers quality computers, networking infrastructure, security systems, and premium maintenance services to organizations across Ghana.</p>
+                <div class="hero-btns">
+                    <a href="#contact" onclick="showPage('contact');return false" class="btn-primary"><i class="fas fa-comments"></i> Get in Touch</a>
+                    <a href="#services" onclick="showPage('services');return false" class="btn-outline"><i class="fas fa-th-large"></i> Our Services</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-num">10<span>+</span></div>
+                        <div class="hero-stat-label">Years Experience</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-num">100<span>+</span></div>
+                        <div class="hero-stat-label">Happy Clients</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-num">500<span>+</span></div>
+                        <div class="hero-stat-label">Projects Done</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="hero-card-title">What We Offer</div>
+                    <div class="hsl-item"><div class="hsl-icon"><i class="fas fa-network-wired"></i></div> Networking Solutions (LAN / WAN)</div>
+                    <div class="hsl-item"><div class="hsl-icon"><i class="fas fa-tools"></i></div> Systems Maintenance</div>
+                    <div class="hsl-item"><div class="hsl-icon"><i class="fas fa-video"></i></div> CCTV Installations</div>
+                    <div class="hsl-item"><div class="hsl-icon"><i class="fas fa-print"></i></div> Printing Services</div>
+                    <div class="hsl-item"><div class="hsl-icon"><i class="fas fa-laptop"></i></div> Computers &amp; Accessories</div>
+                    <div class="hsl-item"><div class="hsl-icon"><i class="fas fa-shield-alt"></i></div> Electric Fence Installation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- ============================================================
+     ABOUT PAGE
+============================================================ -->
+<div id="about" class="page">
+    <section class="about-page">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-img-wrap reveal-left">
+                    <img
+                        src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=680&q=80"
+                        alt="TechPhase Solutions – Professional IT Team" loading="lazy">
+                    <div class="about-badge">
+                        <strong>10+</strong>
+                        <span>Years of Excellence</span>
+                    </div>
+                </div>
+                <div class="about-text reveal-right">
+                    <span class="section-tag">About TechPhase</span>
+                    <h2>Ghana's Premier IT Solutions Company</h2>
+                    <p>TechPhase Solutions was founded in 2014. We supply computers and accessories, various office consumables, as well as networking and system maintenance services for a wide range of organizations across Ghana.</p>
+                    <p>We have an excellent track record of successful projects delivered in demanding environments. TechPhase combines best-of-breed technologies to build solutions driven by the ambition to make our clients more successful and help them accomplish their strategic goals.</p>
+                    <p>We serve corporate customers, Government agencies, Educational institutions, and private consumers.</p>
+                    <div class="mv-grid">
+                        <div class="mv-card">
+                            <h4><i class="fas fa-bullseye" style="color:var(--secondary);margin-right:7px"></i>Our Mission</h4>
+                            <p>Deliver maximum value by supplying quality, affordable, and durable IT products with exceptional after-sales service and networking support.</p>
+                        </div>
+                        <div class="mv-card">
+                            <h4><i class="fas fa-eye" style="color:var(--accent);margin-right:7px"></i>Our Vision</h4>
+                            <p>Become the market leader in computer hardware, office supplies, and networking solutions in Ghana and beyond West Africa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ============================================================
+     SERVICES PAGE
+============================================================ -->
+<div id="services" class="page">
+    <section class="services-page">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">What We Do</span>
+                <h2 class="section-title">Our Services</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">A comprehensive range of IT services to meet all your technological needs, backed by our commitment to excellence and customer satisfaction.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal d1">
+                    <div class="svc-icon"><i class="fas fa-code"></i></div>
+                    <h3>Web Development</h3>
+                    <p>Professional website design and development for businesses — from landing pages to full web applications tailored to your needs.</p>
+                </div>
+                <div class="service-card reveal d2">
+                    <div class="svc-icon"><i class="fas fa-envelope-open-text"></i></div>
+                    <h3>Professional Email</h3>
+                    <p>Professional business email setup, configuration, and management — including domain-based email hosting, migrations, and ongoing support.</p>
+                </div>
+                <div class="service-card reveal d3">
+                    <div class="svc-icon"><i class="fas fa-cloud"></i></div>
+                    <h3>Cloud Services</h3>
+                    <p>Cloud infrastructure setup, migration, and management to keep your business data secure, accessible, and always available.</p>
+                </div>
+                <div class="service-card reveal d1">
+                    <div class="svc-icon"><i class="fas fa-server"></i></div>
+                    <h3>System Administration</h3>
+                    <p>Expert management and administration of servers, networks, and IT infrastructure to ensure optimal uptime and performance.</p>
+                </div>
+                <div class="service-card reveal d2">
+                    <div class="svc-icon"><i class="fas fa-globe-africa"></i></div>
+                    <h3>Wide Area Networking (WAN)</h3>
+                    <p>Professional installation and maintenance of Wide Area Networks for businesses of all sizes across Ghana.</p>
+                </div>
+                <div class="service-card reveal d2">
+                    <div class="svc-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>Local Area Networking (LAN)</h3>
+                    <p>We plan, design, and maintain Local Area Networks to improve your business efficiency and connectivity.</p>
+                </div>
+                <div class="service-card reveal d3">
+                    <div class="svc-icon"><i class="fas fa-desktop"></i></div>
+                    <h3>Systems Maintenance</h3>
+                    <p>Regular preventive and corrective maintenance to keep your IT systems running at peak performance always.</p>
+                </div>
+                <div class="service-card reveal d1">
+                    <div class="svc-icon"><i class="fas fa-video"></i></div>
+                    <h3>CCTV Installations</h3>
+                    <p>Professional CCTV installation and maintenance for enhanced security of your premises and assets.</p>
+                </div>
+                <div class="service-card reveal d2">
+                    <div class="svc-icon"><i class="fas fa-wrench"></i></div>
+                    <h3>Repairs &amp; Servicing</h3>
+                    <p>Expert repairs and servicing of computers, Fax Machines, Printers, UPS, plotters and electronic equipment.</p>
+                </div>
+                <div class="service-card reveal d3">
+                    <div class="svc-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Electric Fence Installation</h3>
+                    <p>Professional installation and commissioning of electric fences for enhanced perimeter security.</p>
+                </div>
+                <div class="service-card reveal d2">
+                    <div class="svc-icon"><i class="fas fa-print"></i></div>
+                    <h3>Printing Services</h3>
+                    <p>All printing works including banners, stickers, books, forms, calendars, invoices, and more.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ============================================================
+     PRODUCTS PAGE
+============================================================ -->
+<div id="products" class="page">
+    <section class="products-page">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Our Products</span>
+                <h2 class="section-title">Quality IT Products</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Whether you need a reliable PC, laptop, or office consumables, TechPhase has the right solution for your business.</p>
+            </div>
+            <div class="products-grid">
+                <div class="reveal-left">
+                    <img
+                        src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=620&q=80"
+                        alt="IT Products and Solutions" loading="lazy"
+                        style="border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);">
+                </div>
+                <div class="reveal-right">
+                    <h3 style="font-size:1.45rem;color:var(--primary);margin-bottom:18px">Products We Offer</h3>
+                    <ul class="product-list">
+                        <li><span class="check-icon"><i class="fas fa-check"></i></span> Computers, Laptops and Accessories</li>
+                        <li><span class="check-icon"><i class="fas fa-check"></i></span> Computer Peripherals</li>
+                        <li><span class="check-icon"><i class="fas fa-check"></i></span> Software Solutions</li>
+                        <li><span class="check-icon"><i class="fas fa-check"></i></span> Office Consumables</li>
+                        <li><span class="check-icon"><i class="fas fa-check"></i></span> Networking Equipment &amp; Cables</li>
+                        <li><span class="check-icon"><i class="fas fa-check"></i></span> CCTV &amp; Security Systems</li>
+                        <li><span class="check-icon"><i class="fas fa-check"></i></span> UPS &amp; Power Solutions</li>
+                    </ul>
+
+                    <h3 style="font-size:1.1rem;color:var(--primary);margin:28px 0 14px">Our Preferred Partners</h3>
+                    <div class="marquee" aria-label="Partner brands">
+                        <div class="marquee-track">
+                            <div class="partner-chip">HP</div>
+                            <div class="partner-chip">Dell</div>
+                            <div class="partner-chip">APC</div>
+                            <div class="partner-chip">Xerox</div>
+                            <div class="partner-chip">Canon</div>
+                            <div class="partner-chip">Lenovo</div>
+                            <div class="partner-chip">Acer</div>
+                            <div class="partner-chip">Toshiba</div>
+                            <div class="partner-chip">Fujitsu</div>
+                            <div class="partner-chip" aria-hidden="true">HP</div>
+                            <div class="partner-chip" aria-hidden="true">Dell</div>
+                            <div class="partner-chip" aria-hidden="true">APC</div>
+                            <div class="partner-chip" aria-hidden="true">Xerox</div>
+                            <div class="partner-chip" aria-hidden="true">Canon</div>
+                            <div class="partner-chip" aria-hidden="true">Lenovo</div>
+                            <div class="partner-chip" aria-hidden="true">Acer</div>
+                            <div class="partner-chip" aria-hidden="true">Toshiba</div>
+                            <div class="partner-chip" aria-hidden="true">Fujitsu</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Strip -->
+    <section class="stats-strip">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="reveal d1">
+                    <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="stat-number" data-target="10"><span class="count">0</span><span>+</span></div>
+                    <div class="stat-label">Years of Industry Experience</div>
+                </div>
+                <div class="reveal d2">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-number" data-target="100"><span class="count">0</span><span>+</span></div>
+                    <div class="stat-label">Satisfied Clients</div>
+                </div>
+                <div class="reveal d3">
+                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-number" data-target="500"><span class="count">0</span><span>+</span></div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ============================================================
+     TEAM PAGE
+============================================================ -->
+<div id="team" class="page">
+    <section class="team-page">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">The People</span>
+                <h2 class="section-title">Our Expert Team</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Meet our dedicated professionals committed to delivering exceptional IT solutions and services.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card reveal d1">
+                    <div class="team-avatar"><i class="fas fa-user-tie"></i></div>
+                    <h3>Robert Kwashie Gozar</h3>
+                    <p class="role">Chief Executive Officer</p>
+                    <div class="team-social">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="team-card reveal d2">
+                    <div class="team-avatar"><i class="fas fa-user"></i></div>
+                    <h3>Mawuli Kofi</h3>
+                    <p class="role">Accounts Manager</p>
+                    <div class="team-social">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="team-card reveal d3">
+                    <div class="team-avatar"><i class="fas fa-tools"></i></div>
+                    <h3>Felix Kofi Gozar</h3>
+                    <p class="role">Technical Support Manager</p>
+                    <div class="team-social">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="team-card reveal d4">
+                    <div class="team-avatar"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Hansen Neequaye</h3>
+                    <p class="role">Technical Support</p>
+                    <div class="team-social">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Client Feedback</span>
+                <h2 class="section-title">What Our Clients Say</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Don't just take our word for it. Here's what our clients have to say about working with TechPhase.</p>
+            </div>
+            <div class="testi-grid">
+                <div class="testi-card reveal d1">
+                    <div class="stars">★★★★★</div>
+                    <div class="testi-quote">"</div>
+                    <p class="testi-text">TechPhase Solutions has been our trusted IT partner for years. Their technical expertise and prompt service have kept our systems running smoothly and efficiently.</p>
+                    <div class="testi-author">
+                        <div class="testi-av"><i class="fas fa-hospital"></i></div>
+                        <div>
+                            <div class="testi-name">BOMA Government Hospital</div>
+                            <div class="testi-role">Healthcare Client</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card reveal d2">
+                    <div class="stars">★★★★★</div>
+                    <div class="testi-quote">"</div>
+                    <p class="testi-text">The team at TechPhase is professional, responsive, and truly understands our business needs. Their networking solutions have significantly improved our operational efficiency.</p>
+                    <div class="testi-author">
+                        <div class="testi-av"><i class="fas fa-building"></i></div>
+                        <div>
+                            <div class="testi-name">MINSOL Limited</div>
+                            <div class="testi-role">Corporate Client</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card reveal d3">
+                    <div class="stars">★★★★★</div>
+                    <div class="testi-quote">"</div>
+                    <p class="testi-text">We've worked with TechPhase for IT equipment and maintenance for over 5 years. Their reliability and quality of service are unmatched in the industry.</p>
+                    <div class="testi-author">
+                        <div class="testi-av"><i class="fas fa-industry"></i></div>
+                        <div>
+                            <div class="testi-name">WACO Ghana Limited</div>
+                            <div class="testi-role">Long-term Client</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ============================================================
+     CLIENTS PAGE
+============================================================ -->
+<div id="clients" class="page">
+    <section class="clients-page">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Who Trusts Us</span>
+                <h2 class="section-title">Our Clients</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">A proud clientele of satisfied customers and corporate bodies who have trusted TechPhase with their IT needs.</p>
+            </div>
+            <div class="clients-grid">
+                <div class="client-card reveal d1"><div class="cl-icon"><i class="fas fa-hospital"></i></div><p>BOMA Government Hospital</p></div>
+                <div class="client-card reveal d2"><div class="cl-icon"><i class="fas fa-hospital"></i></div><p>Tepa Government Hospital</p></div>
+                <div class="client-card reveal d3"><div class="cl-icon"><i class="fas fa-industry"></i></div><p>Crocodile Ghana Matchets Limited</p></div>
+                <div class="client-card reveal d4"><div class="cl-icon"><i class="fas fa-building"></i></div><p>MINSOL Limited</p></div>
+                <div class="client-card reveal d1"><div class="cl-icon"><i class="fas fa-briefcase"></i></div><p>WACO Ghana Limited</p></div>
+                <div class="client-card reveal d2"><div class="cl-icon"><i class="fas fa-chart-line"></i></div><p>AMANTRA Ghana Limited</p></div>
+                <div class="client-card reveal d3"><div class="cl-icon"><i class="fas fa-building"></i></div><p>MROCHEKROM Limited</p></div>
+                <div class="client-card reveal d4"><div class="cl-icon"><i class="fas fa-store"></i></div><p>ALLADI Limited</p></div>
+                <div class="client-card reveal d1"><div class="cl-icon"><i class="fas fa-print"></i></div><p>InkIt Ghana</p></div>
+                <div class="client-card reveal d2"><div class="cl-icon"><i class="fas fa-laptop"></i></div><p>ITING Computers</p></div>
+                <div class="client-card reveal d3"><div class="cl-icon"><i class="fas fa-tasks"></i></div><p>Audancy Limited</p></div>
+                <div class="client-card reveal d4"><div class="cl-icon"><i class="fas fa-hospital-alt"></i></div><p>Ziba Hospital Services</p></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ============================================================
+     CONTACT PAGE
+============================================================ -->
+<div id="contact" class="page">
+    <section class="contact-page">
+        <div class="contact-hero">
+            <div class="container">
+                <div class="section-header reveal" style="margin-bottom:44px">
+                    <span class="section-tag" style="background:rgba(255,140,0,.14);color:var(--accent-light)">Reach Out</span>
+                    <h2 class="section-title" style="color:var(--white)">Let's Talk Business</h2>
+                    <div class="section-divider"></div>
+                    <p class="section-subtitle" style="color:rgba(255,255,255,.58)">Contact TechPhase if you're thinking of office consumables, computer hardware, or IT solutions. Our support team will find the right solution for your organization.</p>
+                </div>
+
+                <div class="contact-grid">
+                    <!-- Contact Info -->
+                    <div class="reveal-left">
+                        <div class="ci-item">
+                            <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <h4>Our Location</h4>
+                                <p>49 S.Dzagble Street, Akweteman-Achimota<br>Accra, Ghana</p>
+                            </div>
+                        </div>
+                        <div class="ci-item">
+                            <div class="ci-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div>
+                                <h4>Phone Numbers</h4>
+                                <a href="tel:+233244201295">+233 244 201 295</a><button class="ci-copy" data-copy="+233 244 201 295" aria-label="Copy phone number" title="Copy"><i class="far fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="ci-item">
+                            <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h4>Email Address</h4>
+                                <a href="mailto:info@techphasesolutions.com">info@techphasesolutions.com</a><button class="ci-copy" data-copy="info@techphasesolutions.com" aria-label="Copy email address" title="Copy"><i class="far fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="ci-item">
+                            <div class="ci-icon"><i class="fas fa-clock"></i></div>
+                            <div>
+                                <h4>Working Hours</h4>
+                                <p>Monday – Friday: 8:00 AM – 5:00 PM</p>
+                                <p>Saturday: 9:00 AM – 2:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="social-row">
+                            <a href="https://facebook.com/techphasesolutions" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com/techphase_gh" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="https://linkedin.com/company/techphase-solutions" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://instagram.com/techphasesolutions" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/233244201295?text=Hello%20TechPhase%20Solutions%2C%20I%20would%20like%20to%20enquire%20about%20your%20IT%20services." target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="form-wrap reveal-right">
+                        <h3>Send a Message</h3>
+
+                        <!-- Alerts -->
+                        <div class="form-alert success-msg" id="formSuccess">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Message sent! An acknowledgement has been sent to your email. We'll get back to you within 24 hours.</span>
+                        </div>
+                        <div class="form-alert error-msg" id="formError">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Something went wrong. Please try again or call us directly.</span>
+                        </div>
+
+                        <!--
+                            CONTACT FORM — Powered by Web3Forms (free, no backend needed)
+                            ➜ Sign up at https://web3forms.com to get your free access_key
+                            ➜ Replace "YOUR_WEB3FORMS_KEY_HERE" below with your key
+                            ➜ All messages will land directly in your inbox
+                        -->
+                        <form id="contactForm" novalidate>
+                            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY_HERE">
+                            <input type="hidden" name="subject" value="New Enquiry – TechPhase Solutions Website">
+                            <input type="hidden" name="from_name" value="TechPhase Solutions Website">
+                            <input type="hidden" name="to" value="kgozar@tehphasesolutions.com">
+                            <input type="hidden" name="replyto" id="replyToField" value="">
+                            <input type="hidden" name="autoresponse" value="1">
+                            <input type="hidden" name="autoresponse_subject" value="We received your message – TechPhase Solutions">
+                            <input type="hidden" name="autoresponse_message" value="Dear Customer, thank you for reaching out to TechPhase Solutions! We have received your message and one of our team members will get back to you within 24 hours. If your matter is urgent, you can also reach us at: +233 244 201 295. Best regards, TechPhase Solutions Team.">
+                            <input type="checkbox" name="botcheck" style="display:none">
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fname">Full Name <span>*</span></label>
+                                    <input type="text" id="fname" name="name" class="form-control" placeholder="e.g. Kwame Mensah" autocomplete="name">
+                                    <div class="form-err" id="fnameErr">Please enter your full name</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="femail">Email Address <span>*</span></label>
+                                    <input type="email" id="femail" name="email" class="form-control" placeholder="you@company.com" autocomplete="email">
+                                    <div class="form-err" id="femailErr">Please enter a valid email address</div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fphone">Phone Number</label>
+                                    <input type="tel" id="fphone" name="phone" class="form-control" placeholder="+233 XX XXX XXXX" autocomplete="tel">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fsubject">Subject <span>*</span></label>
+                                    <input type="text" id="fsubject" name="subject_line" class="form-control" placeholder="How can we help?">
+                                    <div class="form-err" id="fsubjectErr">Please enter a subject</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fmessage">Message <span>*</span></label>
+                                <textarea id="fmessage" name="message" class="form-control" placeholder="Tell us about your IT needs…" maxlength="1500"></textarea>
+                                <div class="form-err" id="fmessageErr">Please enter your message (min. 10 characters)</div>
+                                <div class="char-count" id="charCount" aria-hidden="true">0 / 1500</div>
+                            </div>
+                            <button type="submit" class="btn-submit" id="submitBtn">
+                                <span id="btnText"><i class="fas fa-paper-plane"></i> Send Message</span>
+                                <span id="btnLoading" style="display:none"><i class="fas fa-spinner fa-spin"></i> Sending…</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <!-- FAQ -->
+        <section style="padding:72px 0;background:var(--gray-50)">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">Quick Answers</span>
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="faq-wrap reveal">
+                    <div class="faq-item">
+                        <button class="faq-q" aria-expanded="false">Do you serve clients outside Accra?<i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-a"><div><p>Yes. While our office is in Akweteman-Achimota, Accra, we deliver and support projects nationwide, including hospitals and businesses in the Ashanti, Western, and Volta regions.</p></div></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-q" aria-expanded="false">How fast can you respond to a support request?<i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-a"><div><p>For clients in Greater Accra we typically respond same-day, and within 24 hours for most other regions. Clients on a maintenance contract get priority scheduling.</p></div></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-q" aria-expanded="false">Do you offer maintenance contracts?<i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-a"><div><p>Yes. We offer monthly, quarterly, and annual preventive maintenance agreements covering computers, networks, CCTV, printers, and UPS systems, tailored to the size of your organization.</p></div></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-q" aria-expanded="false">Can you supply equipment on a proforma invoice basis?<i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-a"><div><p>Absolutely. Send us your requirements by email or through the form above and we will issue a proforma invoice, usually within one business day.</p></div></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-q" aria-expanded="false">Do your installations come with a warranty?<i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-a"><div><p>All hardware carries the manufacturer's warranty, and our workmanship on networking, CCTV, and electric fence installations is covered by our own service guarantee.</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="map-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">Find Us</span>
+                    <h2 class="section-title">Our Location</h2>
+                    <div class="section-divider"></div>
+                    <p class="section-subtitle">Visit us at Akweteman-Achimota, Okaikoi North, Accra. Digital Address: <strong>GA-302-8209</strong>.</p>
+                </div>
+                <div class="map-container reveal">
+                    <iframe
+                        src="https://maps.google.com/maps?q=TechPhase+Solutions,+Akweteman-Achimota,+Okaikoi+North,+Accra,+Ghana&ll=5.6228,-0.2241&z=16&output=embed"
+                        allowfullscreen
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="TechPhase Solutions Location – GA-302-8209, Achimota">
+                    </iframe>
+                    <div class="map-pin-label">
+                        <i class="fas fa-map-marker-alt"></i>
+                        TechPhase Solutions &nbsp;·&nbsp; GA-302-8209, Achimota, Accra
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</div>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+    <div class="container">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a class="logo" href="#home" onclick="showPage('home');return false">TechPhase<span>Solutions</span></a>
+                <p>Ghana's trusted IT partner since 2014. Delivering quality computers, networking, CCTV, and maintenance services to organizations across the country.</p>
+                <div class="social-row">
+                    <a href="https://facebook.com/techphasesolutions" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/techphase_gh" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/techphase-solutions" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/techphasesolutions" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h5>Company</h5>
+                <ul>
+                    <li><a href="#home" onclick="showPage('home');return false">Home</a></li>
+                    <li><a href="#about" onclick="showPage('about');return false">About Us</a></li>
+                    <li><a href="#team" onclick="showPage('team');return false">Our Team</a></li>
+                    <li><a href="#clients" onclick="showPage('clients');return false">Our Clients</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Services</h5>
+                <ul>
+                    <li><a href="#services" onclick="showPage('services');return false">Web Development</a></li>
+                    <li><a href="#services" onclick="showPage('services');return false">Professional Email</a></li>
+                    <li><a href="#services" onclick="showPage('services');return false">Cloud Services</a></li>
+                    <li><a href="#services" onclick="showPage('services');return false">System Administration</a></li>
+                    <li><a href="#services" onclick="showPage('services');return false">LAN / WAN Networking</a></li>
+                    <li><a href="#services" onclick="showPage('services');return false">Systems Maintenance</a></li>
+                    <li><a href="#services" onclick="showPage('services');return false">CCTV Installation</a></li>
+                    <li><a href="#services" onclick="showPage('services');return false">Repairs &amp; Servicing</a></li>
+                    <li><a href="#services" onclick="showPage('services');return false">Printing Services</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Contact</h5>
+                <ul>
+                    <li><a href="tel:+233244201295">+233 244 201 295</a></li>
+                    <li><a href="mailto:info@techphasesolutions.com">info@techphasesolutions.com</a></li>
+                    <li><a>Akweteman-Achimota, Accra</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="footerYear"></span> TechPhase Solutions. All Rights Reserved.</p>
+            <p>Serving Ghana with excellence since 2014.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/233244201295" class="wa-btn" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="wa-tip">Chat on WhatsApp</span>
+</a>
+
+<!-- Back to Top -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+    /* -----------------------------------------------
+       PAGE NAVIGATION  (with hash deep-linking)
+    ----------------------------------------------- */
+    const VALID_PAGES = ['home','about','services','products','team','clients','contact'];
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function showPage(pageId, updateHash = true) {
+        if (!VALID_PAGES.includes(pageId)) pageId = 'home';
+
+        document.querySelectorAll('.page').forEach(p => {
+            p.classList.remove('active', 'visible');
+        });
+        const target = document.getElementById(pageId);
+        target.classList.add('active');
+        // Double-rAF trick: let display:block paint before fading in
+        requestAnimationFrame(() => requestAnimationFrame(() => target.classList.add('visible')));
+
+        // Sync nav links (desktop + mobile)
+        document.querySelectorAll('[data-page]').forEach(el => {
+            const isActive = el.dataset.page === pageId;
+            el.classList.toggle('active', isActive);
+            if (isActive) el.setAttribute('aria-current', 'page');
+            else el.removeAttribute('aria-current');
+        });
+
+        // Close mobile menu
+        document.getElementById('mobileNav').classList.remove('open');
+        document.getElementById('hamburger').classList.remove('open');
+
+        // Deep-linkable URLs + working back/forward buttons
+        if (updateHash && location.hash !== '#' + pageId) {
+            history.pushState(null, '', '#' + pageId);
+        }
+        document.title = (pageId === 'home'
+            ? 'TechPhase Solutions | Premier IT Solutions Provider in Ghana'
+            : pageId.charAt(0).toUpperCase() + pageId.slice(1) + ' | TechPhase Solutions');
+
+        window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
+        setTimeout(initReveal, 120); // re-run reveal for newly shown page
+    }
+
+    // Back/forward + manual hash edits
+    window.addEventListener('popstate', () => {
+        showPage(location.hash.replace('#', '') || 'home', false);
+    });
+
+    /* -----------------------------------------------
+       MOBILE MENU
+    ----------------------------------------------- */
+    function toggleMobile() {
+        document.getElementById('hamburger').classList.toggle('open');
+        document.getElementById('mobileNav').classList.toggle('open');
+    }
+
+    /* -----------------------------------------------
+       SCROLL EVENTS  (progress bar + navbar + back-top)
+    ----------------------------------------------- */
+    const progressEl = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        document.getElementById('backTop').classList.toggle('show', y > 320);
+        document.getElementById('navbar').classList.toggle('scrolled', y > 24);
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        progressEl.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
+    }, { passive: true });
+
+    // Escape key closes the mobile menu
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            document.getElementById('mobileNav').classList.remove('open');
+            document.getElementById('hamburger').classList.remove('open');
+        }
+    });
+
+    /* -----------------------------------------------
+       SCROLL REVEAL  (IntersectionObserver)
+    ----------------------------------------------- */
+    function initReveal() {
+        const els = document.querySelectorAll(
+            '#' + (document.querySelector('.page.active')?.id || 'home') +
+            ' .reveal, #' + (document.querySelector('.page.active')?.id || 'home') +
+            ' .reveal-left, #' + (document.querySelector('.page.active')?.id || 'home') +
+            ' .reveal-right'
+        );
+
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in');
+                    // Fire counters if present
+                    entry.target.querySelectorAll('.count').forEach(animateCount);
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -36px 0px' });
+
+        els.forEach(el => { if (!el.classList.contains('in')) io.observe(el); });
+    }
+
+    /* -----------------------------------------------
+       ANIMATED COUNTER
+    ----------------------------------------------- */
+    function animateCount(el) {
+        if (el.dataset.done) return;
+        el.dataset.done = '1';
+        const target = parseInt(el.closest('[data-target]')?.dataset.target || '0');
+        const dur = 1800;
+        const t0 = performance.now();
+        const tick = (now) => {
+            const p = Math.min((now - t0) / dur, 1);
+            const ease = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.floor(ease * target);
+            if (p < 1) requestAnimationFrame(tick);
+            else el.textContent = target;
+        };
+        requestAnimationFrame(tick);
+    }
+
+    /* -----------------------------------------------
+       CONTACT FORM  (Web3Forms)
+    ----------------------------------------------- */
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Field validation rules
+        const rules = [
+            { id: 'fname',    errId: 'fnameErr',    ok: v => v.trim().length >= 2 },
+            { id: 'femail',   errId: 'femailErr',   ok: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+            { id: 'fsubject', errId: 'fsubjectErr', ok: v => v.trim().length >= 3 },
+            { id: 'fmessage', errId: 'fmessageErr', ok: v => v.trim().length >= 10 },
+        ];
+
+        let valid = true;
+        rules.forEach(({ id, errId, ok }) => {
+            const input = document.getElementById(id);
+            const err   = document.getElementById(errId);
+            const pass  = ok(input.value);
+            input.classList.toggle('error', !pass);
+            err.classList.toggle('show', !pass);
+            if (!pass) valid = false;
+        });
+        if (!valid) return;
+
+        // Sync replyto field with customer email so Web3Forms sends acknowledgement
+        document.getElementById('replyToField').value = document.getElementById('femail').value;
+
+        // Loading state
+        const btn = document.getElementById('submitBtn');
+        document.getElementById('btnText').style.display    = 'none';
+        document.getElementById('btnLoading').style.display = 'flex';
+        btn.disabled = true;
+        document.getElementById('formSuccess').style.display = 'none';
+        document.getElementById('formError').style.display   = 'none';
+
+        try {
+            const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(this) });
+            const json = await res.json();
+            if (json.success) {
+                document.getElementById('formSuccess').style.display = 'flex';
+                this.reset();
+            } else {
+                throw new Error('Web3Forms error');
+            }
+        } catch {
+            document.getElementById('formError').style.display = 'flex';
+        } finally {
+            document.getElementById('btnText').style.display    = 'flex';
+            document.getElementById('btnLoading').style.display = 'none';
+            btn.disabled = false;
+        }
+    });
+
+    // Live clear errors on input
+    document.querySelectorAll('.form-control').forEach(inp => {
+        inp.addEventListener('input', () => {
+            inp.classList.remove('error');
+            const err = document.getElementById(inp.id + 'Err');
+            if (err) err.classList.remove('show');
+        });
+    });
+
+    /* -----------------------------------------------
+       FAQ ACCORDION
+    ----------------------------------------------- */
+    document.querySelectorAll('.faq-q').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(i => {
+                i.classList.remove('open');
+                i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+            });
+            if (!isOpen) {
+                item.classList.add('open');
+                btn.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+
+    /* -----------------------------------------------
+       COPY TO CLIPBOARD + TOAST
+    ----------------------------------------------- */
+    let toastTimer;
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+    }
+    document.querySelectorAll('.ci-copy').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(btn.dataset.copy);
+                showToast('Copied: ' + btn.dataset.copy);
+            } catch {
+                showToast('Could not copy — please select the text manually');
+            }
+        });
+    });
+
+    /* -----------------------------------------------
+       MESSAGE CHARACTER COUNTER
+    ----------------------------------------------- */
+    const msgEl = document.getElementById('fmessage');
+    const cntEl = document.getElementById('charCount');
+    if (msgEl && cntEl) {
+        msgEl.addEventListener('input', () => {
+            cntEl.textContent = msgEl.value.length + ' / 1500';
+        });
+    }
+
+    /* -----------------------------------------------
+       INIT
+    ----------------------------------------------- */
+    window.addEventListener('DOMContentLoaded', () => {
+        // Honour deep links like #services or #contact on first load
+        const initial = location.hash.replace('#', '');
+        if (VALID_PAGES.includes(initial) && initial !== 'home') {
+            showPage(initial, false);
+        } else {
+            const ap = document.querySelector('.page.active');
+            if (ap) requestAnimationFrame(() => requestAnimationFrame(() => ap.classList.add('visible')));
+        }
+
+        // Set copyright year
+        document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+        // Kick off reveal
+        initReveal();
+    });
+</script>
+</body>
+</html>
