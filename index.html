@@ -1282,15 +1282,21 @@
 
                         <!--
                             CONTACT FORM — Powered by Web3Forms (free, no backend needed)
-                            ➜ Sign up at https://web3forms.com to get your free access_key
-                            ➜ Replace "YOUR_WEB3FORMS_KEY_HERE" below with your key
-                            ➜ All messages will land directly in your inbox
+                            ✓ Configured: submissions are delivered to the inbox the
+                              access_key below is registered to (info@techphasesolutions.com).
+                            ➜ To change the destination, generate a new key at
+                              https://web3forms.com and replace the access_key value.
                         -->
                         <form id="contactForm" novalidate>
-                            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY_HERE">
+                            <!--
+                                DELIVERY: Web3Forms sends every submission to the email
+                                that the access_key below is registered to.
+                                ➜ Go to https://web3forms.com, enter info@techphasesolutions.com,
+                                  and paste the key they email you into the value below.
+                            -->
+                            <input type="hidden" name="access_key" value="149c91f1-ec20-4705-a963-5d5e78da1e1c">
                             <input type="hidden" name="subject" value="New Enquiry – TechPhase Solutions Website">
                             <input type="hidden" name="from_name" value="TechPhase Solutions Website">
-                            <input type="hidden" name="to" value="kgozar@tehphasesolutions.com">
                             <input type="hidden" name="replyto" id="replyToField" value="">
                             <input type="hidden" name="autoresponse" value="1">
                             <input type="hidden" name="autoresponse_subject" value="We received your message – TechPhase Solutions">
