@@ -1,0 +1,10 @@
+{
+  "name": "techphasesolutions-website",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "TechPhase Solutions website with serverless contact form (Zoho SMTP)",
+  "dependencies": {
+    "nodemailer": "^6.10.1"
+  }
+}

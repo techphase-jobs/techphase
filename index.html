@@ -1281,27 +1281,13 @@
                         </div>
 
                         <!--
-                            CONTACT FORM — Powered by Web3Forms (free, no backend needed)
-                            ✓ Configured: submissions are delivered to the inbox the
-                              access_key below is registered to (info@techphasesolutions.com).
-                            ➜ To change the destination, generate a new key at
-                              https://web3forms.com and replace the access_key value.
+                            CONTACT FORM — self-hosted via /api/contact (Vercel serverless + Zoho SMTP)
+                            ✓ Enquiry is emailed to info@techphasesolutions.com
+                            ✓ Customer automatically receives a branded acknowledgement
+                            Config lives in Vercel env vars: ZOHO_USER, ZOHO_APP_PASSWORD
                         -->
                         <form id="contactForm" novalidate>
-                            <!--
-                                DELIVERY: Web3Forms sends every submission to the email
-                                that the access_key below is registered to.
-                                ➜ Go to https://web3forms.com, enter info@techphasesolutions.com,
-                                  and paste the key they email you into the value below.
-                            -->
-                            <input type="hidden" name="access_key" value="91809fa4-d4d9-4d87-b03a-fc2a1eb13492">
-                            <input type="hidden" name="subject" value="New Enquiry – TechPhase Solutions Website">
-                            <input type="hidden" name="from_name" value="TechPhase Solutions Website">
-                            <input type="hidden" name="replyto" id="replyToField" value="">
-                            <input type="hidden" name="autoresponse" value="1">
-                            <input type="hidden" name="autoresponse_subject" value="We received your message – TechPhase Solutions">
-                            <input type="hidden" name="autoresponse_message" value="Dear Customer, thank you for reaching out to TechPhase Solutions! We have received your message and one of our team members will get back to you within 24 hours. If your matter is urgent, you can also reach us at: +233 244 201 295. Best regards, TechPhase Solutions Team.">
-                            <input type="checkbox" name="botcheck" style="display:none">
+                            <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
                             <div class="form-row">
                                 <div class="form-group">
@@ -1616,9 +1602,6 @@
         });
         if (!valid) return;
 
-        // Sync replyto field with customer email so Web3Forms sends acknowledgement
-        document.getElementById('replyToField').value = document.getElementById('femail').value;
-
         // Loading state
         const btn = document.getElementById('submitBtn');
         document.getElementById('btnText').style.display    = 'none';
@@ -1628,13 +1611,27 @@
         document.getElementById('formError').style.display   = 'none';
 
         try {
-            const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(this) });
+            const payload = {
+                name:     document.getElementById('fname').value,
+                email:    document.getElementById('femail').value,
+                phone:    document.getElementById('fphone')?.value ?? '',
+                subject:  document.getElementById('fsubject').value,
+                message:  document.getElementById('fmessage').value,
+                botcheck: this.querySelector('[name="botcheck"]').checked ? '1' : '',
+            };
+            const res  = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
             const json = await res.json();
             if (json.success) {
                 document.getElementById('formSuccess').style.display = 'flex';
                 this.reset();
+                const cc = document.getElementById('charCount');
+                if (cc) cc.textContent = '0 / 1500';
             } else {
-                throw new Error('Web3Forms error');
+                throw new Error(json.message || 'Send failed');
             }
         } catch {
             document.getElementById('formError').style.display = 'flex';
