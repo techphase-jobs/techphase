@@ -1,7 +1,7 @@
 {
   "hero": {
     "badge": "Ghana's Trusted IT Partner Since 2014",
-    "title": "Your One-Stop |IT Solutions| Provider in Ghana",
+    "title": "Your One-Stop IT Solutions| Provider in Ghana",
     "subtitle": "TechPhase Solutions delivers quality computers, networking infrastructure, security systems, and premium maintenance services to organizations across Ghana.",
     "stats": [
       {
@@ -45,6 +45,10 @@
       {
         "icon": "fa-shield-alt",
         "text": "Electric Fence Installation"
+      },
+      {
+        "icon": "fa-star",
+        "text": "Professional Website Development"
       }
     ]
   },
