@@ -153,7 +153,7 @@ label{display:block;font-size:.74rem;font-weight:600;color:var(--navy);margin:12
           <input data-path="hero.title">
           <label>Subtitle</label><textarea data-path="hero.subtitle"></textarea>
         </div>
-        <div class="card"><div class="card-h"><h3>Hero Statistics</h3></div><div id="heroStatsList"></div></div>
+        <div class="card"><div class="card-h"><h3>Hero Statistics</h3><button class="btn btn-ghost" onclick="addItem('heroStat')">+ Add stat</button></div><div id="heroStatsList"></div></div>
         <div class="card"><div class="card-h"><h3>"What We Offer" card</h3><button class="btn btn-ghost" onclick="addItem('heroOffer')">+ Add item</button></div>
           <label>Card title</label><input data-path="hero.offeringsTitle">
           <div id="heroOfferList" class="item-list" style="margin-top:10px"></div>
@@ -166,9 +166,8 @@ label{display:block;font-size:.74rem;font-weight:600;color:var(--navy);margin:12
         <p class="sec-sub">Company story, mission and vision.</p>
         <div class="card">
           <label>Heading</label><input data-path="about.heading">
-          <label>Paragraph 1</label><textarea data-path="about.paragraphs.0"></textarea>
-          <label>Paragraph 2</label><textarea data-path="about.paragraphs.1"></textarea>
-          <label>Paragraph 3</label><textarea data-path="about.paragraphs.2"></textarea>
+          <div class="card-h" style="margin-top:14px"><h3>Paragraphs</h3><button class="btn btn-ghost" onclick="addItem('aboutPara')">+ Add paragraph</button></div>
+          <div id="aboutParasList"></div>
           <div class="grid2">
             <div><label>Badge number</label><input data-path="about.badgeNumber"></div>
             <div><label>Badge label</label><input data-path="about.badgeLabel"></div>
@@ -209,7 +208,7 @@ label{display:block;font-size:.74rem;font-weight:600;color:var(--navy);margin:12
           <div id="productsList" class="item-list" style="margin-top:8px"></div></div>
         <div class="card"><div class="card-h"><h3>Partner brands (marquee)</h3><button class="btn btn-ghost" onclick="addItem('partner')">+ Add brand</button></div>
           <div id="partnersList" class="item-list" style="margin-top:8px"></div></div>
-        <div class="card"><div class="card-h"><h3>Achievement counters</h3></div><div id="prodStatsList"></div></div>
+        <div class="card"><div class="card-h"><h3>Achievement counters</h3><button class="btn btn-ghost" onclick="addItem('prodStat')">+ Add counter</button></div><div id="prodStatsList"></div></div>
       </section>
 
       <!-- TEAM -->
@@ -261,10 +260,8 @@ label{display:block;font-size:.74rem;font-weight:600;color:var(--navy);margin:12
             <div><label>Phone</label><input data-path="contact.phone"></div>
             <div><label>Public email</label><input data-path="contact.email"></div>
           </div>
-          <div class="grid2">
-            <div><label>Hours — weekdays</label><input data-path="contact.hours.0"></div>
-            <div><label>Hours — weekend</label><input data-path="contact.hours.1"></div>
-          </div>
+          <div class="card-h" style="margin-top:14px"><h3>Working hours lines</h3><button class="btn btn-ghost" onclick="addItem('hour')">+ Add line</button></div>
+          <div id="hoursList"></div>
         </div>
         <div class="card"><div class="card-h"><h3>Social links</h3><span class="badge-i">leave blank to hide an icon</span></div>
           <div class="grid2">
@@ -357,14 +354,28 @@ const fld=(label,val,attrs='')=>`<div><label>${label}</label><input value="${esc
 const area=(label,val)=>`<div><label>${label}</label><textarea>${esc(val)}</textarea></div>`;
 
 function renderLists(){
-  /* hero stats (fixed 3) */
+  /* hero stats */
   $('heroStatsList').innerHTML='';
   C.hero.stats.forEach((s,i)=>{
-    const d=document.createElement('div'); d.className='grid3';
-    d.innerHTML=fld('Number',s.num)+fld('Suffix',s.suffix??'')+fld('Label',s.label);
+    const d=listCard(`<div class="grid3">${fld('Number',s.num)}${fld('Suffix',s.suffix??'')}${fld('Label',s.label)}</div>`,
+      ()=>{C.hero.stats.splice(i,1);renderLists();});
     const [n,su,l]=d.querySelectorAll('input');
     n.oninput=()=>s.num=n.value; su.oninput=()=>s.suffix=su.value; l.oninput=()=>s.label=l.value;
     $('heroStatsList').appendChild(d);
+  });
+  /* about paragraphs */
+  $('aboutParasList').innerHTML='';
+  C.about.paragraphs.forEach((p,i)=>{
+    const d=listCard(area('Paragraph '+(i+1),p), ()=>{C.about.paragraphs.splice(i,1);renderLists();});
+    d.querySelector('textarea').oninput=(e)=>C.about.paragraphs[i]=e.target.value;
+    $('aboutParasList').appendChild(d);
+  });
+  /* contact hours */
+  $('hoursList').innerHTML='';
+  C.contact.hours.forEach((h,i)=>{
+    const d=listCard(fld('Hours line',h), ()=>{C.contact.hours.splice(i,1);renderLists();});
+    d.querySelector('input').oninput=(e)=>C.contact.hours[i]=e.target.value;
+    $('hoursList').appendChild(d);
   });
   /* hero offerings */
   $('heroOfferList').innerHTML='';
@@ -398,11 +409,11 @@ function renderLists(){
     d.querySelector('input').oninput=(e)=>C.products.partners[i]=e.target.value;
     $('partnersList').appendChild(d);
   });
-  /* product stats (fixed 3) */
+  /* product stats */
   $('prodStatsList').innerHTML='';
-  C.products.stats.forEach((s)=>{
-    const d=document.createElement('div'); d.className='grid3';
-    d.innerHTML=fld('Icon (fa-…)',s.icon)+fld('Target number',s.target,'type="number"')+fld('Label',s.label);
+  C.products.stats.forEach((s,i)=>{
+    const d=listCard(`<div class="grid3">${fld('Icon (fa-…)',s.icon)}${fld('Target number',s.target,'type="number"')}${fld('Label',s.label)}</div>`,
+      ()=>{C.products.stats.splice(i,1);renderLists();});
     const [ic,t,l]=d.querySelectorAll('input');
     ic.oninput=()=>s.icon=ic.value; t.oninput=()=>s.target=Number(t.value)||0; l.oninput=()=>s.label=l.value;
     $('prodStatsList').appendChild(d);
@@ -462,6 +473,10 @@ function renderLists(){
 function addItem(kind){
   const map = {
     heroOffer:   ()=>C.hero.offerings.push({icon:'fa-star',text:'New item'}),
+    heroStat:    ()=>C.hero.stats.push({num:'0',suffix:'+',label:'New stat'}),
+    prodStat:    ()=>C.products.stats.push({icon:'fa-star',target:0,label:'New counter'}),
+    aboutPara:   ()=>C.about.paragraphs.push('New paragraph…'),
+    hour:        ()=>C.contact.hours.push('Sunday: Closed'),
     service:     ()=>C.services.items.push({icon:'fa-cog',title:'New Service',text:'Describe this service…'}),
     product:     ()=>C.products.items.push('New product'),
     partner:     ()=>C.products.partners.push('Brand'),
