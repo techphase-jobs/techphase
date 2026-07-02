@@ -353,8 +353,8 @@ function listCard(inner, onDel){
   del.innerHTML='<button class="btn btn-danger">Remove</button>';
   del.querySelector('button').onclick=onDel; d.appendChild(del); return d;
 }
-const fld=(label,val,attrs='')=>`<label>${label}</label><input value="${esc(val)}" ${attrs}>`;
-const area=(label,val)=>`<label>${label}</label><textarea>${esc(val)}</textarea>`;
+const fld=(label,val,attrs='')=>`<div><label>${label}</label><input value="${esc(val)}" ${attrs}></div>`;
+const area=(label,val)=>`<div><label>${label}</label><textarea>${esc(val)}</textarea></div>`;
 
 function renderLists(){
   /* hero stats (fixed 3) */
