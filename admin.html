@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — TechPhase Solutions</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a2540'/%3E%3Cpath d='M14 20h36v8H37v24h-10V28H14z' fill='%23ff8c00'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a2540; --navy-2:#0e3460; --orange:#ff8c00; --orange-l:#ffa733;
+  --bg:#f2f5f9; --card:#ffffff; --line:#dfe7f0; --txt:#1e293b; --mut:#64748b;
+  --ok:#0a7d33; --bad:#b3261e; --r:12px;
+  --ease:cubic-bezier(0.23,1,0.32,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Poppins,system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+button{font-family:inherit;cursor:pointer}
+input,textarea,select{font-family:inherit;font-size:.88rem;width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:9px;background:#fff;color:var(--txt)}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--orange)}
+textarea{resize:vertical;min-height:74px;line-height:1.55}
+label{display:block;font-size:.74rem;font-weight:600;color:var(--navy);margin:12px 0 4px;text-transform:uppercase;letter-spacing:.4px}
+.hint{font-size:.72rem;color:var(--mut);margin-top:3px}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px;border-radius:4px}
+
+/* ---------- LOGIN ---------- */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 100%)}
+.login-card{background:#fff;border-radius:16px;padding:38px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.login-logo{font-size:1.35rem;font-weight:800;color:var(--navy);margin-bottom:4px}
+.login-logo span{color:var(--orange)}
+.login-sub{font-size:.82rem;color:var(--mut);margin-bottom:22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border:0;border-radius:10px;
+  font-weight:600;font-size:.9rem;transition:transform .15s var(--ease),box-shadow .2s var(--ease)}
+.btn:active{transform:scale(.97)}
+.btn-navy{background:var(--navy);color:#fff;width:100%;margin-top:18px}
+.btn-navy:hover{background:var(--navy-2)}
+.btn-orange{background:var(--orange);color:#fff}
+.btn-orange:hover{background:var(--orange-l)}
+.btn-ghost{background:#fff;border:1.5px solid var(--line);color:var(--navy);font-size:.8rem;padding:8px 14px}
+.btn-ghost:hover{border-color:var(--orange);color:var(--orange)}
+.btn-danger{background:#fdecea;color:var(--bad);font-size:.76rem;padding:7px 12px}
+.err{color:var(--bad);font-size:.8rem;margin-top:10px;display:none}
+
+/* ---------- APP SHELL ---------- */
+.app{display:none;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;display:flex;align-items:center;
+  justify-content:space-between;padding:0 22px;height:60px;box-shadow:0 4px 18px rgba(10,37,64,.25)}
+.tb-logo{font-weight:800;font-size:1.05rem}
+.tb-logo span{color:var(--orange)}
+.tb-right{display:flex;align-items:center;gap:10px}
+.tb-status{font-size:.74rem;color:rgba(255,255,255,.65)}
+.layout{display:grid;grid-template-columns:230px 1fr;min-height:calc(100vh - 60px)}
+.side{background:#fff;border-right:1px solid var(--line);padding:18px 12px}
+.side-title{font-size:.68rem;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.8px;margin:6px 10px 10px}
+.snav{list-style:none}
+.snav button{display:flex;align-items:center;gap:10px;width:100%;padding:11px 13px;border:0;background:none;
+  border-radius:9px;font-size:.86rem;font-weight:500;color:var(--txt);text-align:left;transition:background .15s}
+.snav button:hover{background:var(--bg)}
+.snav button.active{background:var(--navy);color:#fff;font-weight:600}
+.snav button.active .dot{background:var(--orange)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--line);flex-shrink:0}
+.main{padding:26px 30px 90px;max-width:980px}
+.sec{display:none}
+.sec.active{display:block;animation:fade .25s var(--ease)}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.sec-h{margin-bottom:6px;color:var(--navy);font-size:1.25rem}
+.sec-sub{font-size:.82rem;color:var(--mut);margin-bottom:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;margin-bottom:16px}
+.card-h{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:4px}
+.card-h h3{font-size:.95rem;color:var(--navy)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 16px}
+.row-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.item-list .card{position:relative}
+.badge-i{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;color:var(--mut)}
+.imgprev{width:84px;height:84px;object-fit:cover;border-radius:10px;border:1.5px solid var(--line);background:var(--bg)}
+.upl-row{display:flex;align-items:center;gap:14px;margin-top:8px}
+.savebar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);
+  padding:12px 26px;display:flex;justify-content:flex-end;align-items:center;gap:14px;z-index:60;
+  box-shadow:0 -6px 24px rgba(10,37,64,.08)}
+.savemsg{font-size:.8rem;color:var(--mut)}
+.savemsg.ok{color:var(--ok);font-weight:600}
+.savemsg.bad{color:var(--bad);font-weight:600}
+.toast{position:fixed;bottom:86px;left:50%;transform:translateX(-50%) translateY(14px);opacity:0;background:var(--navy);
+  color:#fff;padding:11px 20px;border-radius:100px;font-size:.84rem;box-shadow:0 10px 30px rgba(0,0,0,.25);
+  transition:all .25s var(--ease);pointer-events:none;z-index:100}
+.toast.show{transform:translateX(-50%);opacity:1}
+.spin{width:16px;height:16px;border:2.5px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;
+  animation:sp 0.7s linear infinite;display:none}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media(max-width:820px){
+  .layout{grid-template-columns:1fr}
+  .side{display:flex;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:10px}
+  .side-title{display:none}
+  .snav{display:flex;gap:6px}
+  .snav button{white-space:nowrap}
+  .grid2,.grid3{grid-template-columns:1fr}
+  .main{padding:20px 16px 110px}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= LOGIN ================= -->
+<div class="login-wrap" id="loginView">
+  <div class="login-card">
+    <div class="login-logo">TechPhase<span>Solutions</span></div>
+    <p class="login-sub">Website Admin — sign in to manage site content</p>
+    <label for="pw">Admin Password</label>
+    <input type="password" id="pw" autocomplete="current-password" placeholder="••••••••••••">
+    <button class="btn btn-navy" id="loginBtn">Sign In</button>
+    <p class="err" id="loginErr">Incorrect password. Please try again.</p>
+  </div>
+</div>
+
+<!-- ================= APP ================= -->
+<div class="app" id="appView">
+  <header class="topbar">
+    <div class="tb-logo">TechPhase<span>Solutions</span> <span style="color:rgba(255,255,255,.5);font-weight:500;font-size:.8rem">/ Admin</span></div>
+    <div class="tb-right">
+      <span class="tb-status" id="tbStatus"></span>
+      <a class="btn btn-ghost" href="/" target="_blank" rel="noopener" style="text-decoration:none">View Site ↗</a>
+      <button class="btn btn-ghost" id="logoutBtn">Log Out</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="side">
+      <div class="side-title">Site Sections</div>
+      <ul class="snav" id="snav">
+        <li><button data-sec="hero" class="active"><span class="dot"></span>Home / Hero</button></li>
+        <li><button data-sec="about"><span class="dot"></span>About Us</button></li>
+        <li><button data-sec="services"><span class="dot"></span>Services</button></li>
+        <li><button data-sec="products"><span class="dot"></span>Products</button></li>
+        <li><button data-sec="team"><span class="dot"></span>Our Team</button></li>
+        <li><button data-sec="testimonials"><span class="dot"></span>Testimonials</button></li>
+        <li><button data-sec="clients"><span class="dot"></span>Clients</button></li>
+        <li><button data-sec="faqs"><span class="dot"></span>FAQs</button></li>
+        <li><button data-sec="contact"><span class="dot"></span>Contact &amp; Social</button></li>
+      </ul>
+    </nav>
+
+    <main class="main">
+      <!-- HERO -->
+      <section class="sec active" id="sec-hero">
+        <h2 class="sec-h">Home / Hero</h2>
+        <p class="sec-sub">The first thing visitors see. Wrap the highlighted words in | pipes | in the title.</p>
+        <div class="card">
+          <label>Badge text</label><input data-path="hero.badge">
+          <label>Title <span class="hint" style="display:inline">— use |pipes| around the orange words</span></label>
+          <input data-path="hero.title">
+          <label>Subtitle</label><textarea data-path="hero.subtitle"></textarea>
+        </div>
+        <div class="card"><div class="card-h"><h3>Hero Statistics</h3></div><div id="heroStatsList"></div></div>
+        <div class="card"><div class="card-h"><h3>"What We Offer" card</h3><button class="btn btn-ghost" onclick="addItem('heroOffer')">+ Add item</button></div>
+          <label>Card title</label><input data-path="hero.offeringsTitle">
+          <div id="heroOfferList" class="item-list" style="margin-top:10px"></div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="sec" id="sec-about">
+        <h2 class="sec-h">About Us</h2>
+        <p class="sec-sub">Company story, mission and vision.</p>
+        <div class="card">
+          <label>Heading</label><input data-path="about.heading">
+          <label>Paragraph 1</label><textarea data-path="about.paragraphs.0"></textarea>
+          <label>Paragraph 2</label><textarea data-path="about.paragraphs.1"></textarea>
+          <label>Paragraph 3</label><textarea data-path="about.paragraphs.2"></textarea>
+          <div class="grid2">
+            <div><label>Badge number</label><input data-path="about.badgeNumber"></div>
+            <div><label>Badge label</label><input data-path="about.badgeLabel"></div>
+          </div>
+          <label>About image</label>
+          <div class="upl-row"><img class="imgprev" id="prev-aboutimg"><div>
+            <input type="file" accept="image/*" id="upl-aboutimg" style="border:0;padding:0">
+            <p class="hint">JPEG/PNG — automatically compressed before upload</p></div></div>
+        </div>
+        <div class="card">
+          <label>Our Mission</label><textarea data-path="about.mission"></textarea>
+          <label>Our Vision</label><textarea data-path="about.vision"></textarea>
+        </div>
+      </section>
+
+      <!-- SERVICES -->
+      <section class="sec" id="sec-services">
+        <h2 class="sec-h">Services</h2>
+        <p class="sec-sub">Icons use Font Awesome 6 names, e.g. fa-video, fa-cloud, fa-print (browse fontawesome.com/icons).</p>
+        <div class="card"><label>Section subtitle</label><textarea data-path="services.subtitle"></textarea></div>
+        <div class="card-h" style="margin-bottom:10px"><h3 style="color:var(--navy)">Service cards</h3>
+          <button class="btn btn-orange" onclick="addItem('service')">+ Add service</button></div>
+        <div id="servicesList" class="item-list"></div>
+      </section>
+
+      <!-- PRODUCTS -->
+      <section class="sec" id="sec-products">
+        <h2 class="sec-h">Products</h2>
+        <p class="sec-sub">Product list, partner brands and the achievement counters.</p>
+        <div class="card">
+          <label>Section subtitle</label><textarea data-path="products.subtitle"></textarea>
+          <label>Products image</label>
+          <div class="upl-row"><img class="imgprev" id="prev-prodimg"><div>
+            <input type="file" accept="image/*" id="upl-prodimg" style="border:0;padding:0">
+            <p class="hint">Shown beside the product list</p></div></div>
+        </div>
+        <div class="card"><div class="card-h"><h3>Product list</h3><button class="btn btn-ghost" onclick="addItem('product')">+ Add product</button></div>
+          <div id="productsList" class="item-list" style="margin-top:8px"></div></div>
+        <div class="card"><div class="card-h"><h3>Partner brands (marquee)</h3><button class="btn btn-ghost" onclick="addItem('partner')">+ Add brand</button></div>
+          <div id="partnersList" class="item-list" style="margin-top:8px"></div></div>
+        <div class="card"><div class="card-h"><h3>Achievement counters</h3></div><div id="prodStatsList"></div></div>
+      </section>
+
+      <!-- TEAM -->
+      <section class="sec" id="sec-team">
+        <h2 class="sec-h">Our Team</h2>
+        <p class="sec-sub">Add a photo for each member, or leave blank to show the icon instead.</p>
+        <div class="card"><label>Section subtitle</label><textarea data-path="team.subtitle"></textarea></div>
+        <div class="card-h" style="margin-bottom:10px"><h3 style="color:var(--navy)">Members</h3>
+          <button class="btn btn-orange" onclick="addItem('member')">+ Add member</button></div>
+        <div id="teamList" class="item-list"></div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section class="sec" id="sec-testimonials">
+        <h2 class="sec-h">Testimonials</h2>
+        <p class="sec-sub">Client feedback shown on the Team page.</p>
+        <div class="card"><label>Section subtitle</label><textarea data-path="testimonials.subtitle"></textarea></div>
+        <div class="card-h" style="margin-bottom:10px"><h3 style="color:var(--navy)">Testimonials</h3>
+          <button class="btn btn-orange" onclick="addItem('testimonial')">+ Add testimonial</button></div>
+        <div id="testiList" class="item-list"></div>
+      </section>
+
+      <!-- CLIENTS -->
+      <section class="sec" id="sec-clients">
+        <h2 class="sec-h">Clients</h2>
+        <p class="sec-sub">Organisations that trust TechPhase.</p>
+        <div class="card"><label>Section subtitle</label><textarea data-path="clients.subtitle"></textarea></div>
+        <div class="card-h" style="margin-bottom:10px"><h3 style="color:var(--navy)">Client cards</h3>
+          <button class="btn btn-orange" onclick="addItem('client')">+ Add client</button></div>
+        <div id="clientsList" class="item-list"></div>
+      </section>
+
+      <!-- FAQS -->
+      <section class="sec" id="sec-faqs">
+        <h2 class="sec-h">FAQs</h2>
+        <p class="sec-sub">Shown on the Contact page.</p>
+        <div class="card-h" style="margin-bottom:10px"><h3 style="color:var(--navy)">Questions</h3>
+          <button class="btn btn-orange" onclick="addItem('faq')">+ Add FAQ</button></div>
+        <div id="faqsList" class="item-list"></div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="sec" id="sec-contact">
+        <h2 class="sec-h">Contact &amp; Social</h2>
+        <p class="sec-sub">Contact details shown on the Contact page. (Changing the enquiry inbox itself is done in Vercel env vars.)</p>
+        <div class="card">
+          <label>Location (use a line break for the second line)</label><textarea data-path="contact.location" rows="2"></textarea>
+          <div class="grid2">
+            <div><label>Phone</label><input data-path="contact.phone"></div>
+            <div><label>Public email</label><input data-path="contact.email"></div>
+          </div>
+          <div class="grid2">
+            <div><label>Hours — weekdays</label><input data-path="contact.hours.0"></div>
+            <div><label>Hours — weekend</label><input data-path="contact.hours.1"></div>
+          </div>
+        </div>
+        <div class="card"><div class="card-h"><h3>Social links</h3><span class="badge-i">leave blank to hide an icon</span></div>
+          <div class="grid2">
+            <div><label>Facebook</label><input data-path="contact.social.facebook"></div>
+            <div><label>Twitter / X</label><input data-path="contact.social.twitter"></div>
+            <div><label>LinkedIn</label><input data-path="contact.social.linkedin"></div>
+            <div><label>Instagram</label><input data-path="contact.social.instagram"></div>
+            <div><label>WhatsApp link</label><input data-path="contact.social.whatsapp"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="savebar">
+    <span class="savemsg" id="saveMsg">All changes are published together when you click Save.</span>
+    <button class="btn btn-orange" id="saveBtn"><span class="spin" id="saveSpin"></span><span id="saveTxt">Save &amp; Publish</span></button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+'use strict';
+/* ============ STATE & HELPERS ============ */
+let TOKEN = sessionStorage.getItem('tp_token') || '';
+let C = null; // content object
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let toastTimer;
+function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2400); }
+
+const getPath = (obj, path) => path.split('.').reduce((o,k)=>o?.[k], obj);
+function setPath(obj, path, val){
+  const keys = path.split('.'); let o = obj;
+  for (let i=0;i<keys.length-1;i++){ const k=keys[i]; if(o[k]==null) o[k]=/^\d+$/.test(keys[i+1])?[]:{}; o=o[k]; }
+  o[keys.at(-1)] = val;
+}
+
+/* ============ AUTH ============ */
+async function login(){
+  $('loginErr').style.display='none';
+  const res = await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({password:$('pw').value})}).catch(()=>null);
+  const j = await res?.json().catch(()=>null);
+  if (j?.success){ TOKEN=j.token; sessionStorage.setItem('tp_token',TOKEN); enterApp(); }
+  else $('loginErr').style.display='block';
+}
+$('loginBtn').addEventListener('click', login);
+$('pw').addEventListener('keydown', e=>{ if(e.key==='Enter') login(); });
+$('logoutBtn').addEventListener('click', ()=>{ sessionStorage.removeItem('tp_token'); location.reload(); });
+
+async function enterApp(){
+  $('loginView').style.display='none'; $('appView').style.display='block';
+  $('tbStatus').textContent='Loading content…';
+  let res = await fetch('/api/admin?action=content',{headers:{Authorization:'Bearer '+TOKEN}}).catch(()=>null);
+  let j = await res?.json().catch(()=>null);
+  if (res?.status===401){ sessionStorage.removeItem('tp_token'); location.reload(); return; }
+  if (!j?.success){ // fall back to the deployed copy
+    const r2 = await fetch('/content.json?v='+Date.now()).catch(()=>null);
+    j = { success:true, content: await r2?.json().catch(()=>null) };
+  }
+  if (!j?.content){ toast('Could not load content'); return; }
+  C = j.content; $('tbStatus').textContent='Content loaded';
+  bindStaticFields(); renderLists();
+}
+
+/* ============ SIMPLE FIELDS (data-path) ============ */
+function bindStaticFields(){
+  document.querySelectorAll('[data-path]').forEach(el=>{
+    const v = getPath(C, el.dataset.path);
+    el.value = v ?? '';
+    el.oninput = ()=> setPath(C, el.dataset.path, el.value);
+  });
+  // image previews
+  if ($('prev-aboutimg')) $('prev-aboutimg').src = C.about?.image || '';
+  if ($('prev-prodimg'))  $('prev-prodimg').src  = C.products?.image || '';
+}
+
+/* ============ LIST EDITORS ============ */
+function listCard(inner, onDel){
+  const d=document.createElement('div'); d.className='card'; d.innerHTML=inner;
+  const del=document.createElement('div'); del.className='row-actions';
+  del.innerHTML='<button class="btn btn-danger">Remove</button>';
+  del.querySelector('button').onclick=onDel; d.appendChild(del); return d;
+}
+const fld=(label,val,attrs='')=>`<label>${label}</label><input value="${esc(val)}" ${attrs}>`;
+const area=(label,val)=>`<label>${label}</label><textarea>${esc(val)}</textarea>`;
+
+function renderLists(){
+  /* hero stats (fixed 3) */
+  $('heroStatsList').innerHTML='';
+  C.hero.stats.forEach((s,i)=>{
+    const d=document.createElement('div'); d.className='grid3';
+    d.innerHTML=fld('Number',s.num)+fld('Suffix',s.suffix??'')+fld('Label',s.label);
+    const [n,su,l]=d.querySelectorAll('input');
+    n.oninput=()=>s.num=n.value; su.oninput=()=>s.suffix=su.value; l.oninput=()=>s.label=l.value;
+    $('heroStatsList').appendChild(d);
+  });
+  /* hero offerings */
+  $('heroOfferList').innerHTML='';
+  C.hero.offerings.forEach((o,i)=>{
+    const d=listCard(`<div class="grid2">${fld('Icon (fa-…)',o.icon)}${fld('Text',o.text)}</div>`,
+      ()=>{C.hero.offerings.splice(i,1);renderLists();});
+    const [ic,tx]=d.querySelectorAll('input');
+    ic.oninput=()=>o.icon=ic.value; tx.oninput=()=>o.text=tx.value;
+    $('heroOfferList').appendChild(d);
+  });
+  /* services */
+  $('servicesList').innerHTML='';
+  C.services.items.forEach((s,i)=>{
+    const d=listCard(`<div class="grid2">${fld('Icon (fa-…)',s.icon)}${fld('Title',s.title)}</div>${area('Description',s.text)}`,
+      ()=>{C.services.items.splice(i,1);renderLists();});
+    const [ic,ti]=d.querySelectorAll('input'); const tx=d.querySelector('textarea');
+    ic.oninput=()=>s.icon=ic.value; ti.oninput=()=>s.title=ti.value; tx.oninput=()=>s.text=tx.value;
+    $('servicesList').appendChild(d);
+  });
+  /* products list */
+  $('productsList').innerHTML='';
+  C.products.items.forEach((p,i)=>{
+    const d=listCard(fld('Product',p), ()=>{C.products.items.splice(i,1);renderLists();});
+    d.querySelector('input').oninput=(e)=>C.products.items[i]=e.target.value;
+    $('productsList').appendChild(d);
+  });
+  /* partners */
+  $('partnersList').innerHTML='';
+  C.products.partners.forEach((p,i)=>{
+    const d=listCard(fld('Brand',p), ()=>{C.products.partners.splice(i,1);renderLists();});
+    d.querySelector('input').oninput=(e)=>C.products.partners[i]=e.target.value;
+    $('partnersList').appendChild(d);
+  });
+  /* product stats (fixed 3) */
+  $('prodStatsList').innerHTML='';
+  C.products.stats.forEach((s)=>{
+    const d=document.createElement('div'); d.className='grid3';
+    d.innerHTML=fld('Icon (fa-…)',s.icon)+fld('Target number',s.target,'type="number"')+fld('Label',s.label);
+    const [ic,t,l]=d.querySelectorAll('input');
+    ic.oninput=()=>s.icon=ic.value; t.oninput=()=>s.target=Number(t.value)||0; l.oninput=()=>s.label=l.value;
+    $('prodStatsList').appendChild(d);
+  });
+  /* team */
+  $('teamList').innerHTML='';
+  C.team.members.forEach((m,i)=>{
+    const d=listCard(
+      `<div class="grid2">${fld('Name',m.name)}${fld('Role',m.role)}</div>
+       <div class="grid2">${fld('Icon (if no photo)',m.icon??'')}${fld('Email',m.email??'')}</div>
+       <div class="grid2">${fld('LinkedIn URL',m.linkedin??'')}${fld('Twitter URL',m.twitter??'')}</div>
+       <label>Photo</label>
+       <div class="upl-row"><img class="imgprev tm-prev" src="${esc(m.photo||'')}">
+         <div><input type="file" accept="image/*" class="tm-file" style="border:0;padding:0">
+         <p class="hint">Leave empty to show the icon</p>
+         ${m.photo?'<button class="btn btn-danger tm-clear" type="button">Remove photo</button>':''}</div></div>`,
+      ()=>{C.team.members.splice(i,1);renderLists();});
+    const ins=d.querySelectorAll('input:not([type=file])');
+    ins[0].oninput=e=>m.name=e.target.value; ins[1].oninput=e=>m.role=e.target.value;
+    ins[2].oninput=e=>m.icon=e.target.value; ins[3].oninput=e=>m.email=e.target.value;
+    ins[4].oninput=e=>m.linkedin=e.target.value; ins[5].oninput=e=>m.twitter=e.target.value;
+    d.querySelector('.tm-file').onchange=(e)=>uploadImage(e.target.files[0],(path)=>{
+      m.photo=path; renderLists();});
+    d.querySelector('.tm-clear')?.addEventListener('click',()=>{m.photo='';renderLists();});
+    $('teamList').appendChild(d);
+  });
+  /* testimonials */
+  $('testiList').innerHTML='';
+  C.testimonials.items.forEach((t,i)=>{
+    const d=listCard(`<div class="grid3">${fld('Icon (fa-…)',t.icon)}${fld('Client name',t.name)}${fld('Client type',t.role)}</div>${area('Quote',t.text)}`,
+      ()=>{C.testimonials.items.splice(i,1);renderLists();});
+    const [ic,n,r]=d.querySelectorAll('input'); const tx=d.querySelector('textarea');
+    ic.oninput=()=>t.icon=ic.value; n.oninput=()=>t.name=n.value; r.oninput=()=>t.role=r.value; tx.oninput=()=>t.text=tx.value;
+    $('testiList').appendChild(d);
+  });
+  /* clients */
+  $('clientsList').innerHTML='';
+  C.clients.items.forEach((cl,i)=>{
+    const d=listCard(`<div class="grid2">${fld('Icon (fa-…)',cl.icon)}${fld('Organisation name',cl.name)}</div>`,
+      ()=>{C.clients.items.splice(i,1);renderLists();});
+    const [ic,n]=d.querySelectorAll('input');
+    ic.oninput=()=>cl.icon=ic.value; n.oninput=()=>cl.name=n.value;
+    $('clientsList').appendChild(d);
+  });
+  /* faqs */
+  $('faqsList').innerHTML='';
+  C.faqs.forEach((f,i)=>{
+    const d=listCard(fld('Question',f.q)+area('Answer',f.a),
+      ()=>{C.faqs.splice(i,1);renderLists();});
+    d.querySelector('input').oninput=(e)=>f.q=e.target.value;
+    d.querySelector('textarea').oninput=(e)=>f.a=e.target.value;
+    $('faqsList').appendChild(d);
+  });
+}
+
+/* ============ ADD ITEMS ============ */
+function addItem(kind){
+  const map = {
+    heroOffer:   ()=>C.hero.offerings.push({icon:'fa-star',text:'New item'}),
+    service:     ()=>C.services.items.push({icon:'fa-cog',title:'New Service',text:'Describe this service…'}),
+    product:     ()=>C.products.items.push('New product'),
+    partner:     ()=>C.products.partners.push('Brand'),
+    member:      ()=>C.team.members.push({name:'New Member',role:'Role',icon:'fa-user',photo:'',linkedin:'',twitter:'',email:''}),
+    testimonial: ()=>C.testimonials.items.push({icon:'fa-building',name:'Client Name',role:'Client',text:'Their feedback…'}),
+    client:      ()=>C.clients.items.push({icon:'fa-building',name:'New Client'}),
+    faq:         ()=>C.faqs.push({q:'New question?',a:'The answer…'}),
+  };
+  map[kind]?.(); renderLists();
+  toast('Added — remember to Save & Publish');
+}
+
+/* ============ IMAGE UPLOAD (client-side compress → API) ============ */
+function compress(file){
+  return new Promise((resolve,reject)=>{
+    const img=new Image(); const url=URL.createObjectURL(file);
+    img.onload=()=>{
+      const MAX=1200; let {width:w,height:h}=img;
+      if (Math.max(w,h)>MAX){ const k=MAX/Math.max(w,h); w=Math.round(w*k); h=Math.round(h*k); }
+      const cv=document.createElement('canvas'); cv.width=w; cv.height=h;
+      cv.getContext('2d').drawImage(img,0,0,w,h);
+      URL.revokeObjectURL(url);
+      cv.toBlob(b=> b?resolve(b):reject(new Error('compress failed')),'image/jpeg',0.85);
+    };
+    img.onerror=reject; img.src=url;
+  });
+}
+async function uploadImage(file, done){
+  if (!file) return;
+  toast('Uploading image…');
+  try{
+    const blob = file.type==='image/svg+xml' ? file : await compress(file);
+    const b64 = await new Promise((res,rej)=>{ const r=new FileReader();
+      r.onload=()=>res(r.result.split(',')[1]); r.onerror=rej; r.readAsDataURL(blob); });
+    const resp = await fetch('/api/admin',{method:'POST',
+      headers:{'Content-Type':'application/json',Authorization:'Bearer '+TOKEN},
+      body:JSON.stringify({action:'upload',filename:file.name,mime:blob.type,data:b64})});
+    const j = await resp.json();
+    if (!j.success) throw new Error(j.message);
+    toast('Image uploaded ✓ (appears after Save & deploy)');
+    done(j.path);
+  }catch(err){ toast('Upload failed: '+err.message); }
+}
+$('upl-aboutimg')?.addEventListener('change',(e)=>uploadImage(e.target.files[0],(p)=>{C.about.image=p;$('prev-aboutimg').src=p;}));
+$('upl-prodimg')?.addEventListener('change',(e)=>uploadImage(e.target.files[0],(p)=>{C.products.image=p;$('prev-prodimg').src=p;}));
+
+/* ============ SAVE ============ */
+$('saveBtn').addEventListener('click', async ()=>{
+  $('saveSpin').style.display='inline-block'; $('saveTxt').textContent='Publishing…'; $('saveBtn').disabled=true;
+  const msg=$('saveMsg'); msg.className='savemsg';
+  try{
+    const res = await fetch('/api/admin',{method:'POST',
+      headers:{'Content-Type':'application/json',Authorization:'Bearer '+TOKEN},
+      body:JSON.stringify({action:'save',content:C})});
+    const j = await res.json();
+    if (res.status===401){ sessionStorage.removeItem('tp_token'); location.reload(); return; }
+    if (!j.success) throw new Error(j.message||'Save failed');
+    msg.textContent='✓ Published — the live site updates in about a minute.'; msg.classList.add('ok');
+    toast('Saved & publishing 🚀');
+  }catch(err){
+    msg.textContent='✗ '+err.message; msg.classList.add('bad');
+  }finally{
+    $('saveSpin').style.display='none'; $('saveTxt').textContent='Save & Publish'; $('saveBtn').disabled=false;
+  }
+});
+
+/* ============ NAV ============ */
+$('snav').addEventListener('click',(e)=>{
+  const b=e.target.closest('button[data-sec]'); if(!b) return;
+  document.querySelectorAll('#snav button').forEach(x=>x.classList.toggle('active',x===b));
+  document.querySelectorAll('.sec').forEach(s=>s.classList.toggle('active',s.id==='sec-'+b.dataset.sec));
+  window.scrollTo({top:0});
+});
+
+/* ============ BOOT ============ */
+if (TOKEN) enterApp();
+</script>
+</body>
+</html>

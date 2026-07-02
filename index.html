@@ -841,14 +841,14 @@
         <div class="hero-grid"></div>
         <div class="hero-content">
             <div class="hero-text">
-                <div class="hero-badge"><svg width="18" height="12" viewBox="0 0 18 12" aria-hidden="true" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4" fill="#ce1126"/><rect y="4" width="18" height="4" fill="#fcd116"/><rect y="8" width="18" height="4" fill="#006b3f"/><path d="M9 4.2l.55 1.7h1.78l-1.44 1.05.55 1.7L9 7.6l-1.44 1.05.55-1.7L6.67 5.9h1.78z" fill="#0a0a0a"/></svg> Ghana's Trusted IT Partner Since 2014</div>
-                <h1>Your One-Stop <span>IT Solutions</span> Provider in Ghana</h1>
-                <p>TechPhase Solutions delivers quality computers, networking infrastructure, security systems, and premium maintenance services to organizations across Ghana.</p>
+                <div class="hero-badge" id="heroBadge"><svg width="18" height="12" viewBox="0 0 18 12" aria-hidden="true" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4" fill="#ce1126"/><rect y="4" width="18" height="4" fill="#fcd116"/><rect y="8" width="18" height="4" fill="#006b3f"/><path d="M9 4.2l.55 1.7h1.78l-1.44 1.05.55 1.7L9 7.6l-1.44 1.05.55-1.7L6.67 5.9h1.78z" fill="#0a0a0a"/></svg> Ghana's Trusted IT Partner Since 2014</div>
+                <h1 id="heroTitle">Your One-Stop <span>IT Solutions</span> Provider in Ghana</h1>
+                <p id="heroSubtitle">TechPhase Solutions delivers quality computers, networking infrastructure, security systems, and premium maintenance services to organizations across Ghana.</p>
                 <div class="hero-btns">
                     <a href="#contact" onclick="showPage('contact');return false" class="btn-primary"><i class="fas fa-comments"></i> Get in Touch</a>
                     <a href="#services" onclick="showPage('services');return false" class="btn-outline"><i class="fas fa-th-large"></i> Our Services</a>
                 </div>
-                <div class="hero-stats">
+                <div class="hero-stats" id="heroStats">
                     <div class="hero-stat">
                         <div class="hero-stat-num">10<span>+</span></div>
                         <div class="hero-stat-label">Years Experience</div>
@@ -864,7 +864,7 @@
                 </div>
             </div>
             <div class="hero-visual">
-                <div class="hero-card">
+                <div class="hero-card" id="heroCard">
                     <div class="hero-card-title">What We Offer</div>
                     <div class="hsl-item"><div class="hsl-icon"><i class="fas fa-network-wired"></i></div> Networking Solutions (LAN / WAN)</div>
                     <div class="hsl-item"><div class="hsl-icon"><i class="fas fa-tools"></i></div> Systems Maintenance</div>
@@ -889,26 +889,26 @@
                 <div class="about-img-wrap reveal-left">
                     <img
                         src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=680&q=80"
-                        alt="TechPhase Solutions – Professional IT Team" loading="lazy">
+                        alt="TechPhase Solutions – Professional IT Team" loading="lazy" id="aboutImage">
                     <div class="about-badge">
-                        <strong>10+</strong>
-                        <span>Years of Excellence</span>
+                        <strong id="aboutBadgeNum">10+</strong>
+                        <span id="aboutBadgeLabel">Years of Excellence</span>
                     </div>
                 </div>
                 <div class="about-text reveal-right">
                     <span class="section-tag">About TechPhase</span>
-                    <h2>Ghana's Premier IT Solutions Company</h2>
+                    <h2 id="aboutHeading">Ghana's Premier IT Solutions Company</h2><div id="aboutParas">
                     <p>TechPhase Solutions was founded in 2014. We supply computers and accessories, various office consumables, as well as networking and system maintenance services for a wide range of organizations across Ghana.</p>
                     <p>We have an excellent track record of successful projects delivered in demanding environments. TechPhase combines best-of-breed technologies to build solutions driven by the ambition to make our clients more successful and help them accomplish their strategic goals.</p>
-                    <p>We serve corporate customers, Government agencies, Educational institutions, and private consumers.</p>
+                    <p>We serve corporate customers, Government agencies, Educational institutions, and private consumers.</p></div>
                     <div class="mv-grid">
                         <div class="mv-card">
                             <h4><i class="fas fa-bullseye" style="color:var(--secondary);margin-right:7px"></i>Our Mission</h4>
-                            <p>Deliver maximum value by supplying quality, affordable, and durable IT products with exceptional after-sales service and networking support.</p>
+                            <p id="missionText">Deliver maximum value by supplying quality, affordable, and durable IT products with exceptional after-sales service and networking support.</p>
                         </div>
                         <div class="mv-card">
                             <h4><i class="fas fa-eye" style="color:var(--accent);margin-right:7px"></i>Our Vision</h4>
-                            <p>Become the market leader in computer hardware, office supplies, and networking solutions in Ghana and beyond West Africa.</p>
+                            <p id="visionText">Become the market leader in computer hardware, office supplies, and networking solutions in Ghana and beyond West Africa.</p>
                         </div>
                     </div>
                 </div>
@@ -927,9 +927,9 @@
                 <span class="section-tag">What We Do</span>
                 <h2 class="section-title">Our Services</h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">A comprehensive range of IT services to meet all your technological needs, backed by our commitment to excellence and customer satisfaction.</p>
+                <p class="section-subtitle" id="servicesSubtitle">A comprehensive range of IT services to meet all your technological needs, backed by our commitment to excellence and customer satisfaction.</p>
             </div>
-            <div class="services-grid">
+            <div class="services-grid" id="servicesGrid">
                 <div class="service-card reveal d1">
                     <div class="svc-icon"><i class="fas fa-code"></i></div>
                     <h3>Web Development</h3>
@@ -1000,18 +1000,18 @@
                 <span class="section-tag">Our Products</span>
                 <h2 class="section-title">Quality IT Products</h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">Whether you need a reliable PC, laptop, or office consumables, TechPhase has the right solution for your business.</p>
+                <p class="section-subtitle" id="productsSubtitle">Whether you need a reliable PC, laptop, or office consumables, TechPhase has the right solution for your business.</p>
             </div>
             <div class="products-grid">
                 <div class="reveal-left">
                     <img
                         src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=620&q=80"
-                        alt="IT Products and Solutions" loading="lazy"
+                        alt="IT Products and Solutions" loading="lazy" id="productImage"
                         style="border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);">
                 </div>
                 <div class="reveal-right">
                     <h3 style="font-size:1.45rem;color:var(--primary);margin-bottom:18px">Products We Offer</h3>
-                    <ul class="product-list">
+                    <ul class="product-list" id="productList">
                         <li><span class="check-icon"><i class="fas fa-check"></i></span> Computers, Laptops and Accessories</li>
                         <li><span class="check-icon"><i class="fas fa-check"></i></span> Computer Peripherals</li>
                         <li><span class="check-icon"><i class="fas fa-check"></i></span> Software Solutions</li>
@@ -1023,7 +1023,7 @@
 
                     <h3 style="font-size:1.1rem;color:var(--primary);margin:28px 0 14px">Our Preferred Partners</h3>
                     <div class="marquee" aria-label="Partner brands">
-                        <div class="marquee-track">
+                        <div class="marquee-track" id="partnersTrack">
                             <div class="partner-chip">HP</div>
                             <div class="partner-chip">Dell</div>
                             <div class="partner-chip">APC</div>
@@ -1052,7 +1052,7 @@
     <!-- Stats Strip -->
     <section class="stats-strip">
         <div class="container">
-            <div class="stats-grid">
+            <div class="stats-grid" id="statsGrid">
                 <div class="reveal d1">
                     <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
                     <div class="stat-number" data-target="10"><span class="count">0</span><span>+</span></div>
@@ -1083,9 +1083,9 @@
                 <span class="section-tag">The People</span>
                 <h2 class="section-title">Our Expert Team</h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">Meet our dedicated professionals committed to delivering exceptional IT solutions and services.</p>
+                <p class="section-subtitle" id="teamSubtitle">Meet our dedicated professionals committed to delivering exceptional IT solutions and services.</p>
             </div>
-            <div class="team-grid">
+            <div class="team-grid" id="teamGrid">
                 <div class="team-card reveal d1">
                     <div class="team-avatar"><i class="fas fa-user-tie"></i></div>
                     <h3>Robert Kwashie Gozar</h3>
@@ -1137,9 +1137,9 @@
                 <span class="section-tag">Client Feedback</span>
                 <h2 class="section-title">What Our Clients Say</h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">Don't just take our word for it. Here's what our clients have to say about working with TechPhase.</p>
+                <p class="section-subtitle" id="testiSubtitle">Don't just take our word for it. Here's what our clients have to say about working with TechPhase.</p>
             </div>
-            <div class="testi-grid">
+            <div class="testi-grid" id="testiGrid">
                 <div class="testi-card reveal d1">
                     <div class="stars">★★★★★</div>
                     <div class="testi-quote">"</div>
@@ -1191,9 +1191,9 @@
                 <span class="section-tag">Who Trusts Us</span>
                 <h2 class="section-title">Our Clients</h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">A proud clientele of satisfied customers and corporate bodies who have trusted TechPhase with their IT needs.</p>
+                <p class="section-subtitle" id="clientsSubtitle">A proud clientele of satisfied customers and corporate bodies who have trusted TechPhase with their IT needs.</p>
             </div>
-            <div class="clients-grid">
+            <div class="clients-grid" id="clientsGrid">
                 <div class="client-card reveal d1"><div class="cl-icon"><i class="fas fa-hospital"></i></div><p>BOMA Government Hospital</p></div>
                 <div class="client-card reveal d2"><div class="cl-icon"><i class="fas fa-hospital"></i></div><p>Tepa Government Hospital</p></div>
                 <div class="client-card reveal d3"><div class="cl-icon"><i class="fas fa-industry"></i></div><p>Crocodile Ghana Matchets Limited</p></div>
@@ -1227,7 +1227,7 @@
 
                 <div class="contact-grid">
                     <!-- Contact Info -->
-                    <div class="reveal-left">
+                    <div class="reveal-left" id="contactInfo">
                         <div class="ci-item">
                             <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
                             <div>
@@ -1337,7 +1337,7 @@
                     <h2 class="section-title">Frequently Asked Questions</h2>
                     <div class="section-divider"></div>
                 </div>
-                <div class="faq-wrap reveal">
+                <div class="faq-wrap reveal" id="faqWrap">
                     <div class="faq-item">
                         <button class="faq-q" aria-expanded="false">Do you serve clients outside Accra?<i class="fas fa-chevron-down"></i></button>
                         <div class="faq-a"><div><p>Yes. While our office is in Akweteman-Achimota, Accra, we deliver and support projects nationwide, including hospitals and businesses in the Ashanti, Western, and Volta regions.</p></div></div>
@@ -1652,21 +1652,21 @@
     });
 
     /* -----------------------------------------------
-       FAQ ACCORDION
+       FAQ ACCORDION  (delegated — works after re-render)
     ----------------------------------------------- */
-    document.querySelectorAll('.faq-q').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const item = btn.closest('.faq-item');
-            const isOpen = item.classList.contains('open');
-            document.querySelectorAll('.faq-item.open').forEach(i => {
-                i.classList.remove('open');
-                i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
-            });
-            if (!isOpen) {
-                item.classList.add('open');
-                btn.setAttribute('aria-expanded', 'true');
-            }
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.faq-q');
+        if (!btn) return;
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => {
+            i.classList.remove('open');
+            i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
         });
+        if (!isOpen) {
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+        }
     });
 
     /* -----------------------------------------------
@@ -1680,16 +1680,157 @@
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
     }
-    document.querySelectorAll('.ci-copy').forEach(btn => {
-        btn.addEventListener('click', async () => {
-            try {
-                await navigator.clipboard.writeText(btn.dataset.copy);
-                showToast('Copied: ' + btn.dataset.copy);
-            } catch {
-                showToast('Could not copy — please select the text manually');
-            }
-        });
+    document.addEventListener('click', async (e) => {
+        const btn = e.target.closest('.ci-copy');
+        if (!btn) return;
+        try {
+            await navigator.clipboard.writeText(btn.dataset.copy);
+            showToast('Copied: ' + btn.dataset.copy);
+        } catch {
+            showToast('Could not copy — please select the text manually');
+        }
     });
+
+    /* -----------------------------------------------
+       CMS SYNC — renders site content from content.json
+       (edited via /admin — the static HTML is the fallback)
+    ----------------------------------------------- */
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c =>
+        ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+    const setText = (id, v) => { const el = document.getElementById(id); if (el && v != null) el.textContent = v; };
+    const GH_FLAG = '<svg width="18" height="12" viewBox="0 0 18 12" aria-hidden="true" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4" fill="#ce1126"/><rect y="4" width="18" height="4" fill="#fcd116"/><rect y="8" width="18" height="4" fill="#006b3f"/><path d="M9 4.2l.55 1.7h1.78l-1.44 1.05.55 1.7L9 7.6l-1.44 1.05.55-1.7L6.67 5.9h1.78z" fill="#0a0a0a"/></svg> ';
+    const dCls = (i) => 'd' + ((i % 4) + 1);
+
+    function renderContent(c) {
+        try {
+            /* HERO */
+            const hb = document.getElementById('heroBadge');
+            if (hb && c.hero?.badge) hb.innerHTML = GH_FLAG + esc(c.hero.badge);
+            const ht = document.getElementById('heroTitle');
+            if (ht && c.hero?.title) {
+                const parts = String(c.hero.title).split('|');
+                ht.innerHTML = parts.map((p, i) => i % 2 ? `<span>${esc(p)}</span>` : esc(p)).join('');
+            }
+            setText('heroSubtitle', c.hero?.subtitle);
+            const hs = document.getElementById('heroStats');
+            if (hs && c.hero?.stats?.length) hs.innerHTML = c.hero.stats.map(s => `
+                <div class="hero-stat"><div class="hero-stat-num">${esc(s.num)}<span>${esc(s.suffix ?? '')}</span></div>
+                <div class="hero-stat-label">${esc(s.label)}</div></div>`).join('');
+            const hc = document.getElementById('heroCard');
+            if (hc && c.hero?.offerings?.length) hc.innerHTML =
+                `<div class="hero-card-title">${esc(c.hero.offeringsTitle ?? 'What We Offer')}</div>` +
+                c.hero.offerings.map(o => `<div class="hsl-item"><div class="hsl-icon"><i class="fas ${esc(o.icon)}"></i></div> ${esc(o.text)}</div>`).join('');
+
+            /* ABOUT */
+            const ai = document.getElementById('aboutImage');
+            if (ai && c.about?.image) ai.src = c.about.image;
+            setText('aboutBadgeNum', c.about?.badgeNumber);
+            setText('aboutBadgeLabel', c.about?.badgeLabel);
+            setText('aboutHeading', c.about?.heading);
+            const ap = document.getElementById('aboutParas');
+            if (ap && c.about?.paragraphs?.length) ap.innerHTML = c.about.paragraphs.map(p => `<p>${esc(p)}</p>`).join('');
+            setText('missionText', c.about?.mission);
+            setText('visionText', c.about?.vision);
+
+            /* SERVICES */
+            setText('servicesSubtitle', c.services?.subtitle);
+            const sg = document.getElementById('servicesGrid');
+            if (sg && c.services?.items?.length) sg.innerHTML = c.services.items.map((s, i) => `
+                <div class="service-card reveal ${dCls(i)}"><div class="svc-icon"><i class="fas ${esc(s.icon)}"></i></div>
+                <h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>`).join('');
+
+            /* PRODUCTS */
+            setText('productsSubtitle', c.products?.subtitle);
+            const pi = document.getElementById('productImage');
+            if (pi && c.products?.image) pi.src = c.products.image;
+            const pl = document.getElementById('productList');
+            if (pl && c.products?.items?.length) pl.innerHTML = c.products.items.map(p => `
+                <li><span class="check-icon"><i class="fas fa-check"></i></span> ${esc(p)}</li>`).join('');
+            const pt = document.getElementById('partnersTrack');
+            if (pt && c.products?.partners?.length) {
+                const chips = (hidden) => c.products.partners.map(p =>
+                    `<div class="partner-chip"${hidden ? ' aria-hidden="true"' : ''}>${esc(p)}</div>`).join('');
+                pt.innerHTML = chips(false) + chips(true);
+            }
+            const stg = document.getElementById('statsGrid');
+            if (stg && c.products?.stats?.length) stg.innerHTML = c.products.stats.map((s, i) => `
+                <div class="reveal ${dCls(i)}"><div class="stat-icon"><i class="fas ${esc(s.icon)}"></i></div>
+                <div class="stat-number" data-target="${Number(s.target) || 0}"><span class="count">0</span><span>+</span></div>
+                <div class="stat-label">${esc(s.label)}</div></div>`).join('');
+
+            /* TEAM */
+            setText('teamSubtitle', c.team?.subtitle);
+            const tg = document.getElementById('teamGrid');
+            if (tg && c.team?.members?.length) tg.innerHTML = c.team.members.map((m, i) => {
+                const avatar = m.photo
+                    ? `<div class="team-avatar" style="padding:0;overflow:hidden"><img src="${esc(m.photo)}" alt="${esc(m.name)}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"></div>`
+                    : `<div class="team-avatar"><i class="fas ${esc(m.icon || 'fa-user')}"></i></div>`;
+                const soc = [
+                    m.linkedin ? `<a href="${esc(m.linkedin)}" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>` : '',
+                    m.twitter ? `<a href="${esc(m.twitter)}" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>` : '',
+                    m.email ? `<a href="mailto:${esc(m.email)}" aria-label="Email"><i class="fas fa-envelope"></i></a>` : '',
+                ].join('');
+                return `<div class="team-card reveal ${dCls(i)}">${avatar}<h3>${esc(m.name)}</h3>
+                    <p class="role">${esc(m.role)}</p>${soc ? `<div class="team-social">${soc}</div>` : ''}</div>`;
+            }).join('');
+
+            /* TESTIMONIALS */
+            setText('testiSubtitle', c.testimonials?.subtitle);
+            const teg = document.getElementById('testiGrid');
+            if (teg && c.testimonials?.items?.length) teg.innerHTML = c.testimonials.items.map((t, i) => `
+                <div class="testi-card reveal ${dCls(i)}"><div class="stars">★★★★★</div><div class="testi-quote">"</div>
+                <p class="testi-text">${esc(t.text)}</p>
+                <div class="testi-author"><div class="testi-av"><i class="fas ${esc(t.icon || 'fa-building')}"></i></div>
+                <div><div class="testi-name">${esc(t.name)}</div><div class="testi-role">${esc(t.role)}</div></div></div></div>`).join('');
+
+            /* CLIENTS */
+            setText('clientsSubtitle', c.clients?.subtitle);
+            const cg = document.getElementById('clientsGrid');
+            if (cg && c.clients?.items?.length) cg.innerHTML = c.clients.items.map((cl, i) => `
+                <div class="client-card reveal ${dCls(i)}"><div class="cl-icon"><i class="fas ${esc(cl.icon || 'fa-building')}"></i></div><p>${esc(cl.name)}</p></div>`).join('');
+
+            /* FAQS */
+            const fw = document.getElementById('faqWrap');
+            if (fw && c.faqs?.length) fw.innerHTML = c.faqs.map(f => `
+                <div class="faq-item"><button class="faq-q" aria-expanded="false">${esc(f.q)}<i class="fas fa-chevron-down"></i></button>
+                <div class="faq-a"><div><p>${esc(f.a)}</p></div></div></div>`).join('');
+
+            /* CONTACT INFO */
+            const ci = document.getElementById('contactInfo');
+            if (ci && c.contact) {
+                const co = c.contact;
+                const soc = co.social ?? {};
+                ci.innerHTML = `
+                    <div class="ci-item"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div><h4>Our Location</h4><p>${esc(co.location).replace(/\n/g, '<br>')}</p></div></div>
+                    <div class="ci-item"><div class="ci-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div><h4>Phone Numbers</h4><a href="tel:${esc(String(co.phone).replace(/\s+/g, ''))}">${esc(co.phone)}</a><button class="ci-copy" data-copy="${esc(co.phone)}" aria-label="Copy phone number" title="Copy"><i class="far fa-copy"></i></button></div></div>
+                    <div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div>
+                        <div><h4>Email Address</h4><a href="mailto:${esc(co.email)}">${esc(co.email)}</a><button class="ci-copy" data-copy="${esc(co.email)}" aria-label="Copy email address" title="Copy"><i class="far fa-copy"></i></button></div></div>
+                    <div class="ci-item"><div class="ci-icon"><i class="fas fa-clock"></i></div>
+                        <div><h4>Working Hours</h4>${(co.hours ?? []).map(h => `<p>${esc(h)}</p>`).join('')}</div></div>
+                    <div class="social-row">
+                        ${soc.facebook ? `<a href="${esc(soc.facebook)}" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>` : ''}
+                        ${soc.twitter ? `<a href="${esc(soc.twitter)}" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>` : ''}
+                        ${soc.linkedin ? `<a href="${esc(soc.linkedin)}" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>` : ''}
+                        ${soc.instagram ? `<a href="${esc(soc.instagram)}" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>` : ''}
+                        ${soc.whatsapp ? `<a href="${esc(soc.whatsapp)}" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>` : ''}
+                    </div>`;
+            }
+
+            initReveal(); // re-observe freshly rendered .reveal elements
+        } catch (err) {
+            console.error('Content render error:', err);
+        }
+    }
+
+    async function loadContent() {
+        try {
+            const res = await fetch('/content.json?v=' + Date.now());
+            if (!res.ok) return; // static HTML remains as fallback
+            renderContent(await res.json());
+        } catch { /* offline / fetch failed — fallback HTML stays */ }
+    }
 
     /* -----------------------------------------------
        MESSAGE CHARACTER COUNTER
@@ -1717,6 +1858,9 @@
 
         // Set copyright year
         document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+        // Pull latest content from the backend (admin-managed)
+        loadContent();
 
         // Kick off reveal
         initReveal();

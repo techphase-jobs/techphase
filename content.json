@@ -1,0 +1,123 @@
+{
+  "hero": {
+    "badge": "Ghana's Trusted IT Partner Since 2014",
+    "title": "Your One-Stop |IT Solutions| Provider in Ghana",
+    "subtitle": "TechPhase Solutions delivers quality computers, networking infrastructure, security systems, and premium maintenance services to organizations across Ghana.",
+    "stats": [
+      { "num": "10", "suffix": "+", "label": "Years Experience" },
+      { "num": "100", "suffix": "+", "label": "Happy Clients" },
+      { "num": "500", "suffix": "+", "label": "Projects Done" }
+    ],
+    "offeringsTitle": "What We Offer",
+    "offerings": [
+      { "icon": "fa-network-wired", "text": "Networking Solutions (LAN / WAN)" },
+      { "icon": "fa-tools", "text": "Systems Maintenance" },
+      { "icon": "fa-video", "text": "CCTV Installations" },
+      { "icon": "fa-print", "text": "Printing Services" },
+      { "icon": "fa-laptop", "text": "Computers & Accessories" },
+      { "icon": "fa-shield-alt", "text": "Electric Fence Installation" }
+    ]
+  },
+  "about": {
+    "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=680&q=80",
+    "badgeNumber": "10+",
+    "badgeLabel": "Years of Excellence",
+    "heading": "Ghana's Premier IT Solutions Company",
+    "paragraphs": [
+      "TechPhase Solutions was founded in 2014. We supply computers and accessories, various office consumables, as well as networking and system maintenance services for a wide range of organizations across Ghana.",
+      "We have an excellent track record of successful projects delivered in demanding environments. TechPhase combines best-of-breed technologies to build solutions driven by the ambition to make our clients more successful and help them accomplish their strategic goals.",
+      "We serve corporate customers, Government agencies, Educational institutions, and private consumers."
+    ],
+    "mission": "Deliver maximum value by supplying quality, affordable, and durable IT products with exceptional after-sales service and networking support.",
+    "vision": "Become the market leader in computer hardware, office supplies, and networking solutions in Ghana and beyond West Africa."
+  },
+  "services": {
+    "subtitle": "A comprehensive range of IT services to meet all your technological needs, backed by our commitment to excellence and customer satisfaction.",
+    "items": [
+      { "icon": "fa-code", "title": "Web Development", "text": "Professional website design and development for businesses — from landing pages to full web applications tailored to your needs." },
+      { "icon": "fa-envelope-open-text", "title": "Professional Email", "text": "Professional business email setup, configuration, and management — including domain-based email hosting, migrations, and ongoing support." },
+      { "icon": "fa-cloud", "title": "Cloud Services", "text": "Cloud infrastructure setup, migration, and management to keep your business data secure, accessible, and always available." },
+      { "icon": "fa-server", "title": "System Administration", "text": "Expert management and administration of servers, networks, and IT infrastructure to ensure optimal uptime and performance." },
+      { "icon": "fa-globe-africa", "title": "Wide Area Networking (WAN)", "text": "Professional installation and maintenance of Wide Area Networks for businesses of all sizes across Ghana." },
+      { "icon": "fa-network-wired", "title": "Local Area Networking (LAN)", "text": "We plan, design, and maintain Local Area Networks to improve your business efficiency and connectivity." },
+      { "icon": "fa-desktop", "title": "Systems Maintenance", "text": "Regular preventive and corrective maintenance to keep your IT systems running at peak performance always." },
+      { "icon": "fa-video", "title": "CCTV Installations", "text": "Professional CCTV installation and maintenance for enhanced security of your premises and assets." },
+      { "icon": "fa-wrench", "title": "Repairs & Servicing", "text": "Expert repairs and servicing of computers, Fax Machines, Printers, UPS, plotters and electronic equipment." },
+      { "icon": "fa-bolt", "title": "Electric Fence Installation", "text": "Professional installation and commissioning of electric fences for enhanced perimeter security." },
+      { "icon": "fa-print", "title": "Printing Services", "text": "All printing works including banners, stickers, books, forms, calendars, invoices, and more." }
+    ]
+  },
+  "products": {
+    "subtitle": "Whether you need a reliable PC, laptop, or office consumables, TechPhase has the right solution for your business.",
+    "image": "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=620&q=80",
+    "items": [
+      "Computers, Laptops and Accessories",
+      "Computer Peripherals",
+      "Software Solutions",
+      "Office Consumables",
+      "Networking Equipment & Cables",
+      "CCTV & Security Systems",
+      "UPS & Power Solutions"
+    ],
+    "partners": ["HP", "Dell", "APC", "Xerox", "Canon", "Lenovo", "Acer", "Toshiba", "Fujitsu"],
+    "stats": [
+      { "icon": "fa-calendar-alt", "target": 10, "label": "Years of Industry Experience" },
+      { "icon": "fa-users", "target": 100, "label": "Satisfied Clients" },
+      { "icon": "fa-check-circle", "target": 500, "label": "Projects Completed" }
+    ]
+  },
+  "team": {
+    "subtitle": "Meet our dedicated professionals committed to delivering exceptional IT solutions and services.",
+    "members": [
+      { "name": "Robert Kwashie Gozar", "role": "Chief Executive Officer", "icon": "fa-user-tie", "photo": "", "linkedin": "", "twitter": "", "email": "" },
+      { "name": "Mawuli Kofi", "role": "Accounts Manager", "icon": "fa-user", "photo": "", "linkedin": "", "twitter": "", "email": "" },
+      { "name": "Felix Kofi Gozar", "role": "Technical Support Manager", "icon": "fa-tools", "photo": "", "linkedin": "", "twitter": "", "email": "" },
+      { "name": "Hansen Neequaye", "role": "Technical Support", "icon": "fa-laptop-code", "photo": "", "linkedin": "", "twitter": "", "email": "" }
+    ]
+  },
+  "testimonials": {
+    "subtitle": "Don't just take our word for it. Here's what our clients have to say about working with TechPhase.",
+    "items": [
+      { "icon": "fa-hospital", "name": "BOMA Government Hospital", "role": "Healthcare Client", "text": "TechPhase Solutions has been our trusted IT partner for years. Their technical expertise and prompt service have kept our systems running smoothly and efficiently." },
+      { "icon": "fa-building", "name": "MINSOL Limited", "role": "Corporate Client", "text": "The team at TechPhase is professional, responsive, and truly understands our business needs. Their networking solutions have significantly improved our operational efficiency." },
+      { "icon": "fa-industry", "name": "WACO Ghana Limited", "role": "Long-term Client", "text": "We've worked with TechPhase for IT equipment and maintenance for over 5 years. Their reliability and quality of service are unmatched in the industry." }
+    ]
+  },
+  "clients": {
+    "subtitle": "A proud clientele of satisfied customers and corporate bodies who have trusted TechPhase with their IT needs.",
+    "items": [
+      { "icon": "fa-hospital", "name": "BOMA Government Hospital" },
+      { "icon": "fa-hospital", "name": "Tepa Government Hospital" },
+      { "icon": "fa-industry", "name": "Crocodile Ghana Matchets Limited" },
+      { "icon": "fa-building", "name": "MINSOL Limited" },
+      { "icon": "fa-briefcase", "name": "WACO Ghana Limited" },
+      { "icon": "fa-chart-line", "name": "AMANTRA Ghana Limited" },
+      { "icon": "fa-building", "name": "MROCHEKROM Limited" },
+      { "icon": "fa-store", "name": "ALLADI Limited" },
+      { "icon": "fa-print", "name": "InkIt Ghana" },
+      { "icon": "fa-laptop", "name": "ITING Computers" },
+      { "icon": "fa-tasks", "name": "Audancy Limited" },
+      { "icon": "fa-hospital-alt", "name": "Ziba Hospital Services" }
+    ]
+  },
+  "faqs": [
+    { "q": "Do you serve clients outside Accra?", "a": "Yes. While our office is in Akweteman-Achimota, Accra, we deliver and support projects nationwide, including hospitals and businesses in the Ashanti, Western, and Volta regions." },
+    { "q": "How fast can you respond to a support request?", "a": "For clients in Greater Accra we typically respond same-day, and within 24 hours for most other regions. Clients on a maintenance contract get priority scheduling." },
+    { "q": "Do you offer maintenance contracts?", "a": "Yes. We offer monthly, quarterly, and annual preventive maintenance agreements covering computers, networks, CCTV, printers, and UPS systems, tailored to the size of your organization." },
+    { "q": "Can you supply equipment on a proforma invoice basis?", "a": "Absolutely. Send us your requirements by email or through the form above and we will issue a proforma invoice, usually within one business day." },
+    { "q": "Do your installations come with a warranty?", "a": "All hardware carries the manufacturer's warranty, and our workmanship on networking, CCTV, and electric fence installations is covered by our own service guarantee." }
+  ],
+  "contact": {
+    "location": "49 S.Dzagble Street, Akweteman-Achimota\nAccra, Ghana",
+    "phone": "+233 244 201 295",
+    "email": "info@techphasesolutions.com",
+    "hours": ["Monday – Friday: 8:00 AM – 5:00 PM", "Saturday: 9:00 AM – 2:00 PM"],
+    "social": {
+      "facebook": "https://facebook.com/techphasesolutions",
+      "twitter": "https://twitter.com/techphase_gh",
+      "linkedin": "https://linkedin.com/company/techphase-solutions",
+      "instagram": "https://instagram.com/techphasesolutions",
+      "whatsapp": "https://wa.me/233244201295"
+    }
+  }
+}
