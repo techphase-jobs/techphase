@@ -139,6 +139,7 @@ label{display:block;font-size:.74rem;font-weight:600;color:var(--navy);margin:12
         <li><button data-sec="clients"><span class="dot"></span>Clients</button></li>
         <li><button data-sec="faqs"><span class="dot"></span>FAQs</button></li>
         <li><button data-sec="contact"><span class="dot"></span>Contact &amp; Social</button></li>
+        <li><button data-sec="footer"><span class="dot"></span>Footer</button></li>
       </ul>
     </nav>
 
@@ -255,13 +256,22 @@ label{display:block;font-size:.74rem;font-weight:600;color:var(--navy);margin:12
         <h2 class="sec-h">Contact &amp; Social</h2>
         <p class="sec-sub">Contact details shown on the Contact page. (Changing the enquiry inbox itself is done in Vercel env vars.)</p>
         <div class="card">
+          <label>Page heading</label><input data-path="contact.heroHeading">
+          <label>Page subtitle</label><textarea data-path="contact.heroSubtitle"></textarea>
+        </div>
+        <div class="card">
           <label>Location (use a line break for the second line)</label><textarea data-path="contact.location" rows="2"></textarea>
           <div class="grid2">
             <div><label>Phone</label><input data-path="contact.phone"></div>
             <div><label>Public email</label><input data-path="contact.email"></div>
           </div>
+          <label>Digital / GPS address</label><input data-path="contact.digitalAddress">
           <div class="card-h" style="margin-top:14px"><h3>Working hours lines</h3><button class="btn btn-ghost" onclick="addItem('hour')">+ Add line</button></div>
           <div id="hoursList"></div>
+        </div>
+        <div class="card">
+          <label>Map embed URL</label><input data-path="contact.mapEmbedUrl">
+          <p class="hint">From Google Maps: Share → Embed a map → copy just the "src" URL.</p>
         </div>
         <div class="card"><div class="card-h"><h3>Social links</h3><span class="badge-i">leave blank to hide an icon</span></div>
           <div class="grid2">
@@ -271,6 +281,17 @@ label{display:block;font-size:.74rem;font-weight:600;color:var(--navy);margin:12
             <div><label>Instagram</label><input data-path="contact.social.instagram"></div>
             <div><label>WhatsApp link</label><input data-path="contact.social.whatsapp"></div>
           </div>
+          <p class="hint">The WhatsApp link above also drives the floating chat button site-wide.</p>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <section class="sec" id="sec-footer">
+        <h2 class="sec-h">Footer</h2>
+        <p class="sec-sub">Shown at the bottom of every page. The footer's Services and Contact columns update automatically from the Services and Contact sections above — nothing to edit here for those.</p>
+        <div class="card">
+          <label>Brand tagline</label><textarea data-path="footer.tagline"></textarea>
+          <label>Bottom note (next to the copyright line)</label><input data-path="footer.bottomNote">
         </div>
       </section>
     </main>

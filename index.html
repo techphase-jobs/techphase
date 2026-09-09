@@ -32,7 +32,7 @@
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a2540'/%3E%3Cpath d='M14 20h36v8H37v24h-10V28H14z' fill='%23ff8c00'/%3E%3C/svg%3E">
 
     <!-- Structured Data: LocalBusiness -->
-    <script type="application/ld+json">
+    <script type="application/ld+json" id="ldJson">
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
@@ -1220,9 +1220,9 @@
             <div class="container">
                 <div class="section-header reveal" style="margin-bottom:44px">
                     <span class="section-tag" style="background:rgba(255,140,0,.14);color:var(--accent-light)">Reach Out</span>
-                    <h2 class="section-title" style="color:var(--white)">Let's Talk Business</h2>
+                    <h2 class="section-title" style="color:var(--white)" id="contactHeroHeading">Let's Talk Business</h2>
                     <div class="section-divider"></div>
-                    <p class="section-subtitle" style="color:rgba(255,255,255,.58)">Contact TechPhase if you're thinking of office consumables, computer hardware, or IT solutions. Our support team will find the right solution for your organization.</p>
+                    <p class="section-subtitle" style="color:rgba(255,255,255,.58)" id="contactHeroSubtitle">Contact TechPhase if you're thinking of office consumables, computer hardware, or IT solutions. Our support team will find the right solution for your organization.</p>
                 </div>
 
                 <div class="contact-grid">
@@ -1368,17 +1368,17 @@
                     <span class="section-tag">Find Us</span>
                     <h2 class="section-title">Our Location</h2>
                     <div class="section-divider"></div>
-                    <p class="section-subtitle">Visit us at Akweteman-Achimota, Okaikoi North, Accra. Digital Address: <strong>GA-302-8209</strong>.</p>
+                    <p class="section-subtitle" id="mapSubtitle">Visit us at Akweteman-Achimota, Okaikoi North, Accra. Digital Address: <strong id="mapDigitalAddress">GA-302-8209</strong>.</p>
                 </div>
                 <div class="map-container reveal">
-                    <iframe
+                    <iframe id="mapFrame"
                         src="https://maps.google.com/maps?q=TechPhase+Solutions,+Akweteman-Achimota,+Okaikoi+North,+Accra,+Ghana&ll=5.6228,-0.2241&z=16&output=embed"
                         allowfullscreen
                         loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"
                         title="TechPhase Solutions Location – GA-302-8209, Achimota">
                     </iframe>
-                    <div class="map-pin-label">
+                    <div class="map-pin-label" id="mapPinLabel">
                         <i class="fas fa-map-marker-alt"></i>
                         TechPhase Solutions &nbsp;·&nbsp; GA-302-8209, Achimota, Accra
                     </div>
@@ -1396,8 +1396,8 @@
         <div class="footer-top">
             <div class="footer-brand">
                 <a class="logo" href="#home" onclick="showPage('home');return false">TechPhase<span>Solutions</span></a>
-                <p>Ghana's trusted IT partner since 2014. Delivering quality computers, networking, CCTV, and maintenance services to organizations across the country.</p>
-                <div class="social-row">
+                <p id="footerTagline">Ghana's trusted IT partner since 2014. Delivering quality computers, networking, CCTV, and maintenance services to organizations across the country.</p>
+                <div class="social-row" id="footerSocial">
                     <a href="https://facebook.com/techphasesolutions" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://twitter.com/techphase_gh" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                     <a href="https://linkedin.com/company/techphase-solutions" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -1415,7 +1415,7 @@
             </div>
             <div class="footer-col">
                 <h5>Services</h5>
-                <ul>
+                <ul id="footerServicesList">
                     <li><a href="#services" onclick="showPage('services');return false">Web Development</a></li>
                     <li><a href="#services" onclick="showPage('services');return false">Professional Email</a></li>
                     <li><a href="#services" onclick="showPage('services');return false">Cloud Services</a></li>
@@ -1429,7 +1429,7 @@
             </div>
             <div class="footer-col">
                 <h5>Contact</h5>
-                <ul>
+                <ul id="footerContactList">
                     <li><a href="tel:+233244201295">+233 244 201 295</a></li>
                     <li><a href="mailto:info@techphasesolutions.com">info@techphasesolutions.com</a></li>
                     <li><a>Akweteman-Achimota, Accra</a></li>
@@ -1438,13 +1438,13 @@
         </div>
         <div class="footer-bottom">
             <p>&copy; <span id="footerYear"></span> TechPhase Solutions. All Rights Reserved.</p>
-            <p>Serving Ghana with excellence since 2014.</p>
+            <p id="footerBottomNote">Serving Ghana with excellence since 2014.</p>
         </div>
     </div>
 </footer>
 
 <!-- WhatsApp Floating Button -->
-<a href="https://wa.me/233244201295" class="wa-btn" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+<a href="https://wa.me/233244201295" class="wa-btn" id="waFloatBtn" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
     <i class="fab fa-whatsapp"></i>
     <span class="wa-tip">Chat on WhatsApp</span>
 </a>
@@ -1816,6 +1816,67 @@
                         ${soc.instagram ? `<a href="${esc(soc.instagram)}" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>` : ''}
                         ${soc.whatsapp ? `<a href="${esc(soc.whatsapp)}" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>` : ''}
                     </div>`;
+            }
+
+            /* CONTACT PAGE HERO */
+            setText('contactHeroHeading', c.contact?.heroHeading);
+            setText('contactHeroSubtitle', c.contact?.heroSubtitle);
+
+            /* MAP */
+            if (c.contact?.location) {
+                const firstLine = String(c.contact.location).split('\n')[0];
+                const da = c.contact?.digitalAddress;
+                const msub = document.getElementById('mapSubtitle');
+                if (msub) msub.innerHTML = `Visit us at ${esc(firstLine)}.` + (da ? ` Digital Address: <strong id="mapDigitalAddress">${esc(da)}</strong>.` : '');
+                const mpin = document.getElementById('mapPinLabel');
+                if (mpin) mpin.innerHTML = `<i class="fas fa-map-marker-alt"></i> TechPhase Solutions${da ? ` &nbsp;·&nbsp; ${esc(da)}` : ''}`;
+            }
+            const mf = document.getElementById('mapFrame');
+            if (mf && c.contact?.mapEmbedUrl) mf.src = c.contact.mapEmbedUrl;
+
+            /* WHATSAPP FLOATING BUTTON — single source of truth: contact.social.whatsapp */
+            const waBtn = document.getElementById('waFloatBtn');
+            if (waBtn && c.contact?.social?.whatsapp) waBtn.href = c.contact.social.whatsapp;
+
+            /* FOOTER */
+            setText('footerTagline', c.footer?.tagline);
+            setText('footerBottomNote', c.footer?.bottomNote);
+            const fSoc = document.getElementById('footerSocial');
+            if (fSoc && c.contact?.social) {
+                const s = c.contact.social;
+                fSoc.innerHTML = [
+                    s.facebook  ? `<a href="${esc(s.facebook)}" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>` : '',
+                    s.twitter   ? `<a href="${esc(s.twitter)}" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>` : '',
+                    s.linkedin  ? `<a href="${esc(s.linkedin)}" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>` : '',
+                    s.instagram ? `<a href="${esc(s.instagram)}" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>` : '',
+                ].join('');
+            }
+            const fServ = document.getElementById('footerServicesList');
+            if (fServ && c.services?.items?.length) fServ.innerHTML = c.services.items.slice(0, 9).map(s =>
+                `<li><a href="#services" onclick="showPage('services');return false">${esc(s.title)}</a></li>`).join('');
+            const fCon = document.getElementById('footerContactList');
+            if (fCon && c.contact) {
+                const co = c.contact;
+                fCon.innerHTML = `
+                    <li><a href="tel:${esc(String(co.phone).replace(/\s+/g, ''))}">${esc(co.phone)}</a></li>
+                    <li><a href="mailto:${esc(co.email)}">${esc(co.email)}</a></li>
+                    <li><a>${esc(String(co.location).split('\n')[0])}</a></li>`;
+            }
+
+            /* STRUCTURED DATA — keep Google's LocalBusiness listing in sync with contact info.
+               (Open Graph / Twitter preview tags are left as manual edits: those crawlers read
+               the raw HTML and don't execute this JS, so updating them here wouldn't help.) */
+            const ld = document.getElementById('ldJson');
+            if (ld && c.contact) {
+                try {
+                    const data = JSON.parse(ld.textContent);
+                    if (c.contact.phone) data.telephone = String(c.contact.phone).replace(/\s+/g, '');
+                    if (c.contact.email) data.email = c.contact.email;
+                    if (c.contact.location) data.address.streetAddress = String(c.contact.location).split('\n')[0];
+                    const sameAs = [c.contact.social?.facebook, c.contact.social?.twitter, c.contact.social?.linkedin, c.contact.social?.instagram].filter(Boolean);
+                    if (sameAs.length) data.sameAs = sameAs;
+                    ld.textContent = JSON.stringify(data);
+                } catch (e) { /* leave structured data as authored if it doesn't parse */ }
             }
 
             initReveal(); // re-observe freshly rendered .reveal elements

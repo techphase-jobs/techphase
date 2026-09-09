@@ -302,13 +302,17 @@
     }
   ],
   "contact": {
+    "heroHeading": "Let's Talk Business",
+    "heroSubtitle": "Contact TechPhase if you're thinking of office consumables, computer hardware, or IT solutions. Our support team will find the right solution for your organization.",
     "location": "49 S.Dzagble Street, Akweteman-Achimota\nAccra, Ghana",
+    "digitalAddress": "GA-302-8209",
     "phone": "+233 244 201 295",
     "email": "info@techphasesolutions.com",
     "hours": [
       "Monday – Friday: 8:00 AM – 5:00 PM",
       "Saturday: 9:00 AM – 2:00 PM"
     ],
+    "mapEmbedUrl": "https://maps.google.com/maps?q=TechPhase+Solutions,+Akweteman-Achimota,+Okaikoi+North,+Accra,+Ghana&ll=5.6228,-0.2241&z=16&output=embed",
     "social": {
       "facebook": "https://facebook.com/techphasesolutions",
       "twitter": "",
@@ -316,5 +320,9 @@
       "instagram": "",
       "whatsapp": "https://wa.me/233244201295"
     }
+  },
+  "footer": {
+    "tagline": "Ghana's trusted IT partner since 2014. Delivering quality computers, networking, CCTV, and maintenance services to organizations across the country.",
+    "bottomNote": "Serving Ghana with excellence since 2014."
   }
 }
