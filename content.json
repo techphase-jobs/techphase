@@ -10,11 +10,11 @@
       "published": true
     },
     {
-      "title": "New Post",
-      "slug": "new-post",
-      "excerpt": "",
-      "body": "",
-      "image": "",
+      "title": "AI Is Changing Cybersecurity — and the Game Is Getting Faster",
+      "slug": "ai-is-changing-cybersecurity-and-the-game-is-getting-faster",
+      "excerpt": "AI Is Changing Cybersecurity — and the Game Is Getting Faster",
+      "body": "AI has completely changed how we talk about cybersecurity, and it happened faster than most of us expected.\n\nFor years, the conversation was mostly one-sided: AI as a tool for defenders. It helps security teams sift through enormous volumes of data, spot anomalies, and catch threats that would take a human analyst far longer to find. That story is still true. But it's no longer the whole story.\n\nAI is also getting very good at finding weaknesses in software and systems — and not just in the hands of security researchers. Recent research and a growing number of real-world incidents show how quickly that capability is maturing on the offensive side too. The same tool that helps a security team find a vulnerability before criminals do can, in someone else's hands, help find that same vulnerability faster than ever.\n\nThat puts us in an odd position. Cybersecurity is turning into a race between AI-powered attacks and AI-powered defence, and I don't think that's a problem only for the Googles and Microsofts of the world. Banks, schools, hospitals, small and medium businesses, government offices, even a small office back room — all of them now run on cloud services, Windows machines, networks and web applications. The attack surface has gotten a lot bigger, and it keeps growing.\n\nFor IT professionals, that makes the fundamentals matter more, not less. Keep systems patched. Monitor your endpoints and your network. Keep user privileges tight. Protect your backups properly. Use strong authentication everywhere it counts. Know exactly what's running in your environment. And don't assume the controls that worked well last year will automatically hold up against an AI-driven threat landscape — that's worth checking, not assuming.\n\nAI is making cybersecurity more powerful. It's also, unfortunately, making cyberattacks more powerful. The organizations that take that seriously now — rather than after an incident — will be in a much stronger position.\n\nI think the future of cybersecurity isn't really humans fighting attackers anymore. Increasingly, it's machines fighting machines, with humans responsible for making sure their machines are pointed in the right direction.\n\n#AI #Cybersecurity #InformationTechnology #IT #ArtificialIntelligence #Technology",
+      "image": "/images/asd-mtumk36u.jpg",
       "date": "2026-09-09",
       "published": true
     }
