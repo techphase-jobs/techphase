@@ -8,6 +8,15 @@
       "image": "/images/kevin-ku-w7zyugynprq-unsplash-mtumenv5.jpg",
       "date": "2026-09-09",
       "published": true
+    },
+    {
+      "title": "New Post",
+      "slug": "new-post",
+      "excerpt": "",
+      "body": "",
+      "image": "",
+      "date": "2026-09-09",
+      "published": true
     }
   ],
   "hero": {
