@@ -137,7 +137,7 @@ ${post.date ? `<meta property="article:published_time" content="${escHtml(post.d
 <meta name="twitter:image" content="${escHtml(imageUrl)}">`;
 
   const body = `<main>
-  <a class="back" href="/#news">&larr; Back to News &amp; Updates</a>
+  <a class="back" href="/news">&larr; Back to News &amp; Updates</a>
   ${post.image ? `<img class="cover" src="${escHtml(post.image)}" alt="${escHtml(post.title)}">` : ''}
   ${dateLabel ? `<div class="meta">${escHtml(dateLabel)}</div>` : ''}
   <h1>${escHtml(post.title)}</h1>
