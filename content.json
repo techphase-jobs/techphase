@@ -17,6 +17,15 @@
       "image": "/images/asd-mtumk36u.jpg",
       "date": "2026-09-09",
       "published": true
+    },
+    {
+      "title": "Windows 11 Is Getting More Security-Focused — and IT Administrators Should Pay Attention",
+      "slug": "windows-11-is-getting-more-security-focused-and-it-administrators-shou",
+      "excerpt": "Windows 11 Is Getting More Security-Focused — and IT Administrators Should Pay Attention",
+      "body": "If you manage Windows machines for a living, there's something worth paying attention to in Windows 11 right now: security is becoming baked into the operating system itself, not just something antivirus software bolts on afterward.\n\nOne example is Microsoft's plan to roll out Memory Integrity to more eligible devices. It uses virtualization-based security to help shield critical parts of Windows from malicious or untrusted kernel-level code — the kind of low-level attack that's historically been hard to defend against. Microsoft is also continuing to tighten up Secure Boot and TPM reporting. And on the other side of the update, September 2026's Windows 11 release adds improvements to several AI components — Image Search, Content Extraction, Semantic Analysis — on supported Copilot+ PCs.\n\nSo Windows 11 is pushing in two directions at once: more AI capability, and more security underneath it.\n\nFor home users, most of this happens quietly in the background and doesn't require much thought. For IT administrators, it deserves a closer look. Managing business computers isn't just a question of whether Windows is running anymore — it's worth actually checking:\n\nAre devices fully patched?\nIs Secure Boot enabled?\nIs TPM functioning the way it should?\nIs Memory Integrity compatible with your applications and drivers, or will it break something?\nAre security policies centrally managed, or left to whatever each machine happens to have?\nAre users running with more admin privileges than they actually need?\nDo you have working backups if something does go wrong?\n\nWindows 11 is genuinely getting more security-conscious at the OS level, and that's a good thing. But an operating system can only do so much on its own — security still comes down to how the system is configured, managed and monitored day to day. For anyone responsible for Windows machines in a business setting, keeping up with changes like these is becoming just as important as keeping the machines running in the first place.\n\n#Windows11 #Microsoft #Cybersecurity #IT #InformationTechnology #WindowsSecurity #Technology",
+      "image": "/images/sunrise-king-nk-cb-l1cv0-unsplash-mtumn6j6.jpg",
+      "date": "2026-09-09",
+      "published": true
     }
   ],
   "hero": {
