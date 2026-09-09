@@ -138,6 +138,7 @@ label{display:block;font-size:.74rem;font-weight:600;color:var(--navy);margin:12
         <li><button data-sec="testimonials"><span class="dot"></span>Testimonials</button></li>
         <li><button data-sec="clients"><span class="dot"></span>Clients</button></li>
         <li><button data-sec="faqs"><span class="dot"></span>FAQs</button></li>
+        <li><button data-sec="news"><span class="dot"></span>News &amp; Updates</button></li>
         <li><button data-sec="contact"><span class="dot"></span>Contact &amp; Social</button></li>
         <li><button data-sec="footer"><span class="dot"></span>Footer</button></li>
       </ul>
@@ -251,6 +252,15 @@ label{display:block;font-size:.74rem;font-weight:600;color:var(--navy);margin:12
         <div id="faqsList" class="item-list"></div>
       </section>
 
+      <!-- NEWS -->
+      <section class="sec" id="sec-news">
+        <h2 class="sec-h">News &amp; Updates</h2>
+        <p class="sec-sub">Posts appear on your site's "News &amp; Updates" page as soon as you Save &amp; Publish, each with its own shareable link. Facebook isn't connected automatically — after publishing, click "Copy for Facebook" on a post and paste it into your FB Page.</p>
+        <div class="card-h" style="margin-bottom:10px"><h3 style="color:var(--navy)">Posts</h3>
+          <button class="btn btn-orange" onclick="addItem('post')">+ Add post</button></div>
+        <div id="newsList" class="item-list"></div>
+      </section>
+
       <!-- CONTACT -->
       <section class="sec" id="sec-contact">
         <h2 class="sec-h">Contact &amp; Social</h2>
@@ -317,6 +327,22 @@ let toastTimer;
 function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show');
   clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2400); }
 
+function slugify(s){
+  return String(s||'').toLowerCase().trim()
+    .replace(/['"]/g,'')
+    .replace(/[^a-z0-9]+/g,'-')
+    .replace(/^-+|-+$/g,'')
+    .slice(0,70) || 'post';
+}
+function uniqueSlug(base, excludeIndex){
+  base = base || 'post';
+  let slug = base, n = 2;
+  const taken = () => (C.posts||[]).some((p,idx)=> idx!==excludeIndex && p.slug===slug);
+  while (taken()) { slug = base + '-' + n; n++; }
+  return slug;
+}
+function todayStr(){ return new Date().toISOString().slice(0,10); }
+
 const getPath = (obj, path) => path.split('.').reduce((o,k)=>o?.[k], obj);
 function setPath(obj, path, val){
   const keys = path.split('.'); let o = obj;
@@ -348,7 +374,7 @@ async function enterApp(){
     j = { success:true, content: await r2?.json().catch(()=>null) };
   }
   if (!j?.content){ toast('Could not load content'); return; }
-  C = j.content; $('tbStatus').textContent='Content loaded';
+  C = j.content; C.posts = C.posts || []; $('tbStatus').textContent='Content loaded';
   bindStaticFields(); renderLists();
 }
 
@@ -488,6 +514,62 @@ function renderLists(){
     d.querySelector('textarea').oninput=(e)=>f.a=e.target.value;
     $('faqsList').appendChild(d);
   });
+  /* news posts */
+  $('newsList').innerHTML='';
+  (C.posts||[]).forEach((p,i)=>{
+    const d=listCard(`
+      <div class="grid2">${fld('Title',p.title,'class="np-title"')}${fld('Date',p.date||todayStr(),'type="date" class="np-date"')}</div>
+      <div class="grid2">
+        <div><label>URL slug</label><input value="${esc(p.slug||'')}" class="np-slug"></div>
+        <div><label>Status</label>
+          <select class="np-pub">
+            <option value="1" ${p.published!==false?'selected':''}>Published — visible on site</option>
+            <option value="0" ${p.published===false?'selected':''}>Draft — hidden</option>
+          </select>
+        </div>
+      </div>
+      ${area('Excerpt (short summary — shown on the News list and used for the Facebook link preview)', p.excerpt||'')}
+      ${area('Full post (leave a blank line between paragraphs)', p.body||'')}
+      <label>Cover image</label>
+      <div class="upl-row"><img class="imgprev np-prev" src="${esc(p.image||'')}"><div>
+        <input type="file" accept="image/*" class="np-file" style="border:0;padding:0">
+        <p class="hint">Shown on the News list and as the Facebook preview image</p>
+        ${p.image?'<button class="btn btn-danger np-clear" type="button">Remove image</button>':''}</div></div>
+      <div class="row-actions" style="margin-top:14px">
+        <button class="btn btn-ghost np-copy" type="button">Copy for Facebook</button>
+        <a class="btn btn-ghost" href="/news/${esc(p.slug||'')}" target="_blank" rel="noopener" style="text-decoration:none">View live ↗</a>
+      </div>`,
+      ()=>{C.posts.splice(i,1);renderLists();});
+
+    const titleInput = d.querySelector('.np-title');
+    const dateInput  = d.querySelector('.np-date');
+    const slugInput  = d.querySelector('.np-slug');
+    const pubSelect  = d.querySelector('.np-pub');
+    const [excerptTa, bodyTa] = d.querySelectorAll('textarea');
+
+    let auto = (p.slug === slugify(p.title));
+    titleInput.oninput = (e)=>{ p.title = e.target.value;
+      if (auto) { p.slug = uniqueSlug(slugify(p.title), i); slugInput.value = p.slug; } };
+    slugInput.oninput = ()=>{ auto = false; };
+    slugInput.onblur = (e)=>{ p.slug = uniqueSlug(slugify(e.target.value || p.title), i); renderLists(); };
+    dateInput.oninput = (e)=> p.date = e.target.value;
+    pubSelect.onchange = (e)=> p.published = e.target.value === '1';
+    excerptTa.oninput = (e)=> p.excerpt = e.target.value;
+    bodyTa.oninput = (e)=> p.body = e.target.value;
+
+    d.querySelector('.np-file').onchange = (e)=>uploadImage(e.target.files[0], (path)=>{ p.image=path; renderLists(); });
+    d.querySelector('.np-clear')?.addEventListener('click', ()=>{ p.image=''; renderLists(); });
+    d.querySelector('.np-copy').addEventListener('click', ()=>{
+      const url = location.origin + '/news/' + (p.slug||'');
+      const text = (p.title||'') + '\n\n' + (p.body||p.excerpt||'') + '\n\nRead more: ' + url;
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(text).then(
+          ()=>toast('Copied — paste it into your Facebook post'),
+          ()=>toast('Could not copy — select the text manually'));
+      } else toast('Clipboard not available — select the text manually');
+    });
+    $('newsList').appendChild(d);
+  });
 }
 
 /* ============ ADD ITEMS ============ */
@@ -505,6 +587,8 @@ function addItem(kind){
     testimonial: ()=>C.testimonials.items.push({icon:'fa-building',name:'Client Name',role:'Client',text:'Their feedback…'}),
     client:      ()=>C.clients.items.push({icon:'fa-building',name:'New Client'}),
     faq:         ()=>C.faqs.push({q:'New question?',a:'The answer…'}),
+    post:        ()=>{ const slug=uniqueSlug(slugify('New Post'),-1);
+                        C.posts.push({title:'New Post',slug,excerpt:'',body:'',image:'',date:todayStr(),published:true}); },
   };
   map[kind]?.(); renderLists();
   toast('Added — remember to Save & Publish');

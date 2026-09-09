@@ -469,6 +469,26 @@
         .client-card p { font-weight: 600; font-size: .84rem; color: var(--primary); position: relative; z-index: 1; transition: var(--transition); }
 
         /* ===============================================
+           NEWS & UPDATES PAGE
+        =============================================== */
+        .news-page { padding-top: 120px; }
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 28px; }
+        .news-card {
+            background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg);
+            overflow: hidden; transition: var(--transition); display: flex; flex-direction: column;
+        }
+        .news-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .news-card-img { width: 100%; height: 180px; object-fit: cover; background: var(--gray-100); }
+        .news-card-body { padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+        .news-card-date { font-size: .76rem; color: var(--secondary); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+        .news-card h3 { font-size: 1.12rem; color: var(--primary); line-height: 1.35; }
+        .news-card p { font-size: .89rem; color: var(--gray-600); flex: 1; }
+        .news-card-more { font-size: .85rem; font-weight: 600; color: var(--accent); display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; }
+        .news-card-more i { transition: transform .25s ease; }
+        .news-card:hover .news-card-more i { transform: translateX(4px); }
+        .news-empty { color: var(--gray-600); text-align: center; grid-column: 1/-1; padding: 40px 0; }
+
+        /* ===============================================
            CONTACT PAGE
         =============================================== */
         .contact-page { padding-top: 78px; }
@@ -810,6 +830,7 @@
             <li><a href="#products" onclick="showPage('products');return false" data-page="products">Products</a></li>
             <li><a href="#team" onclick="showPage('team');return false"     data-page="team">Our Team</a></li>
             <li><a href="#clients" onclick="showPage('clients');return false"  data-page="clients">Clients</a></li>
+            <li><a href="#news" onclick="showPage('news');return false"     data-page="news">News &amp; Updates</a></li>
             <li><a href="#contact" onclick="showPage('contact');return false"  data-page="contact" class="nav-cta">Contact Us</a></li>
         </ul>
 
@@ -824,6 +845,7 @@
         <a href="#products" onclick="showPage('products');return false" data-page="products">Products</a>
         <a href="#team" onclick="showPage('team');return false"     data-page="team">Our Team</a>
         <a href="#clients" onclick="showPage('clients');return false"  data-page="clients">Clients</a>
+        <a href="#news" onclick="showPage('news');return false"     data-page="news">News &amp; Updates</a>
         <a href="#contact" onclick="showPage('contact');return false"  data-page="contact">Contact Us</a>
     </nav>
 </header>
@@ -1212,6 +1234,25 @@
 </div>
 
 <!-- ============================================================
+     NEWS & UPDATES PAGE
+============================================================ -->
+<div id="news" class="page">
+    <section class="news-page">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Latest From TechPhase</span>
+                <h2 class="section-title">News &amp; Updates</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle" id="newsSubtitle">Announcements, project highlights, and IT tips from the TechPhase team.</p>
+            </div>
+            <div class="news-grid" id="newsGrid">
+                <p class="news-empty" id="newsEmpty">No posts yet — check back soon.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ============================================================
      CONTACT PAGE
 ============================================================ -->
 <div id="contact" class="page">
@@ -1411,6 +1452,7 @@
                     <li><a href="#about" onclick="showPage('about');return false">About Us</a></li>
                     <li><a href="#team" onclick="showPage('team');return false">Our Team</a></li>
                     <li><a href="#clients" onclick="showPage('clients');return false">Our Clients</a></li>
+                    <li><a href="#news" onclick="showPage('news');return false">News &amp; Updates</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -1462,7 +1504,7 @@
     /* -----------------------------------------------
        PAGE NAVIGATION  (with hash deep-linking)
     ----------------------------------------------- */
-    const VALID_PAGES = ['home','about','services','products','team','clients','contact'];
+    const VALID_PAGES = ['home','about','services','products','team','clients','news','contact'];
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function showPage(pageId, updateHash = true) {
@@ -1492,9 +1534,10 @@
         if (updateHash && location.hash !== '#' + pageId) {
             history.pushState(null, '', '#' + pageId);
         }
-        document.title = (pageId === 'home'
-            ? 'TechPhase Solutions | Premier IT Solutions Provider in Ghana'
-            : pageId.charAt(0).toUpperCase() + pageId.slice(1) + ' | TechPhase Solutions');
+        const pageTitles = { home: 'TechPhase Solutions | Premier IT Solutions Provider in Ghana', news: 'News & Updates' };
+        document.title = pageTitles[pageId]
+            ? (pageId === 'home' ? pageTitles.home : pageTitles[pageId] + ' | TechPhase Solutions')
+            : pageId.charAt(0).toUpperCase() + pageId.slice(1) + ' | TechPhase Solutions';
 
         window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
         setTimeout(initReveal, 120); // re-run reveal for newly shown page
@@ -1788,6 +1831,25 @@
             const cg = document.getElementById('clientsGrid');
             if (cg && c.clients?.items?.length) cg.innerHTML = c.clients.items.map((cl, i) => `
                 <div class="client-card reveal ${dCls(i)}"><div class="cl-icon"><i class="fas ${esc(cl.icon || 'fa-building')}"></i></div><p>${esc(cl.name)}</p></div>`).join('');
+
+            /* NEWS & UPDATES */
+            const ng = document.getElementById('newsGrid');
+            if (ng && c.posts) {
+                const posts = c.posts.filter(p => p.published !== false)
+                    .slice().sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+                ng.innerHTML = posts.length ? posts.map((p, i) => {
+                    const dateLabel = p.date ? new Date(p.date + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+                    return `<a href="/news/${esc(p.slug)}" class="news-card reveal ${dCls(i)}">
+                        ${p.image ? `<img class="news-card-img" src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy">` : ''}
+                        <div class="news-card-body">
+                            ${dateLabel ? `<span class="news-card-date">${esc(dateLabel)}</span>` : ''}
+                            <h3>${esc(p.title)}</h3>
+                            <p>${esc(p.excerpt || '')}</p>
+                            <span class="news-card-more">Read more <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </a>`;
+                }).join('') : '<p class="news-empty">No posts yet — check back soon.</p>';
+            }
 
             /* FAQS */
             const fw = document.getElementById('faqWrap');
